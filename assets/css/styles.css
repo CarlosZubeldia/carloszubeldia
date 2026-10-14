@@ -6808,6 +6808,13 @@ body.is-locked .header--over-media .brand__dot {
   }
 }
 
+/* El titular de Edusport va en mayusculas (lo pide el cliente). Acotado al
+   proyecto y hecho por CSS a proposito: `p.title` se usa tambien en el menu, en
+   las tarjetas y en el SEO, y no queremos gritar en esos sitios. */
+.project--edusport .phero__title {
+  text-transform: uppercase;
+}
+
 /* El aire ENTRE piezas. Antes puse la regla solo en `.psection__full`, y si
    todas las piezas van dentro del MISMO contenedor eso no separa nada: solo
    movia el grupo entero (por eso el cliente lo veia igual). Aqui se apunta al
