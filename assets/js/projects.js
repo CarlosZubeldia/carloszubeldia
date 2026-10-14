@@ -1388,40 +1388,21 @@ const PROJECTS = [
             t: "media",
             full: true,
             src: IMG + "edusport-web-mockups.webp",
-            title: { en: "Home, sports area and blog", es: "Home, área deportiva y blog" },
-            v: {
-              en: "The homepage introduces the school and links to the sports area, a content hub with news, the sports glossary and the EDUSPORT Talks podcasts and webinars.",
-              es: "La home presenta la escuela y enlaza con el área deportiva, un espacio de contenidos con noticias, el glosario deportivo y los podcast y webinars de EDUSPORT Talks.",
-            },
           },
           {
             t: "media",
             full: true,
             src: IMG + "edusport-web-ficha.webp",
-            caption: { en: "Course detail page", es: "Ficha de curso" },
           },
           {
             t: "media",
             full: true,
             src: IMG + "edusport-web-cursos.webp",
-            title: { en: "Browsing the catalogue", es: "Explorar el catálogo" },
-            v: {
-              en: "The course listing combines a category menu with filters for ECTS credits, hours and price, so students can narrow down the offer before opening a course.",
-              es: "El listado de cursos combina un menú de categorías con filtros por créditos ECTS, horas y precio, para que el alumno acote la oferta antes de abrir un curso.",
-            },
           },
           {
             t: "media",
             full: true,
             src: IMG + "edusport-web-banner.webp",
-            title: {
-              en: "Power up your sports career with our professional masters",
-              es: "Potencia tu carrera deportiva con nuestros másters profesionales",
-            },
-            v: {
-              en: "The campaign banner combines the sports photography with the lime pattern to give the masters a voice of their own inside the catalogue.",
-              es: "La cabecera de campaña combina la fotografía deportiva con el patrón lima para dar voz propia a los másters dentro del catálogo.",
-            },
           },
           {
             /* `full: true` también aqui: los bloques a todo el ancho se pintan
@@ -1436,11 +1417,6 @@ const PROJECTS = [
             t: "media",
             full: true,
             src: IMG + "edusport-web-errores.webp",
-            title: { en: "Error states", es: "Estados de error" },
-            v: {
-              en: "The interface also covers the moments when something goes wrong: 404 for a page that does not exist, 403 when access is not allowed and 502 while the site is under maintenance. \"Sorry, we could not find the page you were looking for. If you like, you can go back to the home page.\"",
-              es: "La interfaz también resuelve los momentos en los que algo falla: 404 para una página que no existe, 403 cuando no hay acceso y 502 mientras la web está en mantenimiento. «Lo sentimos, no se ha encontrado la página para tu búsqueda. Si lo deseas, puedes volver a la página de inicio.»",
-            },
           },
         ],
       },
