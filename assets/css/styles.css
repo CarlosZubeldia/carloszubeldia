@@ -3664,9 +3664,9 @@ h4 {
 .project--edusport .pintro__col--right {
   grid-column: 2;
   grid-row: 1;
-  padding: clamp(1.25rem, 2.6vw, 2rem);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-box);
+  /* Sin caja (era el unico proyecto con panel en la columna de datos): mismo
+     tratamiento que Ascaso y Altessia, solo el aire de la izquierda. */
+  padding-left: clamp(1rem, 2.6vw, 2.75rem);
 }
 
 /* La ultima fila de la tabla cierra la caja: no lleva raya. */
