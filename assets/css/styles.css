@@ -6784,5 +6784,8 @@ body.is-locked .header--over-media .brand__dot {
 
 .project--edusport .psection__full,
 .project--edusport .psection__full + .psection__full {
-  margin-top: clamp(2.5rem, 5.5vw, 4.5rem);
+  /* 72 px se quedaban cortos con piezas tan grandes: ahora el aire es el de una
+     seccion completa (128 px en escritorio y se reduce solo en pantallas
+     pequenas). */
+  margin-top: clamp(3.5rem, 8vw, 8rem);
 }
