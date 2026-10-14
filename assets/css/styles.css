@@ -6771,3 +6771,18 @@ body.is-locked .header--over-media .brand__dot {
   background-position: top center;
   background-size: min(100% - 20px, var(--maxw)) 1px;
 }
+
+/* ------------------------------------- EDUSPORT: SECCION DE LA WEB --------- */
+/* Las piezas van sueltas sobre el blanco (fuera la caja gris del bloque `media`)
+   y con el mismo aire generoso entre ellas que en Altessia y Ascaso. Acotado al
+   proyecto para no tocar los demas. */
+.project--edusport .psection__full .pshow {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.project--edusport .psection__full,
+.project--edusport .psection__full + .psection__full {
+  margin-top: clamp(2.5rem, 5.5vw, 4.5rem);
+}
