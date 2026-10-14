@@ -752,8 +752,11 @@ h4 {
 /* Marquesina */
 .marquee {
   border-block: 1px solid var(--line);
-  /* El alto de siempre (1,35rem): el cliente lo dio por bueno. Lo que sobraba
-     era el hueco del HERO, no el de la cinta. */
+  /* Los filetes van a sangre (0-1905) mientras todo lo demas respeta el margen
+     de 10 px, y el cliente los veia como rayas negras de lado a lado. Metidos
+     con el mismo margen que las secciones; el fondo es blanco sobre blanco, asi
+     que no se nota el recorte. */
+  margin-inline: 10px;
   padding-block: 1.35rem;
   overflow: hidden;
   white-space: nowrap;
