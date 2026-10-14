@@ -6784,8 +6784,17 @@ body.is-locked .header--over-media .brand__dot {
 
 .project--edusport .psection__full,
 .project--edusport .psection__full + .psection__full {
-  /* 72 px se quedaban cortos con piezas tan grandes: ahora el aire es el de una
-     seccion completa (128 px en escritorio y se reduce solo en pantallas
-     pequenas). */
+  /* Aire arriba del grupo (el rotulo -> primera pieza). */
   margin-top: clamp(3.5rem, 8vw, 8rem);
+}
+
+/* El aire ENTRE piezas. Antes puse la regla solo en `.psection__full`, y si
+   todas las piezas van dentro del MISMO contenedor eso no separa nada: solo
+   movia el grupo entero (por eso el cliente lo veia igual). Aqui se apunta al
+   hermano directo, que es lo que de verdad hay entre una pieza y la siguiente,
+   y se cubren las dos estructuras posibles. */
+.project--edusport #website .pshow + .pshow,
+.project--edusport #website .psection__full + .psection__full,
+.project--edusport #website .psection__full > * + * {
+  margin-top: clamp(5rem, 11vw, 11rem);
 }
