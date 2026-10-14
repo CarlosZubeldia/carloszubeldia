@@ -3644,6 +3644,10 @@ h4 {
    lo de aqui va acotado a .project--edusport. */
 .project--edusport .pintro {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  /* Sin caja: como Altessia y Ascaso. La seccion se queda sobre el blanco de la
+     pagina, sin borde ni fondo propios. */
+  border: 0;
+  background: transparent;
 }
 
 /* La columna izquierda deja de ser transparente y apila sus tres piezas:
