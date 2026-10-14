@@ -6788,6 +6788,26 @@ body.is-locked .header--over-media .brand__dot {
   margin-top: clamp(3.5rem, 8vw, 8rem);
 }
 
+/* ------------------------------- TITULARES DE PROYECTO EN PANTALLA ESTRECHA -- */
+/* El cliente reporto que "ascaso shop" se cortaba por la derecha y se quedaba en
+   "ascaso sho". Causa: a <=900 px manda una regla de 14vw (titular enorme) y el
+   texto no podia partirse, asi que se salia de la caja. Ahora el tamano es mas
+   contenido, el tracking se aprieta y, si aun no cabe, PARTE en dos lineas en
+   vez de perderse. Se incluyen los selectores de proyecto porque el de Altessia
+   (0,5em de tracking) tiene mas prioridad que el generico. */
+@media (max-width: 900px) {
+  .phero__title,
+  .project--altessia .phero__title,
+  .project--ascaso .phero__title,
+  .project--edusport .phero__title {
+    font-size: clamp(2rem, 10.5vw, 4.2rem);
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+}
+
 /* El aire ENTRE piezas. Antes puse la regla solo en `.psection__full`, y si
    todas las piezas van dentro del MISMO contenedor eso no separa nada: solo
    movia el grupo entero (por eso el cliente lo veia igual). Aqui se apunta al
