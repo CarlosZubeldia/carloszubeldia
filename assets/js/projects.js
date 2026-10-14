@@ -1379,47 +1379,41 @@ const PROJECTS = [
         id: "website",
         label: { en: "The website", es: "La web" },
         blocks: [
-          /* El original agrupa las capturas por filas. Aqui van en el mismo
-             orden, emparejando escritorio con escritorio y movil con movil
-             para que las proporciones de cada caja casen. */
+          /* Las capturas vienen del Figma ya COMPUESTAS (los dos portatiles con
+             el movil en una sola pieza, la rejilla, la banda y los tres errores),
+             asi que cada bloque lleva UNA imagen y `mediaCols: 1` para que ocupe
+             el ancho completo. El collage de fotos se queda como estaba: el
+             cliente lo dio por bueno. */
           {
-            t: "showcase",
-            mediaCols: 2,
+            t: "media",
+            full: true,
+            src: IMG + "edusport-web-mockups.webp",
             title: { en: "Home, sports area and blog", es: "Home, área deportiva y blog" },
             v: {
               en: "The homepage introduces the school and links to the sports area, a content hub with news, the sports glossary and the EDUSPORT Talks podcasts and webinars.",
               es: "La home presenta la escuela y enlaza con el área deportiva, un espacio de contenidos con noticias, el glosario deportivo y los podcast y webinars de EDUSPORT Talks.",
             },
-            images: [
-              IMG + "bb5de17b8c2da0a11b7cef043255762a88e8701a.png",
-              IMG + "4c1d7b74d0f3a7e1318294bab0ebda7cba02ed0b.png",
-            ],
-          },
-          {
-            t: "showcase",
-            mediaCols: 2,
-            images: [
-              IMG + "6d5a9f0768c993e87736187d9ae54bd87d22b6ab.png",
-              IMG + "56a0e9e3aabf29ae5996cfb471199f20ada3cdf0.png",
-            ],
           },
           {
             t: "media",
-            src: IMG + "0a2b665273cdf4d29a6fcc2f526ef38be2d531d7.png",
+            full: true,
+            src: IMG + "edusport-web-ficha.webp",
             caption: { en: "Course detail page", es: "Ficha de curso" },
           },
           {
-            t: "showcase",
+            t: "media",
+            full: true,
+            src: IMG + "edusport-web-cursos.webp",
             title: { en: "Browsing the catalogue", es: "Explorar el catálogo" },
             v: {
               en: "The course listing combines a category menu with filters for ECTS credits, hours and price, so students can narrow down the offer before opening a course.",
               es: "El listado de cursos combina un menú de categorías con filtros por créditos ECTS, horas y precio, para que el alumno acote la oferta antes de abrir un curso.",
             },
-            images: [IMG + "28d6385d4186229ab3ac5271b3728f9a9ff5dbf7.png"],
           },
           {
-            t: "showcase",
-            mediaCols: 2,
+            t: "media",
+            full: true,
+            src: IMG + "edusport-web-banner.webp",
             title: {
               en: "Power up your sports career with our professional masters",
               es: "Potencia tu carrera deportiva con nuestros másters profesionales",
@@ -1428,30 +1422,25 @@ const PROJECTS = [
               en: "The campaign banner combines the sports photography with the lime pattern to give the masters a voice of their own inside the catalogue.",
               es: "La cabecera de campaña combina la fotografía deportiva con el patrón lima para dar voz propia a los másters dentro del catálogo.",
             },
-            images: [
-              IMG + "1965828eb7f39ef97ff34eb6121608921aee3a96.png",
-              IMG + "68b0dce9c1c9f125c1af57cc322f2ed9728c443f.png",
-            ],
           },
           {
+            /* `full: true` también aqui: los bloques a todo el ancho se pintan
+               DESPUES de los que van en columna, y sin esto el collage se
+               colaba el primero y rompia el orden del Figma. */
             t: "media",
+            full: true,
             src: IMG + "a54d739088548ed35e6250d051cdcb4397315a0d.png",
           },
           {
-            /* Los estados del sistema: en el original cada uno es una foto
-               con el mensaje superpuesto en HTML. */
-            t: "showcase",
-            mediaCols: 3,
+            /* Los estados del sistema, los tres en una sola pieza del Figma. */
+            t: "media",
+            full: true,
+            src: IMG + "edusport-web-errores.webp",
             title: { en: "Error states", es: "Estados de error" },
             v: {
               en: "The interface also covers the moments when something goes wrong: 404 for a page that does not exist, 403 when access is not allowed and 502 while the site is under maintenance. \"Sorry, we could not find the page you were looking for. If you like, you can go back to the home page.\"",
               es: "La interfaz también resuelve los momentos en los que algo falla: 404 para una página que no existe, 403 cuando no hay acceso y 502 mientras la web está en mantenimiento. «Lo sentimos, no se ha encontrado la página para tu búsqueda. Si lo deseas, puedes volver a la página de inicio.»",
             },
-            images: [
-              IMG + "c5ef966193a86bab270f7716d5ade7bee076bf59.png",
-              IMG + "e319370c4311f4e8308e876bca724ca128bb2f0a.png",
-              IMG + "98e6a1fe7061345054b05c8622d16c726fd042d6.png",
-            ],
           },
         ],
       },
