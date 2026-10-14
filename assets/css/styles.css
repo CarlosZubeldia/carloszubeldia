@@ -752,11 +752,6 @@ h4 {
 /* Marquesina */
 .marquee {
   border-block: 1px solid var(--line);
-  /* Los filetes van a sangre (0-1905) mientras todo lo demas respeta el margen
-     de 10 px, y el cliente los veia como rayas negras de lado a lado. Metidos
-     con el mismo margen que las secciones; el fondo es blanco sobre blanco, asi
-     que no se nota el recorte. */
-  margin-inline: 10px;
   padding-block: 1.35rem;
   overflow: hidden;
   white-space: nowrap;
@@ -6756,25 +6751,4 @@ body.is-locked .header--over-media .brand__dot {
 .p404__text {
   margin-bottom: 2rem;
   color: var(--ink-2);
-}
-
-/* ------------------------------------------------- RAYAS ENTRE SECCIONES --- */
-/* Las secciones marcadas con `section--line` pintaban su filete de borde a
-   borde de la ventana (0-1905 medido), y el cliente las veia como rayas negras
-   de lado a lado. Ahora van metidas al MISMO ancho que el contenido, como la
-   que hay encima de las cifras: la formula es la del marco comun de la web. */
-.section--line {
-  border-top: 0;
-  position: relative;
-}
-
-.section--line::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100% - 20px, var(--maxw));
-  height: 1px;
-  background: var(--line);
 }
