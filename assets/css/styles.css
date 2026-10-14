@@ -2765,7 +2765,8 @@ h4 {
   text-transform: uppercase;
 }
 
-.pshow img {
+.pshow img,
+.pshow video {
   width: 100%;
   border-radius: 6px;
 }
@@ -2932,6 +2933,14 @@ h4 {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* Las rejillas de DOS columnas pasan a una. A 768 px cada tarjeta se quedaba
+     en 375 y la de Componentes se pisaba por dentro (el panel de la foto encima
+     de la caja del logotipo, con el texto en una columna de 100 px). Antes una
+     fila que perder la legibilidad. */
+  .pgrid--2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .phero__title {
     font-size: clamp(2rem, 14vw, 5rem);
   }
@@ -3039,11 +3048,20 @@ h4 {
 }
 
 /* --- Altessia: las cajas oscuras pasan a verde muy claro -----------------
-   El tono #EBFFF6 sustituye al negro en las cajas de este proyecto; el
-   texto pasa a tinta oscura para que siga siendo legible. */
-.project--altessia .pshowcase,
+   El tono #EBFFF6 sustituia al negro en las cajas de este proyecto; el texto
+   pasa a tinta oscura para que siga siendo legible.
+   OJO: los `showcase` de Altessia van ahora SIN fondo. El cliente fue quitando el
+   menta de todos (Guiding, Humanising, Building trust y Encouraging) y esta regla
+   general seguia pintandolo: era lo que se veia dentro de Humanising y de
+   "Favorecer la peticion de cita" aunque sus SECCIONES ya fueran transparentes.
+   El color se queda solo en las bandas oscuras. */
 .project--altessia .pband--dark {
   background: #ebfff6;
+  color: var(--ink);
+}
+
+.project--altessia .pshowcase {
+  background: transparent;
   color: var(--ink);
 }
 
@@ -3062,7 +3080,11 @@ h4 {
 
 .project--altessia .pshowcase__grid img,
 .project--altessia .pshowcase__grid video {
-  background: #ffffff;
+  /* Los mockups (moviles de Guiding, portatiles de Encouraging, movil de
+     Building trust) son PNG con el fondo TRANSPARENTE: el blanco que llevaban
+     aqui les pintaba una caja blanca alrededor. Sin el toman el fondo de su
+     seccion (menta en Guiding y Building trust, #FAFAFA en Encouraging). */
+  background: transparent;
 }
 
 .project--altessia .pband--dark .psection__label {
@@ -3232,8 +3254,12 @@ h4 {
 }
 
 .project--altessia .pcard[data-kind="palette"] .pswatch__dot {
-  width: 58px;
-  height: 58px;
+  /* `flex: 0 0 auto` para que el punto no se aplaste cuando el hex ocupa su
+     sitio debajo: sin esto el circulo sale ovalado. (El de la CELDA esta en la
+     regla base de `.pswatch`.) */
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
 }
 
 /* --- Galeria: dos fotos altas a la izquierda y dos apiladas a la derecha - */
@@ -3251,6 +3277,12 @@ h4 {
 }
 
 .project--altessia .pcard[data-kind="images"] .pcard__body img {
+  display: block;
+  /* `margin: 0`: la regla general `.pcard__body > * + *` le metia 12 px de
+     margen superior a partir de la SEGUNDA imagen, asi que la primera (que
+     ocupa dos filas) quedaba pegada arriba y las otras tres caian 12 px mas
+     abajo y se salian de la caja. */
+  margin: 0;
   width: 100%;
   height: 100%;
   aspect-ratio: auto;
@@ -3278,11 +3310,15 @@ h4 {
 }
 
 /* --- Componentes: logotipo, tarjeta de foto, botones y barra verde ------
-   La caja del logotipo ocupa el 32% del ancho y la tarjeta de foto el 27%,
-   pegada al borde derecho: el resto es el aire que las separa. */
+   Proporciones medidas sobre la referencia del cliente (ancho de contenido
+   464 px): caja del logotipo 48,7% y tarjeta de foto 36,9%, pegada al borde
+   derecho, con el resto (15,3%) de aire entre las dos. Antes eran 32,4% y
+   26,8%: las dos cajas quedaban pequenas y los dos botones no cabian en una
+   fila. La foto, ademas, va pegada ABAJO (en la referencia arranca 23 px por
+   debajo de la caja del logotipo y termina a la altura de los botones). */
 .project--altessia .pcomp {
   display: grid;
-  grid-template-columns: minmax(0, 32.4%) minmax(0, 26.8%);
+  grid-template-columns: minmax(0, 48.7%) minmax(0, 36.9%);
   grid-template-rows: auto auto;
   justify-content: space-between;
   gap: clamp(0.85rem, 1.6vw, 1.35rem) 0;
@@ -3293,7 +3329,10 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 180px;
+  /* Alto proporcional al ancho, como en la referencia (226 x 173 = 1,31). Con
+     los 180 px fijos que tenia, la columna izquierda se quedaba mas corta que
+     la foto y la maqueta no cuadraba. */
+  aspect-ratio: 1.31;
   padding: clamp(0.85rem, 1.4vw, 1rem);
   border: 1px dashed #c7d2cb;
   border-radius: var(--radius-box);
@@ -3302,11 +3341,17 @@ h4 {
 .project--altessia .pcomp__photo {
   grid-column: 2;
   grid-row: 1 / 3;
+  /* Llena el alto de la columna izquierda (caja del logotipo + botones): asi no
+     queda hueco ni arriba ni abajo, y la foto recorta con `cover`.
+     OJO: aqui NO puede llevar `aspect-ratio`. Con `align-self: stretch` el alto
+     es definido, y el navegador saca entonces el ANCHO del ratio: la tarjeta se
+     sale de la caja por la derecha. El ratio va abajo, en una columna, donde la
+     tarjeta va sola en su fila. */
+  align-self: stretch;
   position: relative;
   margin: 0;
   overflow: hidden;
   border-radius: 6px;
-  aspect-ratio: 0.87;
   background: #dfeae4;
 }
 
@@ -3378,6 +3423,10 @@ h4 {
   font-weight: 500;
   background: #171717;
   color: #ffffff;
+  /* Son MUESTRAS del sistema (van en <span>, no son enlaces): al pasar el ratón
+     no hacen nada, asi que no deben reaccionar con el hover de los botones de
+     verdad (que se levantan 2 px y mueven el icono). */
+  pointer-events: none;
 }
 
 .project--altessia .pcomp__buttons .btn--ghost {
@@ -3519,8 +3568,12 @@ h4 {
   .project--altessia .pcomp__photo {
     grid-column: 1;
     grid-row: auto;
+    /* Aqui la tarjeta va sola en su fila: manda el `aspect-ratio` (y no el
+       estirado, que sacaria el ancho del alto). */
+    align-self: start;
     justify-self: start;
     width: min(100%, 300px);
+    aspect-ratio: 0.93;
   }
 
   .project--altessia .pcomp__buttons {
@@ -3531,8 +3584,17 @@ h4 {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .project--altessia .pcard[data-kind="type"] .pfont,
-  .project--altessia .pcard[data-kind="type"] .pcard__body > p {
+  /* OJO: las reglas de escritorio de los especimenes llevan `:nth-child`,
+     `:not()` y `.pcard__body > p`, que pesan MAS que `.pfont` o `.psample` a
+     secas, asi que ganaban a esta media query. El caso grave era el `.psample`:
+     conservaba `grid-column: 2` y, en una rejilla de una columna, eso crea una
+     SEGUNDA COLUMNA IMPLICITA. El texto se iba a la columna estrecha (0 px a
+     390) y el parrafo salia con una palabra por linea. Hay que repetir los
+     selectores con la misma fuerza o mas. */
+  .project--altessia .pcard[data-kind="type"] .pfont:nth-child(1),
+  .project--altessia .pcard[data-kind="type"] .pfont:nth-child(2),
+  .project--altessia .pcard[data-kind="type"] .pcard__body > p.psample,
+  .project--altessia .pcard[data-kind="type"] .pcard__body > p:not(.psample) {
     grid-column: 1;
     grid-row: auto;
   }
@@ -4769,23 +4831,65 @@ h4 {
 /* =====================================================================
    REGLA: el texto de las cajas ocupa todo el ancho disponible
    ---------------------------------------------------------------------
-   Antes habia una medida global de lectura (--maxw-text: 62ch) y cuatro
-   topes sueltos mas. El texto se quedaba corto y dejaba hueco a la derecha.
-   Se quitan todos, PERO solo a los bloques de TEXTO: las etiquetas y los
-   rotulos de columna conservan su ancho, porque ahi el limite es
-   intencionado y sirve para que la rejilla cuadre.
+   Antes habia una medida global de lectura (--maxw-text: 62ch) y varios
+   topes sueltos mas. El texto se quedaba corto y dejaba hueco a la derecha:
+   medido a 1920 px, la entradilla del hero de un proyecto dejaba 1249 px
+   de aire y la cita de la home, 344. Se quitan todos, PERO solo a los
+   bloques de TEXTO.
    La separacion entre la columna de la etiqueta y la del texto no se toca:
    va en el `gap` de la rejilla, no en estos anchos.
+
+   CONSERVAN SU TOPE, a proposito: son rotulos, no texto de lectura, y su
+   ancho es el que hace cuadrar la rejilla de al lado.
+     · .psection__label                              22ch
+     · .project--edusport #another .psection__label  22ch
+     · .pboxes__label                                22ch
+   Tres mas llevan tope de LECTURA de 60ch, por la razon contraria (ver la
+   nota de abajo): .phero__tagline, .section-head__aside y el texto del
+   panel "Guiding" de Altessia.
+   Y estos dos no son reglas del sistema sino decisiones de su proyecto:
+     · .project--edusport .psection__body    80ch  (texto centrado bajo un
+       titular centrado: se limita para que la linea no se haga eterna)
+     · .project--altessia #humanising/#appointments .pshowcase__text  70ch
    ===================================================================== */
 :root {
   --maxw-text: none;
 }
 
-.project-card__desc,
-.project-hero__tagline,
-.phero__top,
-.psection__text {
+/* Bloques de texto: el ancho lo pone su columna. */
+.project-card__desc,        /* descripcion de tarjeta          (46ch) */
+.project-hero__tagline,     /* entradilla de la ficha          (46ch) */
+.phero__top,                /* bloque de texto del hero        (46ch) */
+.psection__text,            /* parrafo de seccion              (72ch) */
+.psection__lead,            /* entradilla de seccion           (34ch) */
+.psection__sub,             /* entradilla bajo la etiqueta          */
+.pshowcase__text p,         /* texto de las cajas oscuras      (40ch) */
+.hero__claim,               /* entradilla del hero de la home  (44ch) */
+.hero__role,                /* titular del hero: parte por el salto de
+                               linea del HTML, su tope (11ch) no hacia nada */
+.section-head__title,       /* titular de seccion (22ch: no llegaba a
+                               aplicarse, el texto ya era mas corto) */
+.approach__statement,       /* frase grande de "Enfoque"       (30ch) */
+.stat__label,               /* pie de las cifras               (26ch) */
+.quote,                     /* cita de la home                 (26ch) */
+.contact__title,            /* titular del contacto            (16ch) */
+.lead,                      /* parrafo destacado      (--maxw-text) */
+.body,                      /* parrafo normal         (--maxw-text) */
+.prose-section__lead,       /* entradilla de prosa             (28ch) */
+.prose-section__content p,
+.prose-section__content ul {
   max-width: none;
+}
+
+/* --- Excepciones: tope de LECTURA, no de rejilla -------------------------
+   Aqui el problema era el contrario que en el resto: sin tope la linea se
+   iba a 119-123 caracteres (medido a 1920 px). 60ch (~630 px) deja dos
+   lineas comodas y, en la cabecera de seccion, permite que la entradilla
+   siga cabiendo al lado del titular (639 + 32 + 630 < 1632) en vez de caer
+   a una fila propia. */
+.phero__tagline,
+.section-head__aside {
+  max-width: 60ch;
 }
 
 /* --- Titulo de la tarjeta en mayusculas (Edusport) ---------------------- */
@@ -5321,22 +5425,48 @@ h4 {
 /* ==========================================================================
    FONDOS DE BANDA DE ALTESSIA, COMO EL ORIGINAL
    --------------------------------------------------------------------------
-   El original reparte tres verdes #B8E0CE (Decisiones clave, Guiding y
-   Building trust) y tres grises #FAFAFA (Arquitectura de la informacion,
-   Humanising y Encouraging), mientras que aqui casi todo caia en el menta
-   claro #EBFFF6, que es casi blanco y aplana la pagina.
+   El original reparte verdes #B8E0CE (Guiding y Building trust: Decisiones
+   clave lo llevaba tambien, pero el cliente lo paso a menta claro #F1FCF7) y
+   grises #FAFAFA (Arquitectura de la informacion, Humanising y Encouraging),
+   mientras que aqui casi todo caia en el menta claro #EBFFF6, que es casi
+   blanco y aplana la pagina.
    Va con :has() porque el color lo pinta la banda que envuelve la seccion, y
    se repite sobre la seccion por si esa bloque no lleva banda. */
-.project--altessia .pband:has(#decisions),
-.project--altessia #rehabilitation,
+/* Guiding ya no pinta el verde en la seccion: lo pintan sus DOS cajas (el texto
+   y los moviles), asi que entre ellas se ve el blanco de la pagina. */
+/* Building trust: del verde #B8E0CE al gris #FAFAFA y de ahi al menta claro
+   #F1FCF7 (el cliente fue afinando el tono). */
 .project--altessia #trust {
-  background: #b8e0ce;
+  background: #f1fcf7;
 }
 
-.project--altessia .pband:has(#ia),
-.project--altessia #humanising,
-.project--altessia #appointments {
+/* Decisiones clave: menta claro en vez del verde. Ya NO lleva margen superior:
+   cuando iba despues de Principios de diseno (las dos cajas claras y pegadas)
+   hacia falta separarlas, pero ahora va despues de Diseno final, que es blanco:
+   el aire lo pone el padding de esa seccion, como entre dos secciones normales. */
+.project--altessia .pband:has(#decisions) {
+  background: #f1fcf7;
+}
+
+/* Principios de diseno, en #FAFAFA (antes el menta #F1FCF7 de la banda suave,
+   que se confundia con el de Decisiones). */
+.project--altessia .pband--soft:has(#design-principles) {
   background: #fafafa;
+}
+
+/* Encouraging ("Favorecer la peticion de cita") va SIN fondo: llevaba el mismo
+   #FAFAFA que Building trust y, al ir pegadas, se leia como si estuviera DENTRO
+   de esa caja. */
+.project--altessia #appointments {
+  background: transparent;
+}
+
+/* Arquitectura de la informacion es OTRA seccion, y va SIN fondo: la caja gris
+   de Investigacion e inspiracion ya llega hasta sus conclusiones, y al llevar
+   las dos #FAFAFA y ir seguidas se encadenaban en una sola mancha que se comia
+   dos secciones. */
+.project--altessia .pband:has(#ia) {
+  background: transparent;
 }
 
 /* En las bandas verdes claras el texto va oscuro: el blanco solo vale sobre
@@ -5851,17 +5981,20 @@ body.is-locked .header--over-media .brand__dot {
 }
 
 /* 2. La paleta rompia en dos filas: la rejilla de 4 columnas ganaba por orden
-   a la regla de flex. Con 5 columnas, los cinco circulos van en una fila. */
+   a la regla de flex. Con `auto-fit` y un minimo de 80 px, mientras quepan las
+   cinco muestras van en UNA fila de columnas iguales, y cuando el ancho no da
+   (a 390 px) el navegador reparte 3 por fila y las otras dos saltan. Con 5
+   columnas FIJAS la celda se quedaba en 46 px teniendo dentro un punto de 64 y
+   un hex de 62: los codigos se tocaban ("#B8E0CE#000000#FAFAFA"). */
 .project--altessia .pcard[data-kind="palette"] .pswatches {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
-/* 23. Circulos de la paleta algo mayores (64 px: con 5 columnas en 592 px cada
-   celda mide 118 y el hex necesita ~60). */
-.project--altessia .pcard[data-kind="palette"] .pswatch {
-  width: 64px;
-  height: 64px;
-}
+/* 23. Circulos de la paleta algo mayores: el tamano va en el PUNTO, no en la
+   celda (esta en el bloque "Paleta: las cinco muestras..."). Estuvo puesto aqui
+   en `.pswatch`, que es la CELDA de la rejilla: al fijarle 64 px de alto, el
+   flex apretaba el punto para que cupiera el hex debajo, y los circulos salian
+   ovalados (58 x 34) y arrimados al borde izquierdo de su celda. */
 
 /* 3. UX audit: el gris va en la caja de la captura, no en toda la seccion. */
 .project--altessia .pband--grey:has(#ux-audit) {
@@ -5938,18 +6071,38 @@ body.is-locked .header--over-media .brand__dot {
 }
 
 /* 6. Conclusiones clave: la franja era tres veces mas alta y con los estilos
-   de una seccion normal. */
+   de una seccion normal.
+   Va PEGADA a la seccion que cierra, con el mismo aire que hay entre los
+   bloques de dentro (el de antes de la imagen): en el original la franja
+   queda a ~52 px de la captura, no a los 112 px de una seccion nueva. */
 .project--altessia .pband--soft:has(#findings) {
   background: #ebfff6;
+  margin-top: clamp(1.4rem, 2.4vw, 2.05rem);
 }
 
 .project--altessia #findings.psection {
   padding-block: clamp(1.25rem, 2.6vw, 2.25rem);
 }
 
-.project--altessia #findings .psection__label {
+.project--altessia #findings .psection__label,
+.project--altessia #principles .psection__label {
   color: #294133;
   font-size: var(--fs-small);
+  /* El icono de la llave va a la izquierda del rotulo. El tope de 22ch de las
+     etiquetas se suelta aqui: con el icono al lado partiria el rotulo. */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: none;
+}
+
+.project--altessia #findings .psection__label::before,
+.project--altessia #principles .psection__label::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  background: url("../img/altessia-findings.svg") no-repeat center / contain;
 }
 
 .project--altessia #findings .psection__lead {
@@ -5962,10 +6115,23 @@ body.is-locked .header--over-media .brand__dot {
   max-width: none;
 }
 
-/* 7. Final design: la entradilla cabe en una columna mas ancha (516 px) y baja
-   a 4 lineas. */
+/* 7. Final design: la etiqueta y la entradilla a la IZQUIERDA y el video a la
+   DERECHA, como en el original. La columna del texto va algo mas ancha que la
+   de serie (0.7fr) para que la entradilla no caiga en demasiadas lineas. */
 .project--altessia #final.psection {
   grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+}
+
+/* La CASCADA es para cuando la seccion pasa a una columna (responsive): ahi la
+   etiqueta, la entradilla y el video caen uno debajo de otro.
+   OJO: esto hay que declararlo aqui con la MISMA fuerza que la regla de arriba,
+   porque si no la de escritorio (0,3,0) gana a la media query base
+   (`@media (max-width: 1024px) .psection`, 0,1,0) y a 1024 px la entradilla se
+   quedaba en una columna de 230 px con 20 lineas. */
+@media (max-width: 1024px) {
+  .project--altessia #final.psection {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* 9. About: SIN panel de fondo. Se probo el #FAFAFA del original y el cliente
@@ -5975,15 +6141,53 @@ body.is-locked .header--over-media .brand__dot {
   background: transparent;
 }
 
-/* 10. Research & inspiration: la seccion sobre #FAFAFA y los tres referentes
-   en tres columnas con tarjeta blanca. */
-.project--altessia #research {
+/* 10. Research & inspiration: la caja sobre #FAFAFA y los tres referentes en
+   tres columnas con tarjeta blanca.
+   El ancho y los margenes son los MISMOS que los de las bandas del resto de la
+   pagina (bloque "ANCHO MAXIMO COMUN"): antes llevaba `margin-inline: 10px`,
+   que anula el centrado del sistema, y la caja se pegaba al borde izquierdo
+   dejando 135 px de aire a la derecha. */
+.project--altessia #research,
+.project--altessia #principles {
+  max-width: min(100% - 20px, var(--maxw));
+  margin-inline: auto;
   background: #fafafa;
   border-radius: var(--radius-box);
-  margin-inline: 10px;
+}
+
+/* Aire entre la franja de arriba (Conclusiones clave I) y esta caja. Va con el
+   MISMO valor que el padding de una seccion: dos cajas de color seguidas no
+   pueden ir pegadas, y asi el hueco blanco es el de una seccion normal. */
+.project--altessia #research {
+  margin-top: clamp(3rem, 7.6vw, 7rem);
+}
+
+/* La entradilla va en la columna ancha y los tres referentes DEBAJO, a todo el
+   ancho de la caja (antes se quedaban dentro de la columna de 1,9fr y sobraba
+   un palmo por la derecha). Se usa el mismo truco que en la auditoria UX:
+   `display: contents` y areas de rejilla. El `row-gap` a 0 porque la
+   separacion ya la traen los margenes de cada bloque. */
+.project--altessia #research.psection {
+  row-gap: 0;
+  /* Su cierre es la franja de conclusiones de abajo: el aire lo pone esa,
+     con el mismo valor que entre los bloques de dentro. */
+  padding-bottom: 0;
+}
+
+.project--altessia #research .psection__body {
+  display: contents;
+}
+
+.project--altessia #research .psection__body > p:nth-of-type(1) {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.project--altessia #research .psection__body > p:nth-of-type(2) {
+  grid-area: 2 / 2 / 3 / 3;
 }
 
 .project--altessia #research .psection__body > div {
+  grid-area: 3 / 1 / 4 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
@@ -6004,12 +6208,43 @@ body.is-locked .header--over-media .brand__dot {
   order: -1;
 }
 
-/* 11. Conclusiones clave (segundo bloque): tarjeta #FAFAFA con tres columnas
-   numeradas. */
-.project--altessia #principles {
-  background: #fafafa;
-  border-radius: var(--radius-box);
-  margin-inline: 10px;
+/* --- Research & inspiration en UNA columna --------------------------------
+   Mismo caso que la auditoria UX: en cuanto la seccion pasa a una columna
+   (<= 1024 px) las areas 1/2, 2/2 y 3/1 crean columnas implicitas y la
+   maqueta se desmonta (la etiqueta se monta encima de la entradilla y los
+   referentes caen en un palmo). Aqui se vuelve al flujo normal. */
+@media (max-width: 1024px) {
+  .project--altessia #research.psection {
+    row-gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .project--altessia #research .psection__body {
+    display: block;
+  }
+
+  .project--altessia #research .psection__body > p:nth-of-type(1),
+  .project--altessia #research .psection__body > p:nth-of-type(2),
+  .project--altessia #research .psection__body > div {
+    grid-area: auto;
+  }
+}
+
+/* Los tres referentes, apilados cuando no caben en tres columnas. */
+@media (max-width: 860px) {
+  .project--altessia #research .psection__body > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 11. Conclusiones clave (segundo bloque): el rotulo ARRIBA, con su icono y su
+   filete a todo el ancho, y los tres puntos DEBAJO. Antes iba a dos columnas
+   (rotulo a la izquierda, puntos a la derecha). */
+.project--altessia #principles.psection {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: clamp(1.25rem, 2.2vw, 1.75rem);
+  /* Es el cierre de Investigacion e inspiracion (la caja gris sigue), asi que
+     el aire de arriba es el de un bloque, no el de una seccion. */
+  padding-top: clamp(1.4rem, 2.4vw, 2.05rem);
 }
 
 .project--altessia #principles .psection__label {
@@ -6021,6 +6256,12 @@ body.is-locked .header--over-media .brand__dot {
 
 .project--altessia #principles .pgrid--3 {
   counter-reset: kf;
+}
+
+/* Los titulos de los puntos, sin mayusculas (los dos bloques de "Conclusiones
+   clave" y el recorrido del paciente van igual). */
+.project--altessia #principles .pgrid--3 .pshow__title {
+  text-transform: none;
 }
 
 .project--altessia #principles .pgrid--3 > div {
@@ -6056,20 +6297,42 @@ body.is-locked .header--over-media .brand__dot {
   line-height: 1.3;
 }
 
-/* 14. Guiding: dos paneles del mismo verde en vez de una tarjeta menta. */
+/* 14. Guiding: DOS cajas del mismo verde, una con el rotulo y el texto y otra
+   con los moviles. El aire entre ellas lo pone la rejilla del `pshowcase`.
+   Antes era UNA caja verde (la pintaba la seccion) con un panel BLANCO dentro
+   para los moviles, y el texto sin caja propia. */
 .project--altessia #rehabilitation .pshowcase {
   background: transparent;
   padding: 0;
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-  align-items: start;
+  /* `stretch` y no `start`: la caja del texto se estira a la MISMA altura que la
+     de los moviles, para que las dos queden paralelas. */
+  align-items: stretch;
+}
+
+/* Las dos cajas van con el MISMO margen lateral que el resto de la pagina (el
+   `padding-inline: 10px` de `.psection--wide`). Estuvo puesto a 0 para que
+   llegaran al borde del marco, pero entonces quedaban 10 px mas anchas que todas
+   las demas secciones: el cliente lo vio como "no se respetan los margenes". */
+.project--altessia #rehabilitation.psection {
+  padding-inline: 10px;
 }
 
 .project--altessia #rehabilitation .pshowcase__text {
   padding: clamp(1.25rem, 2.6vw, 2.5rem);
+  background: #f1fcf7;
+  border-radius: var(--radius-box);
+}
+
+/* El panel es ancho (1,7fr de 1670 = 985 px utiles). Al soltar el tope de
+   40ch el parrafo se iba a 118 caracteres por linea; 60ch (~630 px) lo deja
+   en dos lineas legibles. Es tope de lectura, no de rejilla. */
+.project--altessia #rehabilitation .pshowcase__text p {
+  max-width: 60ch;
 }
 
 .project--altessia #rehabilitation .pshowcase__media {
-  background: #ffffff;
+  background: #f1fcf7;
   border-radius: var(--radius-box);
   padding: clamp(1rem, 1.8vw, 1.5rem);
   justify-items: center;
@@ -6082,12 +6345,27 @@ body.is-locked .header--over-media .brand__dot {
   justify-self: center;
 }
 
+/* Por debajo de 1024 el `pshowcase` se pone en UNA columna, pero aqui la regla
+   de arriba (mas especifica) lo impedia: las dos cajas seguian de lado y a
+   390 px el texto quedaba en una columna de 90 px. */
+@media (max-width: 1024px) {
+  .project--altessia #rehabilitation .pshowcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* 15. Humanising y Encouraging: texto centrado y la media debajo a todo el
    ancho. */
 .project--altessia #humanising .pshowcase,
 .project--altessia #appointments .pshowcase {
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
+}
+
+/* Las dos cajas (video y foto) llegan al ancho total de la seccion: el `pshowcase`
+   metia su padding lateral de 40 px y las dejaba en 1660 de 1740. */
+.project--altessia #humanising .pshowcase {
+  padding-inline: 0;
 }
 
 .project--altessia #humanising .pshowcase__text,
@@ -6099,6 +6377,41 @@ body.is-locked .header--over-media .brand__dot {
 .project--altessia #humanising .pshowcase__text p,
 .project--altessia #appointments .pshowcase__text p {
   max-width: none;
+}
+
+/* Humanising: el video MAS ANCHO que la foto (60/40) y las dos cajas a la MISMA
+   altura que ya tenia el video (492 px a 1660 de ancho), sin volver a los 770 de
+   antes. Para eso la fila lleva una `aspect-ratio` (1660/492 = 3,37) y las dos
+   piezas se recortan con `object-fit: cover`:
+     · video 990x492  (formato de caja 2,01 frente al 1,61 suyo  -> recorte 20%)
+     · foto  660x492  (formato de caja 1,34 frente al 1,74 suyo  -> recorte 23%)
+   Encajar un video mas ancho a la misma altura sin recortar es imposible: para
+   igualar alturas los anchos tienen que ser proporcionales a los formatos. */
+.project--altessia #humanising .pshowcase__media {
+  width: 100%;
+}
+
+.project--altessia #humanising .pshowcase__grid {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  width: 100%;
+}
+
+/* La caja del video y la de la foto clavan la MISMA altura: con el reparto 3:2 y
+   estos formatos de caja (990/492 = 2,01 y 660/492 = 1,34), las dos miden 0,298
+   veces el ancho de la fila. `object-fit: cover` recorta lo que sobra (20 % el
+   video, 23 % la foto). El `aspect-ratio` va en cada PIEZA y no en la rejilla:
+   puesto en la rejilla, con `height: 100%` en los hijos, se realimentaba y la
+   fila se iba a 2077 px, fuera de la caja. A 1920: video 990x492 y foto 660x492. */
+.project--altessia #humanising .pshowcase__grid > video {
+  width: 100%;
+  aspect-ratio: 990 / 492;
+  object-fit: cover;
+}
+
+.project--altessia #humanising .pshowcase__grid > img {
+  width: 100%;
+  aspect-ratio: 660 / 492;
+  object-fit: cover;
 }
 
 .project--altessia #appointments .pshowcase__grid {
@@ -6114,9 +6427,81 @@ body.is-locked .header--over-media .brand__dot {
   aspect-ratio: auto;
 }
 
-/* 16. Building trust: la caja interior es blanca, no menta. */
+/* 16. Building trust, como en el original: rotulo y texto CENTRADOS arriba y la
+   media DEBAJO (antes el texto iba a la izquierda, centrado en vertical, que es
+   lo que dejaba el hueco de menta a su alrededor), con el movil al lado de la
+   tarjeta. El blanco de la tarjeta lo pone la propia captura, asi que la caja
+   ya no va blanca: el menta vuelve a verse detras del texto y del movil. */
 .project--altessia #trust .pshowcase {
-  background: #ffffff;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  background: transparent;
+}
+
+.project--altessia #trust .pshowcase__text {
+  text-align: center;
+  max-width: 70ch;
+}
+
+.project--altessia #trust .pshowcase__text p {
+  max-width: none;
+}
+
+.project--altessia #trust .pshowcase__grid {
+  /* La tarjeta manda y el movil la acompana: en el original la tarjeta ocupa el
+     61% del ancho y el movil el 13%, o sea 4,7 partes frente a 1. */
+  grid-template-columns: minmax(0, 4.7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.5rem);
+  width: 100%;
+}
+
+/* La tarjeta "Nuestra historia" y el movil, a la MISMA altura: manda el movil
+   (636x1294, formato 0,49) y la tarjeta se ajusta a esa altura. Su formato de caja
+   es 4,7 x 0,49 = 2,305, mas apaisado que el suyo (1600x864 = 1,85), asi que va con
+   `object-fit: contain`: se ve entera y las bandas que quedan a los lados son
+   #FAFAFA sobre una captura de fondo blanco, o sea inapreciables.
+   El `width: 100%` del contenedor no es decorativo: sin el, la rejilla no tiene
+   ancho definido (su padre va a `auto`), las columnas `fr` no reparten y las dos
+   alturas salen dispares. */
+.project--altessia #trust .pshowcase__media {
+  width: 100%;
+}
+
+.project--altessia #trust .pshowcase__grid > img:first-child {
+  aspect-ratio: 2.305;
+  object-fit: contain;
+}
+
+.project--altessia #trust .pshowcase__grid > img:last-child {
+  aspect-ratio: 636 / 1294;
+}
+
+/* En pantalla estrecha esas filas de dos o tres medios se apilan: a 390 px el
+   reparto 4,7 a 1 dejaba el movil en 64 px, el video de Humanising en 180 y los
+   tres portatiles de Encouraging en 113 cada uno. */
+@media (max-width: 700px) {
+  .project--altessia #trust .pshowcase__grid,
+  .project--altessia #humanising .pshowcase__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Apiladas, cada pieza vuelve a su formato natural (sin el alto fijo ni el
+     recorte que si llevan en escritorio). */
+  .project--altessia #humanising .pshowcase__grid > img,
+  .project--altessia #humanising .pshowcase__grid > video {
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .project--altessia #appointments .pshowcase__grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project--altessia #appointments .pshowcase__grid img {
+    width: 100%;
+  }
 }
 
 /* 17. Inspiring: la caja es #FAFAFA y el rotulo pequeno en mayusculas. */
@@ -6128,6 +6513,30 @@ body.is-locked .header--over-media .brand__dot {
   text-transform: uppercase;
   font-size: var(--fs-small);
   letter-spacing: 0.06em;
+}
+
+/* "Inspiring the first steps" es una seccion SIN etiqueta, asi que el generador
+   la marca como `psection--wide`, que lleva el ritmo CORTO de las cajas de
+   Diseno final (25,6 px). Aqui tiene que respirar como una seccion normal, y su
+   unica caja no lleva el margen superior que se les da a los bloques `full`
+   cuando van debajo de texto. */
+.project--altessia #inspiring.psection {
+  padding-block: clamp(3rem, 7.6vw, 7rem);
+  /* OJO: aqui NO va `padding-inline: 0`. La caja tiene que quedar al mismo
+     margen que el resto de secciones (el `padding-inline: 10px` de
+     `.psection--wide`); lo que estaba mal era su `max-width: 92%`, que la metia
+     79 px hacia dentro. */
+}
+
+.project--altessia #inspiring .psection__full {
+  margin-top: 0;
+}
+
+/* La caja de Inspiring llega al borde del marco, como las bandas y las demas
+   cajas de la pagina. La regla comun `.psection__full > .pshow` la dejaba al
+   92% del ancho (79 px de sangria a cada lado, se veia desalineada). */
+.project--altessia #inspiring .psection__full > .pshow {
+  max-width: none;
 }
 
 /* 22. Cabeceras de las tarjetas de Design principles a 16 px. */
@@ -6188,6 +6597,9 @@ body.is-locked .header--over-media .brand__dot {
    devuelve a la entradilla, que es la que si lo necesita. */
 .project--altessia #ux-audit.psection {
   row-gap: 0;
+  /* El aire de debajo lo pone la franja de conclusiones, que es el cierre de
+     la seccion: aqui no se suma el padding de una seccion nueva. */
+  padding-bottom: 0;
 }
 
 /* Titulos del recorrido a 16 px, como pidio el cliente. */
@@ -6246,14 +6658,22 @@ body.is-locked .header--over-media .brand__dot {
   font-size: 1rem;
   line-height: 1.3;
   letter-spacing: 0;
+  /* Los titulos de los pasos, sin mayusculas (como los de Conclusiones). */
+  text-transform: none;
 }
 
-/* La caja es UNA sola: el fondo menta va en el contenedor, con el rotulo
-   arriba separado del resto por el mismo aire que usa Figma (30 px). */
-.project--altessia #ux-audit .psection__full > .pshow {
-  background: transparent;
-  padding: 0;
-}
+/* ==========================================================================
+   EL RECORRIDO DEL PACIENTE ES UNA SOLA CAJA
+   --------------------------------------------------------------------------
+   El menta lo pintan DOS elementos seguidos: el rotulo (esquinas de arriba) y
+   la rejilla de los 4 pasos (esquinas de abajo). Entre los dos se colaba el
+   `margin-top` que la seccion le da a todo bloque que sigue a otro: de ahi el
+   corte. Con ese margen a 0 las dos mitades quedan pegadas y se leen como una
+   caja sola.
+   OJO: el menta NO va en `.psection__full > .pshow`, que es la caja de la
+   CAPTURA (la de abajo), no la del recorrido.
+   La captura va SIN caja: ni fondo ni relleno, a todo el ancho de la seccion.
+   ========================================================================== */
 
 .project--altessia #ux-audit .pcaption,
 .project--altessia #ux-audit .pgrid--4 {
@@ -6265,34 +6685,30 @@ body.is-locked .header--over-media .brand__dot {
   border-radius: 30px 30px 0 0;
 }
 
-/* ==========================================================================
-   UNA SOLA CAJA (recorrido del paciente)
-   --------------------------------------------------------------------------
-   El menta lo pintaban DOS elementos (el rotulo y la rejilla de pasos) y entre
-   ellos se colaba el hueco de la rejilla de la seccion: de ahi el corte.
-   Ahora el fondo va en el contenedor comun (.pshow) y las dos mitades van
-   transparentes, con el aire que marca Figma (30 px) entre rotulo y pasos.
-   ========================================================================== */
+.project--altessia #ux-audit .pgrid--4 {
+  margin-top: 0;
+}
 
 .project--altessia #ux-audit .psection__full > .pshow {
-  background: #ebfff6;
-  border-radius: 30px;
-  padding: 30px;
-}
-
-.project--altessia #ux-audit .pcaption,
-.project--altessia #ux-audit .pgrid--4 {
   background: transparent;
   border-radius: 0;
+  padding: 0;
 }
 
-.project--altessia #ux-audit .pcaption {
-  padding: 0;
-  margin: 0 0 30px;
-  border-bottom: 0;
-}
+/* --- La auditoria UX en UNA columna ---------------------------------------
+   Para poner la entradilla bajo la etiqueta, esta seccion usa
+   `display: contents` en el cuerpo y areas de rejilla (1/2 y 2/2). En cuanto
+   la seccion pasa a UNA columna (<= 1024 px) esas areas crean una columna
+   implicita: la caja menta se comia la columna de la etiqueta y el parrafo
+   caia a una palabra por linea. Aqui se vuelve al flujo normal. */
+@media (max-width: 1024px) {
+  .project--altessia #ux-audit .psection__body {
+    display: block;
+  }
 
-.project--altessia #ux-audit .pgrid--4 {
-  padding: 0;
-  gap: 20px;
+  .project--altessia #ux-audit .psection__lead,
+  .project--altessia #ux-audit .pcaption,
+  .project--altessia #ux-audit .pgrid--4 {
+    grid-area: auto;
+  }
 }

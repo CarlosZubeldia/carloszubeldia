@@ -726,12 +726,77 @@
     },
   };
 
+  /* --------------------------------------------------- VÍDEO AL LLEGAR ---- */
+  /* Los vídeos que quedan lejos del pliegue (bloques marcados con `lazy: true`)
+     se emiten con `preload="none"` y sin `autoplay`, así no se descarga ni un
+     byte hasta que su sección se acerca a la pantalla. Aquí se les da el
+     `play()` al entrar, con la misma red de seguridad por rectángulo que usa
+     Reveal (por si el IntersectionObserver no dispara). */
+
+  const VideoLazy = {
+    io: null,
+    pending: new Set(),
+    queued: false,
+
+    init() {
+      const videos = $$("video[data-video-auto]");
+      if (!videos.length) return;
+
+      if ("IntersectionObserver" in window) {
+        this.io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) this.play(e.target);
+            });
+          },
+          { rootMargin: "250px 0px", threshold: 0.01 }
+        );
+      }
+
+      window.addEventListener("scroll", () => this.schedule(), { passive: true });
+      window.addEventListener("resize", () => this.schedule());
+
+      videos.forEach((v) => {
+        this.pending.add(v);
+        if (this.io) this.io.observe(v);
+      });
+      this.schedule();
+    },
+
+    schedule() {
+      if (this.queued) return;
+      this.queued = true;
+      requestAnimationFrame(() => {
+        this.queued = false;
+        this.sweep();
+      });
+    },
+
+    sweep() {
+      if (!this.pending.size) return;
+      const margen = window.innerHeight + 250;
+      this.pending.forEach((v) => {
+        const r = v.getBoundingClientRect();
+        if (r.top < margen && r.bottom > -250) this.play(v);
+      });
+    },
+
+    play(v) {
+      if (!v || !this.pending.has(v)) return;
+      this.pending.delete(v);
+      if (this.io) this.io.unobserve(v);
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    },
+  };
+
   /* ---------------------------------------------------------------- INIT --- */
 
   function init() {
     Lang.init();
     Header.init();
     Reveal.init();
+    VideoLazy.init();
     Filters.init();
     Media.init();
     Mesh.init();
@@ -751,8 +816,9 @@
 /* --- Pantalla de carga ----------------------------------------------------
    El saludo va rotando por siete idiomas mientras la pagina carga, y la barra
    avanza. NO anade espera: se retira en cuanto termina la carga, con un minimo
-   corto (900 ms) para que no parpadee. Si el sistema pide movimiento reducido,
-   se muestra el primer idioma y se retira igual. */
+   para que no parpadee y de tiempo a ver el ciclo de idiomas (1,5 s: eran 2,5).
+   Si el sistema pide movimiento reducido, se muestra el primer idioma y se
+   retira igual. */
 (() => {
   const pre = document.querySelector("[data-preloader]");
   if (!pre) return;
@@ -762,7 +828,7 @@
   const bar = pre.querySelector("[data-preloader-bar]");
   const pct = pre.querySelector("[data-preloader-pct]");
   const palabras = ["Bienvenido", "Welcome", "\u6b22\u8fce", "Willkommen", "Bienvenue", "\u3088\u3046\u3053\u305d"];
-  const MINIMO = 2500;
+  const MINIMO = 1500;
   const PASO = 417;
   const t0 = Date.now();
   let i = 0;
@@ -786,6 +852,24 @@
     }, falta);
   };
 
-  if (document.readyState === "complete") salir();
-  else window.addEventListener("load", salir, { once: true });
+  /* La pantalla de carga NO puede quedarse atascada. Antes esperaba al evento
+     \`load\` de la ventana, que aguarda a TODOS los recursos -y los videos pesan
+     7 MB-, asi que en una conexion lenta (o en movil) tapaba la web durante
+     muchos segundos: parecia que el sitio no entraba.
+     Ahora sale en cuanto el DOM esta listo (DOMContentLoaded, que no espera a
+     los medios) y, como red de seguridad, a los 4 segundos pase lo que pase.
+     El minimo de 1,5 s para ver el ciclo de idiomas se mantiene dentro de
+     salir(). */
+  let yaSalio = false;
+  const salirUnaVez = () => {
+    if (yaSalio) return;
+    yaSalio = true;
+    salir();
+  };
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    salirUnaVez();
+  } else {
+    document.addEventListener("DOMContentLoaded", salirUnaVez, { once: true });
+  }
+  window.setTimeout(salirUnaVez, 4000);
 })();

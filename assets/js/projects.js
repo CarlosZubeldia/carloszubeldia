@@ -973,7 +973,30 @@ const PROJECTS = [
         ],
       },
 
+      /* ------------------------------------------------- DISEÑO FINAL ----- */
+      {
+        id: "final",
+        label: { en: "Final design", es: "Diseño final" },
+        sub: {
+          en: "The final interface translates the research, UX audit and information architecture into a clear digital experience that helps patients understand their healthcare journey, discover relevant treatments and confidently take the next step.",
+          es: "La interfaz final traduce la investigación, la auditoría UX y la arquitectura de la información en una experiencia digital clara que ayuda al paciente a entender su recorrido sanitario, descubrir los tratamientos relevantes y dar el siguiente paso con confianza.",
+        },
+        blocks: [
+          {
+            /* El electrocardiograma: es un VÍDEO (assets/video/altessia-final.mp4,
+               recomprimido de 6,4 MB a 0,6) y va en la columna de la derecha,
+               al lado de la etiqueta y la entradilla, como en el original.
+               El póster es el fotograma que se ve mientras carga. */
+            t: "media",
+            video: "assets/video/altessia-final.mp4",
+            src: IMG + "altessia-final-poster.jpg",
+          },
+        ],
+      },
+
       /* ------------------------------------- DECISIONES CLAVE DE DISEÑO --- */
+      /* Va DESPUES de Diseño final y ANTES de Inspirar los primeros pasos,
+         como en el original. */
       {
         id: "decisions",
         theme: "dark",
@@ -1011,21 +1034,22 @@ const PROJECTS = [
         ],
       },
 
-      /* ------------------------------------------------- DISEÑO FINAL ----- */
+      /* ------------------------------------- INSPIRAR LOS PRIMEROS PASOS -- */
+      /* Seccion sin etiqueta (ocupa todo el ancho) con una sola caja. Va la
+         ultima del bloque, despues de Decisiones clave. */
       {
-        id: "final",
-        label: { en: "Final design", es: "Diseño final" },
-        sub: {
-          en: "The final interface translates the research, UX audit and information architecture into a clear digital experience that helps patients understand their healthcare journey, discover relevant treatments and confidently take the next step.",
-          es: "La interfaz final traduce la investigación, la auditoría UX y la arquitectura de la información en una experiencia digital clara que ayuda al paciente a entender su recorrido sanitario, descubrir los tratamientos relevantes y dar el siguiente paso con confianza.",
-        },
+        id: "inspiring",
         blocks: [
           {
-            /* En el original este bloque lleva un hueco de medios vacío:
-               se queda como caja de texto oscura, sin capturas. */
+            /* La grabación de la web de Altessia (assets/video/altessia-home.mp4,
+               recomprimida de 38,8 MB a 4,9). La caja lleva su póster mientras
+               carga y `lazy` para que el vídeo no se descargue al entrar. */
             t: "media",
             full: true,
             theme: "dark",
+            lazy: true,
+            video: "assets/video/altessia-home.mp4",
+            src: IMG + "altessia-home-poster.jpg",
             title: { en: "Inspiring the first steps", es: "Inspirar los primeros pasos" },
             v: {
               en: "The homepage immediately connects physical activity with cardiovascular health, encouraging patients to take the first step towards prevention and rehabilitation.",
@@ -1066,6 +1090,13 @@ const PROJECTS = [
               en: "Real professionals, authentic patient interactions and specialised equipment reinforce trust while making the rehabilitation process feel approachable and personal.",
               es: "Profesionales reales, interacciones auténticas con pacientes y equipamiento especializado refuerzan la confianza y hacen que el proceso de rehabilitación se sienta cercano y personal.",
             },
+            /* En el original esta sección lleva DOS medios: la grabación de la
+               web (a la izquierda, la misma que en "Inspiring the first steps")
+               y la foto del paciente con la mascarilla (a la derecha). El vídeo
+               va primero, así que la columna izquierda es la web. */
+            video: "assets/video/altessia-home.mp4",
+            poster: IMG + "altessia-home-poster.jpg",
+            lazy: true,
             images: [IMG + "4c6da8861e4654df50a9094cd306ac61eabfeaed.png"],
           },
         ],
