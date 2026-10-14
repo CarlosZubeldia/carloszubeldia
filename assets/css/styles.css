@@ -6752,3 +6752,18 @@ body.is-locked .header--over-media .brand__dot {
   margin-bottom: 2rem;
   color: var(--ink-2);
 }
+
+/* ------------------------------------------------- RAYAS ENTRE SECCIONES --- */
+/* Las secciones `section--line` pintaban su filete de borde a sangre (0-1905) y
+   el cliente las ve como rayas duras de lado a lado. Se pinta la raya con un
+   FONDO degradado limitado al ancho del contenido (la formula del marco comun),
+   en vez de con el borde: asi queda metida como la de las cifras y NO hay que
+   tocar el `position` de la seccion, que fue lo que descolo la home el 14 oct.
+   El borde se queda pero transparente, para no cambiar ni un pixel de alto. */
+.section--line {
+  border-top-color: transparent;
+  background-image: linear-gradient(var(--line), var(--line));
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: min(100% - 20px, var(--maxw)) 1px;
+}
