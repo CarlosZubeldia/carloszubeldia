@@ -598,7 +598,9 @@ h4 {
 /* 8. HERO ================================================================== */
 
 .hero {
-  padding: calc(var(--header-h) + 0.5rem) 10px 10px;
+  /* Sin aire abajo (eran 10 px): el cuadro del hero toca ya la marquesina, que
+     es lo que el cliente queria. Arriba se queda lo que mide la cabecera. */
+  padding: calc(var(--header-h) + 0.5rem) 10px 0;
 }
 
 /* Cuadro redondeado con el vídeo, la malla interactiva y el texto dentro */
@@ -750,9 +752,9 @@ h4 {
 /* Marquesina */
 .marquee {
   border-block: 1px solid var(--line);
-  /* Sin aire arriba ni abajo: la cinta va pegada al hero y los filetes quedan
-     como un tic estrecho, sin franja blanca de por medio. */
-  padding-block: 0;
+  /* El alto de siempre (1,35rem): el cliente lo dio por bueno. Lo que sobraba
+     era el hueco del HERO, no el de la cinta. */
+  padding-block: 1.35rem;
   overflow: hidden;
   white-space: nowrap;
   background: var(--bg);
