@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Altessia — Carlos Zubeldia" data-title-es="Altessia — Carlos Zubeldia">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Altessia — Carlos Zubeldia</title>
+  <meta name="description" content="Designing a patient-centred experience that encourages prevention, rehabilitation and long-term wellbeing." data-desc-en="Designing a patient-centred experience that encourages prevention, rehabilitation and long-term wellbeing." data-desc-es="Diseñando una experiencia centrada en el paciente que fomente la prevención, la rehabilitación y el bienestar a largo plazo.">
+  <meta name="author" content="Carlos Zubeldia">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Altessia — Carlos Zubeldia">
+  <meta property="og:description" content="Designing a patient-centred experience that encourages prevention, rehabilitation and long-term wellbeing.">
+  <meta property="og:image" content="https://carloszubeldia.com/assets/img/altessia-card.webp">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://carloszubeldia.com/altessia.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/d443d4ee85f48a1c8e4ca03e4f27583cf6b97daa.svg">
+  <link rel="alternate icon" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600&display=swap" rel="stylesheet">
+  <!-- Sin cache: durante el desarrollo el navegador guardaba el HTML antiguo
+       y seguia pidiendo el CSS viejo. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1791924191641">
+
+  <script>
+    /* Evita el flash: fija el idioma antes del primer pintado */
+    (function () {
+      try {
+        document.documentElement.classList.add("js");
+        var q = new URLSearchParams(location.search).get("lang");
+        var l = q || localStorage.getItem("cz-lang") || (navigator.language || "en").slice(0, 2).toLowerCase();
+        document.documentElement.lang = ["en", "es"].indexOf(l) > -1 ? l : "en";
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<script>(function(){try{if(sessionStorage.getItem("cz-preloader")){document.documentElement.className+=" preloader-skip";}else{sessionStorage.setItem("cz-preloader","1");}}catch(e){}})();</script>
+<div class="preloader" data-preloader>
+  <div class="preloader__inner">
+    <p class="preloader__hello" data-preloader-hello>Bienvenido</p>
+    <p class="preloader__name"><span class="preloader__who">Carlos Zubeldia</span> <span class="preloader__dot">&#183;</span> <span class="preloader__role">Product Designer</span></p>
+    <p class="preloader__pct">[<span data-preloader-pct>000</span>]</p>
+  </div>
+  <div class="preloader__bar" aria-hidden="true"><span data-preloader-bar></span></div>
+</div>
+
+<a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="es">Saltar al contenido</span></a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="header header--over-media">
+  <div class="wrap header__inner">
+    <a class="brand" href="index.html" aria-label="Carlos Zubeldia">
+      <span class="brand__dot" aria-hidden="true"></span>
+      <span>Carlos Zubeldia</span>
+    </a>
+
+    <nav class="nav nav--desktop" aria-label="Main">
+      <a class="nav__link" href="work.html" aria-current="page"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+      <a class="nav__link" href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+      <a class="nav__link" href="index.html#contact"><span data-l="en">Contact</span><span data-l="es">Contacto</span></a>
+          <a class="nav__link nav__link--cv" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener"><span data-l="en">Resume</span><span data-l="es">CV</span></a>
+    </nav>
+
+    <div class="header__tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button class="lang__opt" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang__opt" type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" aria-hidden="true">
+  <nav class="drawer__nav" aria-label="Mobile">
+    <a class="drawer__link" href="work.html"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+    <a class="drawer__link" href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+    <a class="drawer__link" href="index.html#contact"><span data-l="en">Contact</span><span data-l="es">Contacto</span></a>
+    <a class="drawer__link" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener"><span data-l="en">Resume</span><span data-l="es">CV</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <a class="btn btn--ghost drawer__cta" href="mailto:carloszubeldiavilchez@gmail.com">
+      <img class="drawer__icon" src="assets/img/icon-mail-negro.svg" alt="" aria-hidden="true"><span data-l="en">Email</span><span data-l="es">Email</span>
+    </a>
+    <a class="btn drawer__cta" href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">
+      <img class="drawer__icon" src="assets/img/icon-linkedin-blanco.svg" alt="" aria-hidden="true">LinkedIn
+    </a>
+  </div>
+</div>
+
+<main id="main" class="project project--altessia">
+
+  <header class="phero">
+    <div class="phero__frame">
+      <div class="phero__media" aria-hidden="true"><img src="assets/img/68edbae6e0f7ad1b9d08a7166794d55cf4210558.png" alt="Altessia" decoding="async"></div>
+      <div class="phero__scrim" aria-hidden="true"></div>
+      <div class="phero__top">
+        <span class="phero__cat"><span data-l="en">Healthcare / Cardiac rehabilitation</span><span data-l="es">Salud / Rehabilitación cardíaca</span></span>
+        <p class="phero__tagline"><span data-l="en">Designing a patient-centred experience that encourages prevention, rehabilitation and long-term wellbeing.</span><span data-l="es">Diseñando una experiencia centrada en el paciente que fomente la prevención, la rehabilitación y el bienestar a largo plazo.</span></p>
+      </div>
+      <p class="phero__title" aria-hidden="true">Altessia</p>
+    </div>
+  </header>
+
+  <section class="pintro">
+    <div class="pintro__col pintro__col--left">
+      <div class="pintro__head"><span class="eyebrow eyebrow--accent"><span data-l="en">About the project</span><span data-l="es">Sobre el proyecto</span></span></div>
+      <div class="pintro__text"><div class="stack" data-l="en"><p>Altessia is a specialised cardiology clinic dedicated to helping patients manage their cardiovascular health through every stage of their journey.</p><p>This project focused on redesigning the digital experience to better support patients in understanding their condition, exploring available treatments and accessing the resources needed for long-term care.</p><p>The work included UX audit, benchmark analysis, information architecture, wireframes and UI design across a two-month engagement.</p></div><div class="stack" data-l="es"><p>Altessia es una clínica de cardiología especializada dedicada a ayudar a los pacientes a gestionar su salud cardiovascular en cada etapa de su recorrido.</p><p>Este proyecto se centró en rediseñar la experiencia digital para acompañar mejor al paciente: entender su condición, explorar los tratamientos disponibles y acceder a los recursos necesarios para el cuidado a largo plazo.</p><p>El trabajo incluyó auditoría UX, análisis de benchmark, arquitectura de la información, wireframes y diseño de interfaz a lo largo de dos meses.</p></div></div>
+      
+    </div>
+    <div class="pintro__col pintro__col--right">
+      <div class="pintro__facts">
+        <div class="pfact"><span class="pfact__label"><span data-l="en">My role</span><span data-l="es">Mi rol</span></span><span class="pfact__value"><span data-l="en">Product Designer</span><span data-l="es">Product Designer</span></span></div>
+        <div class="pfact"><span class="pfact__label"><span data-l="en">Duration</span><span data-l="es">Duración</span></span><span class="pfact__value"><span data-l="en">6 Weeks</span><span data-l="es">6 semanas</span></span></div>
+        <div class="pfact"><span class="pfact__label"><span data-l="en">Industry</span><span data-l="es">Industria</span></span><span class="pfact__value"><span data-l="en">Healthcare sector</span><span data-l="es">Sector salud</span></span></div>
+      </div>
+      <p class="pcaption pintro__caption"><span data-l="en">What I worked on</span><span data-l="es">Que trabajé en el proyecto</span></p>
+      <div class="tags pintro__tags"><span class="tag"><span data-l="en">UX Audit</span><span data-l="es">Auditoría UX</span></span><span class="tag"><span data-l="en">Benchmarking</span><span data-l="es">Benchmarking</span></span><span class="tag"><span data-l="en">UI Design</span><span data-l="es">Diseño UI</span></span><span class="tag"><span data-l="en">Information Architecture</span><span data-l="es">Arquitectura de la información</span></span><span class="tag"><span data-l="en">Wireframes</span><span data-l="es">Wireframes</span></span></div>
+      <div class="pintro__link"><a class="btn" href="https://www.altessia.es/" target="_blank" rel="noopener"><span data-l="en">Visit the website</span><span data-l="es">Visitar la web</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </div>
+  </section>
+
+  <figure class="pbanner reveal">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/img/altessia-banner-poster.jpg"><source src="assets/video/altessia-banner.mp4" type="video/mp4"></video>
+    <figcaption class="pshow__caption"><span data-l="en">Altessia website</span><span data-l="es">Web de Altessia</span></figcaption>
+  </figure>
+
+    <section class="psection reveal" id="challenge">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Challenge</span><span data-l="es">El reto</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__text"><span data-l="en">Patients visiting Altessia were often looking for more than medical information. They needed guidance, clarity and reassurance throughout what is often a complex and emotional healthcare journey.</span><span data-l="es">Los pacientes que visitaban Altessia solían buscar algo más que información médica. Necesitaban orientación, claridad y tranquilidad a lo largo de un recorrido sanitario que a menudo es complejo y emocional.</span></p>
+<p class="psection__text"><span data-l="en">One of the main challenges was helping users understand which services were relevant to their condition, what steps to follow after diagnosis, and how to maintain a healthy lifestyle after treatment. While the clinic offered a wide range of specialised services and resources, the existing experience made it difficult for patients to understand how these elements connected throughout their care journey.</span><span data-l="es">Uno de los principales retos era ayudar a los usuarios a entender qué servicios eran relevantes para su condición, qué pasos seguir tras el diagnóstico y cómo mantener un estilo de vida saludable después del tratamiento. Aunque la clínica ofrecía una amplia gama de servicios y recursos especializados, la experiencia existente dificultaba entender cómo se conectaban todos esos elementos a lo largo del proceso de cuidado.</span></p>
+<p class="psection__text"><span data-l="en">The goal was to transform the website into a clearer and more structured experience that could support patients from diagnosis and treatment to recovery and long-term cardiovascular wellbeing.</span><span data-l="es">El objetivo era transformar la web en una experiencia más clara y estructurada, capaz de acompañar al paciente desde el diagnóstico y el tratamiento hasta la recuperación y el bienestar cardiovascular a largo plazo.</span></p>
+      </div>
+    </section>
+    <div class="pband pband--grey">
+    <section class="psection reveal" id="ux-audit">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">UX audit</span><span data-l="es">Auditoría UX</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__lead"><span data-l="en">The project began with a UX audit focused on understanding how patients interacted with the existing website and identifying opportunities to improve clarity, navigation and information access.</span><span data-l="es">El proyecto comenzó con una auditoría UX centrada en entender cómo interactuaban los pacientes con la web existente e identificar oportunidades para mejorar la claridad, la navegación y el acceso a la información.</span></p>
+<p class="pcaption"><span data-l="en">The patient journey</span><span data-l="es">El recorrido del paciente</span></p>
+<div class="pgrid pgrid--4"><div><h3 class="pshow__title"><span data-l="en">Diagnosis</span><span data-l="es">Diagnóstico</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">“I need to understand what is happening and what I need.”</span><span data-l="es">«Necesito entender qué me está pasando y qué necesito.»</span></p></div><div><h3 class="pshow__title"><span data-l="en">Treatment</span><span data-l="es">Tratamiento</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">“I want to know which treatments are available and how they work.”</span><span data-l="es">«Quiero saber qué tratamientos hay disponibles y cómo funcionan.»</span></p></div><div><h3 class="pshow__title"><span data-l="en">Recovery</span><span data-l="es">Recuperación</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">“I need guidance during my recovery and rehabilitation.”</span><span data-l="es">«Necesito orientación durante mi recuperación y rehabilitación.»</span></p></div><div><h3 class="pshow__title"><span data-l="en">Long-term care</span><span data-l="es">Cuidado a largo plazo</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">“I want to stay healthy and prevent future cardiovascular issues.”</span><span data-l="es">«Quiero mantenerme sano y prevenir futuros problemas cardiovasculares.»</span></p></div></div>
+      </div>
+      <div class="psection__full">
+<figure class="pshow"><img src="assets/img/693cff5f8e2f066626436bb4ef35f5dcf4ac7ef5.png" alt="Altessia" loading="lazy" decoding="async"></figure>
+      </div>
+    </section>
+    </div>
+    <div class="pband pband--soft">
+    <section class="psection reveal" id="findings">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Key findings</span><span data-l="es">Conclusiones clave</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__lead"><span data-l="en">Patients need a clearer, more guided experience that connects information, services and support to each stage of their cardiovascular health journey.</span><span data-l="es">Los pacientes necesitan una experiencia más clara y guiada que conecte información, servicios y apoyo en cada etapa de su recorrido de salud cardiovascular.</span></p>
+      </div>
+    </section>
+    </div>
+    <section class="psection reveal" id="research">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Research &amp; inspiration</span><span data-l="es">Investigación e inspiración</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__text"><span data-l="en">To design a more intuitive and supportive experience for Altessia patients, I analysed leading healthcare websites and digital platforms.</span><span data-l="es">Para diseñar una experiencia más intuitiva y de acompañamiento para los pacientes de Altessia, analicé webs y plataformas digitales líderes del sector salud.</span></p>
+<p class="psection__text"><span data-l="en">The research focused on how they structure information, guide patients throughout their healthcare journey and build trust through clarity, consistency and accessibility.</span><span data-l="es">La investigación se centró en cómo estructuran la información, guían al paciente a lo largo de su recorrido sanitario y construyen confianza mediante claridad, consistencia y accesibilidad.</span></p>
+<div>      <article class="pref reveal">
+        <div>
+          <span class="pref__num">01</span>
+          <h3 class="pref__name">QuironSalud</h3>
+          
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Well-organised services and specialties that help users quickly identify the care they need while reducing navigation complexity.</span><span data-l="es">Servicios y especialidades bien organizados que ayudan a identificar rápidamente la atención necesaria y reducen la complejidad de la navegación.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/9f009c45bc9d941433ad29ff00d5bc23f958255f.png" alt="QuironSalud" loading="lazy" decoding="async">
+        </div>
+      </article>
+      <article class="pref reveal">
+        <div>
+          <span class="pref__num">02</span>
+          <h3 class="pref__name">HM hospitales</h3>
+          
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Transparent communication, specialist visibility and intuitive appointment flows that reinforce confidence throughout the patient journey.</span><span data-l="es">Comunicación transparente, visibilidad de los especialistas y flujos de cita intuitivos que refuerzan la confianza durante todo el recorrido del paciente.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/ca8938a4fac6f01019adf7b324535374446c6d69.png" alt="HM hospitales" loading="lazy" decoding="async">
+        </div>
+      </article>
+      <article class="pref reveal">
+        <div>
+          <span class="pref__num">03</span>
+          <h3 class="pref__name">Mayo Clinic</h3>
+          
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Clear content hierarchy and educational resources that simplify complex medical information and help patients understand every stage of their care.</span><span data-l="es">Jerarquía de contenido clara y recursos educativos que simplifican información médica compleja y ayudan a entender cada etapa de la atención.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/85322471362964520738ac7fdb3ffdd1babe42ef.png" alt="Mayo Clinic" loading="lazy" decoding="async">
+        </div>
+      </article></div>
+      </div>
+    </section>
+    <section class="psection reveal" id="principles">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Key findings</span><span data-l="es">Conclusiones clave</span></h2>
+      </div>
+      <div class="psection__body">
+<div class="pgrid pgrid--3"><div><h3 class="pshow__title"><span data-l="en">Clear patient pathways</span><span data-l="es">Rutas de paciente claras</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Guide patients through each stage of care with clear navigation, contextual information and visible next steps.</span><span data-l="es">Guiar al paciente en cada etapa de la atención con navegación clara, información contextual y siguientes pasos visibles.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Accessible information</span><span data-l="es">Información accesible</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Prioritise content through strong information hierarchy to make complex medical topics easier to understand.</span><span data-l="es">Priorizar el contenido con una jerarquía sólida para hacer más comprensibles los temas médicos complejos.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Build trust through transparency</span><span data-l="es">Generar confianza con transparencia</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Clear service descriptions, specialist information and consistent communication help patients feel informed and confident.</span><span data-l="es">Descripciones de servicio claras, información de especialistas y comunicación consistente para que el paciente se sienta informado y seguro.</span></p></div></div>
+      </div>
+    </section>
+    <div class="pband pband--soft">
+    <section class="psection reveal" id="ia">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Information architecture</span><span data-l="es">Arquitectura de la información</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__lead"><span data-l="en">Designing a clearer path through the patient’s journey.</span><span data-l="es">Diseñando un camino más claro a través del recorrido del paciente.</span></p>
+<p class="psection__text"><span data-l="en">The navigation was redesigned to simplify decision-making and reduce cognitive load. Instead of organising information around the clinic’s structure, the new architecture follows the questions patients naturally ask during their healthcare journey.</span><span data-l="es">La navegación se rediseñó para simplificar la toma de decisiones y reducir la carga cognitiva. En lugar de organizar la información según la estructura de la clínica, la nueva arquitectura sigue las preguntas que los pacientes se hacen de forma natural durante su recorrido sanitario.</span></p>
+<p class="psection__text"><span data-l="en">This approach makes treatments, services and supporting resources easier to discover while creating a more intuitive path towards the website’s primary goal: booking an appointment.</span><span data-l="es">Este enfoque facilita el descubrimiento de tratamientos, servicios y recursos de apoyo, y crea un camino más intuitivo hacia el objetivo principal de la web: pedir cita.</span></p>
+      </div>
+      <div class="psection__full">
+<figure class="pshow"><img src="assets/img/17efa62e1f1a9b38cc1a08fd7d513126de2be47b.png" alt="Altessia" loading="lazy" decoding="async"><figcaption class="pshow__caption"><span data-l="en">Site map</span><span data-l="es">Mapa del sitio</span></figcaption></figure>
+      </div>
+    </section>
+    </div>
+    <div class="pband pband--soft">
+    <section class="psection reveal" id="design-principles">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Design principles</span><span data-l="es">Principios de diseño</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__text"><span data-l="en">The redesign is built on a small set of design principles that keep every page consistent, calm and easy to follow for patients of any age.</span><span data-l="es">El rediseño se apoya en un conjunto reducido de principios de diseño que mantienen todas las páginas coherentes, tranquilas y fáciles de seguir para pacientes de cualquier edad.</span></p>
+<p class="psection__text"><span data-l="en">Typography, colour, components and photography were defined as one shared system, so treatments, services and supporting resources always look and behave the same way across the site.</span><span data-l="es">La tipografía, el color, los componentes y la fotografía se definieron como un único sistema compartido, de modo que los tratamientos, los servicios y los recursos de apoyo se ven y funcionan igual en toda la web.</span></p>
+      </div>
+      <div class="psection__full">
+<div class="pgrid pgrid--2"><article class="pcard" data-kind="type"><h3 class="pcard__title pcard__title--icon"><img class="pcard__icon" src="assets/img/e4a161e0366e33983beb6d27a44392db36d4038e.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><span data-l="en">Typography</span><span data-l="es">Tipografía</span></h3><div class="pcard__body"><p class="psample"><span data-l="en">Which cardiovascular conditions do we treat at Altessia?</span><span data-l="es">¿Qué patologías tratamos en Altessia?</span></p><p><span data-l="en">At Altessia we treat the main cardiovascular conditions in a specialised way, from cardiovascular risk to diseases such as ischaemic heart disease or heart failure.</span><span data-l="es">En Altessia tratamos de forma especializada las principales patologías cardiovasculares, desde el riesgo cardiovascular hasta enfermedades como la cardiopatía isquémica o la insuficiencia cardíaca.</span></p><div class="pfonts"><div class="pfont"><div class="pfont__name">Switzer</div><div class="pfont__aa">Aa</div><div class="pfont__role"><span data-l="en">Display</span><span data-l="es">Titulares</span></div></div><div class="pfont"><div class="pfont__name">Outfit</div><div class="pfont__aa">Aa</div><div class="pfont__role"><span data-l="en">Text</span><span data-l="es">Texto</span></div></div></div><span class="pcard__rule" aria-hidden="true"></span></div></article>
+<article class="pcard" data-kind="palette"><h3 class="pcard__title pcard__title--icon"><img class="pcard__icon" src="assets/img/0b75c42b45fb538b36e99feb5b757b1cf61d3929.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><span data-l="en">Colour palette</span><span data-l="es">Paleta de color</span></h3><div class="pcard__body"><div class="pswatches"><div class="pswatch"><span class="pswatch__dot" style="background:#294133"></span>#294133</div><div class="pswatch"><span class="pswatch__dot" style="background:#5B776B"></span>#5B776B</div><div class="pswatch"><span class="pswatch__dot" style="background:#B8E0CE"></span>#B8E0CE</div><div class="pswatch"><span class="pswatch__dot" style="background:#000000"></span>#000000</div><div class="pswatch"><span class="pswatch__dot" style="background:#FAFAFA"></span>#FAFAFA</div></div></div><p class="pnote"><span class="pnote__dot" aria-hidden="true"></span><span><span data-l="en">Soft green tones communicate care, reassurance and wellbeing while maintaining contrast and accessibility.</span><span data-l="es">Los tonos verdes suaves comunican cuidado, tranquilidad y bienestar manteniendo el contraste y la accesibilidad.</span></span></p></article>
+<article class="pcard" data-kind="components"><h3 class="pcard__title pcard__title--icon"><img class="pcard__icon" src="assets/img/ec9e99243405ad0dd6134d9fd7f7209f24d6ad28.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><span data-l="en">Components</span><span data-l="es">Componentes</span></h3><div class="pcard__body"><div class="pcomp"><div class="pcomp__logo"><span class="alogo" style="--logo-scale:1.45" role="img" aria-label="Altessia"><span class="alogo__word"><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:24.6305px;--h:28.8453px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="28.8453" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24.6305 28.8453" width="24.6305">
+<path d="M9.70503 28.8453C3.62749 28.8453 0 25.8165 0 20.7457C0 16.8242 2.15809 14.0323 6.24411 12.6702C9.87572 11.4596 13.5801 11.157 18.3132 11.0955V10.9617C18.3132 6.73097 16.3743 4.76146 12.2137 4.76146C8.81223 4.76146 6.80972 6.48537 6.25922 9.88268C6.22215 10.113 6.02446 10.2797 5.792 10.2797H1.37695C1.23875 10.2797 1.10971 10.2204 1.01956 10.1152C0.929866 10.0099 0.890055 9.8739 0.91019 9.73794C1.82221 3.45872 5.98053 0 12.6173 0C19.6467 0 23.6778 3.95876 23.6778 10.8586V21.3445C23.6778 24.426 23.9409 26.2266 24.5838 27.5601C24.6539 27.707 24.6452 27.8802 24.5573 28.0184C24.4694 28.1566 24.3184 28.2399 24.156 28.2399H19.4911C19.3089 28.2399 19.1424 28.1347 19.0632 27.9702C18.6532 27.1083 18.4711 25.9634 18.3832 24.8668C16.2361 27.3759 13.0804 28.8409 9.70686 28.8409L9.70503 28.8453ZM18.3132 15.3548C7.00284 15.5258 5.46297 18.1204 5.46297 20.6449C5.46297 22.7657 7.26139 24.0838 10.1567 24.0838C14.655 24.0838 18.3132 20.5154 18.3132 16.129V15.3548Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:5.36229px;--h:36.9624px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="36.9624" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 5.36229 36.9624" width="5.36229">
+<path d="M4.88867 0H0.473623C0.212327 0 0 0.212103 0 0.473766V36.4887C0 36.7503 0.212327 36.9624 0.473623 36.9624H4.88867C5.15042 36.9624 5.36229 36.7503 5.36229 36.4887V0.473766C5.36229 0.212103 5.15042 0 4.88867 0Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:14.947px;--h:34.313px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="34.313" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 14.947 34.313" width="14.947">
+<path d="M11.5121 34.313C6.26379 34.313 3.71306 31.4509 3.71306 25.5599V10.5801H0.474084C0.212788 10.5801 0 10.3674 0 10.1064V6.59506C0 6.33404 0.212788 6.12129 0.474084 6.12129H3.71306V0.47372C3.71306 0.212744 3.92585 0 4.18715 0H8.60173C8.86303 0 9.07582 0.212744 9.07582 0.47372V6.12129H14.4734C14.7342 6.12129 14.947 6.33404 14.947 6.59506V10.1064C14.947 10.3674 14.7342 10.5801 14.4734 10.5801H9.07582V25.5599C9.07582 29.1677 10.4926 29.8015 13.4689 29.8015H14.3722C14.6335 29.8015 14.8459 30.0143 14.8459 30.2753V33.4357C14.8459 33.6155 14.7452 33.78 14.585 33.859C14.0194 34.1419 12.8722 34.3108 11.5121 34.3108V34.313Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:25.3308px;--h:28.8431px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="28.8431" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 25.3308 28.8431" width="25.3308">
+<path d="M12.8676 28.8431C8.93489 28.8431 5.66936 27.5118 3.41882 24.9918C1.18202 22.485 0 18.8464 0 14.4731C0 5.41071 4.71525 0 12.6155 0C16.4425 0 19.6224 1.31595 21.8135 3.80527C23.9825 6.27047 25.1298 9.83884 25.1298 14.1222V15.2254C25.1298 15.4864 24.917 15.6991 24.6561 15.6991H5.48724C5.85562 21.112 8.46125 24.0839 12.8653 24.0839C16.5193 24.0839 18.9122 22.3161 19.7826 18.9692C19.8375 18.7609 20.026 18.6139 20.2411 18.6139H24.858C25.0026 18.6139 25.1385 18.6797 25.2286 18.7938C25.3183 18.9078 25.3513 19.0547 25.3183 19.1951C23.8645 25.4173 19.4407 28.8431 12.8653 28.8431H12.8676ZM19.4975 11.4377C18.8088 7.12365 16.3812 4.7593 12.6173 4.7593C8.85389 4.7593 6.42167 7.00522 5.68904 11.4377H19.4975Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:38.4293px;--h:44.5005px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="44.5005" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 38.4293 44.5005" width="38.4293">
+<path d="M12.2136 44.5005C5.33985 44.5005 1.00398 41.0616 0.00592544 34.8197C-0.0160399 34.6815 0.0237796 34.5433 0.113472 34.438C0.203621 34.3328 0.334947 34.2713 0.473146 34.2713H4.88819C5.12066 34.2713 5.31789 34.4402 5.35541 34.6683C5.9169 38.1336 8.40631 40.0395 12.3651 40.0395C15.9006 40.0395 18.0125 38.603 18.0125 36.1992C18.0125 33.53 15.4311 32.894 11.1785 32.1636C6.60104 31.3763 0.903302 30.3981 0.903302 23.9062C0.903302 19.8004 4.0439 15.6552 11.06 15.6552C15.8851 15.6552 19.3789 17.5326 21.1618 21.0835C21.6116 21.9783 22.9584 24.3843 27.4169 24.3843C30.9524 24.3843 33.0647 22.9477 33.0647 20.5439C33.0647 17.8748 30.4834 17.2388 26.2303 16.5084C21.6533 15.721 15.9551 14.7428 15.9551 8.25088C15.9551 4.14297 19.0961 0 26.1122 0C32.7202 0 36.6483 3.37098 37.4684 9.74668C37.4862 9.88268 37.4445 10.0186 37.3544 10.1195C37.2647 10.2226 37.1352 10.2796 36.9993 10.2796H32.5843C32.3518 10.2796 32.1523 10.1108 32.117 9.87829C31.5404 6.20028 29.6102 4.55753 25.8619 4.55753C22.9803 4.55753 21.1179 5.88883 21.1179 7.94826C21.1179 10.6986 23.761 11.3434 28.1143 12.0737C32.7092 12.8457 38.4293 13.8085 38.4293 20.2391C38.4293 25.3844 33.9443 28.8409 27.2677 28.8409C21.9736 28.8409 18.1594 26.799 16.2338 22.9389C15.519 21.5067 14.159 20.2127 10.8079 20.2127C7.92582 20.2127 6.0638 21.544 6.0638 23.6034C6.0638 26.3538 8.70651 26.9986 13.0602 27.7289C17.6551 28.501 23.3748 29.4638 23.3748 35.8943C23.3748 41.0396 18.8897 44.4961 12.2136 44.4961V44.5005Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:5.36275px;--h:36.8418px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="36.8418" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 5.36275 36.8418" width="5.36275">
+<path d="M0.474091 36.8418C0.212795 36.8418 0 36.6291 0 36.3681V9.95942C0 9.6984 0.212795 9.48571 0.474091 9.48571H4.88868C5.14997 9.48571 5.36275 9.6984 5.36275 9.95942V36.3681C5.36275 36.6291 5.14997 36.8418 4.88868 36.8418H0.474091ZM0.474091 6.86917C0.212795 6.86917 0 6.65643 0 6.3954V0.47372C0 0.212698 0.212795 0 0.474091 0H4.88868C5.14997 0 5.36275 0.212698 5.36275 0.47372V6.3954C5.36275 6.65643 5.14997 6.86917 4.88868 6.86917H0.474091Z" fill="var(--fill-0, #2D4738)"/>
+</svg><svg class="alogo__part" aria-hidden="true" focusable="false" style="--w:24.6307px;--h:28.8453px;display:block" xmlns="http://www.w3.org/2000/svg" fill="none" height="28.8453" overflow="visible" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24.6307 28.8453" width="24.6307">
+<path d="M9.70504 28.8453C3.62749 28.8453 0 25.8165 0 20.7458C0 16.8242 2.1604 14.0323 6.24413 12.6703C9.87391 11.4596 13.5783 11.1569 18.3136 11.0955V10.9617C18.3136 6.73321 16.3747 4.7615 12.2141 4.7615C8.81224 4.7615 6.81019 6.48542 6.25968 9.88268C6.22216 10.113 6.02493 10.2797 5.79246 10.2797H1.37742C1.23922 10.2797 1.10971 10.2205 1.02002 10.1152C0.92987 10.0099 0.890519 9.87394 0.910197 9.73799C1.82268 3.45877 5.98099 0 12.6177 0C19.6471 0 23.6782 3.9588 23.6782 10.8609V21.3467C23.6782 24.4282 23.9414 26.2288 24.5838 27.5623C24.6543 27.7092 24.6452 27.8825 24.5578 28.0206C24.4722 28.1588 24.3184 28.2422 24.1564 28.2422H19.4893C19.3071 28.2422 19.1405 28.1369 19.0614 27.9724C18.6514 27.1105 18.4692 25.9656 18.3814 24.869C16.2342 27.3781 13.0781 28.8431 9.70504 28.8431V28.8453ZM18.3136 15.3548C7.00285 15.5259 5.46343 18.1205 5.46343 20.6448C5.46343 22.7657 7.26185 24.0839 10.1567 24.0839C14.655 24.0839 18.3136 20.5154 18.3136 16.129V15.3548Z" fill="var(--fill-0, #2D4738)"/>
+</svg></span></span></div><figure class="pcomp__photo"><img src="assets/img/72f970755b288d32c23697d739409c56d3d77eac.png" alt="Physiotherapy" loading="lazy" decoding="async"><figcaption class="pcomp__caption"><span class="pcomp__caption-title"><span data-l="en">Physiotherapy</span><span data-l="es">Fisioterapia</span></span><span class="pcomp__caption-text"><span data-l="en">Therapeutic intervention to improve mobility, relieve discomfort and optimise physical function throughout the process.</span><span data-l="es">Intervención terapéutica para mejorar movilidad, aliviar molestias y optimizar tu función física durante todo el proceso.</span></span><span class="pcomp__caption-cta"><span data-l="en">Book an appointment</span><span data-l="es">Pedir cita</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></figcaption></figure><div class="pcomp__buttons"><span class="btn btn--ghost"><span data-l="en">Ver tratamiento</span><span data-l="es">Ver tratamiento</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="btn"><span data-l="en">Pide tu cita</span><span data-l="es">Pide tu cita</span><span class="pcomp__btn-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.2" y="3.4" width="11.6" height="10.4" rx="2.2" stroke="currentColor" stroke-width="1.3"/><path d="M2.2 6.6h11.6M5.4 1.9v2.4M10.6 1.9v2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span></span></div></div><div class="pcomp__bar"><span class="alogo" style="--logo-scale:1" role="img" aria-label="Altessia"><span class="alogo__mark"><img class="alogo__part" src="assets/img/39215846de9e1832f8d3642f094fdacc9c5fb805.svg" alt="" aria-hidden="true" style="--w:17.3371px;--h:11.3193px;display:block;--x:25px;--y:0px" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/da65cadb386f53552cb38831e9ee404a3463d8c1.svg" alt="" aria-hidden="true" style="--w:39.8808px;--h:24.6215px;display:block;--x:0px;--y:0px" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/611d761e52dd6312c7bfa6006bbc432b314db9b5.svg" alt="" aria-hidden="true" style="--w:20.2527px;--h:15.317px;display:block;--x:1px;--y:28px" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/5a336af6a82223e8723658d0cd62da89a69c42bb.svg" alt="" aria-hidden="true" style="--w:38.5072px;--h:25.0674px;display:block;--x:6px;--y:19px" loading="lazy" decoding="async"></span><span class="alogo__word"><img class="alogo__part" src="assets/img/a7816ffaa86c38c04095eda9ff3c9c48752e4878.svg" alt="" aria-hidden="true" style="--w:24.6305px;--h:28.8453px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/a3721fabe4aa5644647ff2a93e20b9e476ab9817.svg" alt="" aria-hidden="true" style="--w:5.36229px;--h:36.9624px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/9d94bc5591e46918273cc882d3b24295caa224d6.svg" alt="" aria-hidden="true" style="--w:14.947px;--h:34.313px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/60371141ae215630359210ceba583b7ab947fcc4.svg" alt="" aria-hidden="true" style="--w:25.3308px;--h:28.8431px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/dc94fd709bfa9165006ff9eae3d1586023e40121.svg" alt="" aria-hidden="true" style="--w:38.4293px;--h:44.5005px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/fac9e36ac9608a35a77610f6f35eecc1d4d34f29.svg" alt="" aria-hidden="true" style="--w:5.36275px;--h:36.8418px;display:block" loading="lazy" decoding="async"><img class="alogo__part" src="assets/img/b038305b6d364a9c28befac3189ec8a08c3a5090.svg" alt="" aria-hidden="true" style="--w:24.6307px;--h:28.8453px;display:block" loading="lazy" decoding="async"></span></span><div class="pcomp__social"><img src="assets/img/789b50a7af0a282db46e58e0b23a379fb7f8ba7b.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><img src="assets/img/874451fc4ae1412a305781b7ae6ec927a0bb9b3c.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"></div></div></div></article>
+<article class="pcard" data-kind="images"><h3 class="pcard__title pcard__title--icon"><img class="pcard__icon" src="assets/img/336056e85ffe43af27fee86519c2a9645fdf3355.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><span data-l="en">Gallery</span><span data-l="es">Galería</span></h3><div class="pcard__body"><img src="assets/img/118c54fd3f6230960dcfb1643143afa1b7639438.png" alt="Gallery 1" loading="lazy" decoding="async"><img src="assets/img/96fd423b1b7d0b7de1fcc43c7bff1ab4ac60c836.png" alt="Gallery 2" loading="lazy" decoding="async"><img src="assets/img/31b161d303abc1ecdc94482b3319496451a9e4d7.png" alt="Gallery 3" loading="lazy" decoding="async"><img src="assets/img/68edbae6e0f7ad1b9d08a7166794d55cf4210558.png" alt="Gallery 4" loading="lazy" decoding="async"></div><p class="pnote"><span class="pnote__dot" aria-hidden="true"></span><span><span data-l="en">Photography focuses on real interactions between patients and healthcare professionals, reinforcing trust, personalised care and the rehabilitation journey.</span><span data-l="es">La fotografía se centra en interacciones reales entre pacientes y profesionales sanitarios, reforzando la confianza, la atención personalizada y el proceso de rehabilitación.</span></span></p></article></div>
+<article class="pcard pcard--decisions"><h3 class="pcard__title pcard__title--icon"><img class="pcard__icon" src="assets/img/136e0381e9b7ce8459332a5f26d91f5232ec9416.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"><span data-l="en">Accessibility &amp; readability</span><span data-l="es">Accesibilidad y legibilidad</span></h3><div class="pcard__body"><div class="pdecisions pdecisions--4"><div class="pdecision"><img class="pdecision__icon" src="assets/img/000ec44c26e2e40cc97e84039dda926901d56ff6.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">High contrast</span><span data-l="es">Alto contraste</span></h3><p class="pdecision__text"><span data-l="en">Text and UI elements meet WCAG standards.</span><span data-l="es">El texto y los elementos de interfaz cumplen los estándares WCAG.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/0b62700aa34b8226de11c3a4343d823f10eda425.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Large tap areas</span><span data-l="es">Áreas táctiles amplias</span></h3><p class="pdecision__text"><span data-l="en">Buttons and interactive elements are sized for easy and confident use.</span><span data-l="es">Los botones y elementos interactivos tienen un tamaño cómodo y seguro de usar.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/47bfe7035a84f590996e8f72092b1dd6d782da04.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Readable text</span><span data-l="es">Texto legible</span></h3><p class="pdecision__text"><span data-l="en">Body text is set at a comfortable size.</span><span data-l="es">El texto de párrafo tiene un tamaño cómodo de lectura.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/ccfc45c84ca4d776dfa72846c09f7920978488cc.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Generous spacing</span><span data-l="es">Espaciado generoso</span></h3><p class="pdecision__text"><span data-l="en">8 pt spacing system applied across layouts for clarity and rhythm.</span><span data-l="es">Sistema de espaciado de 8 pt aplicado a todos los layouts para dar claridad y ritmo.</span></p></div></div></div></div></article>
+      </div>
+    </section>
+    </div>
+    <div class="pband pband--dark">
+    <section class="psection reveal" id="decisions">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Key design decisions</span><span data-l="es">Decisiones clave de diseño</span></h2>
+      </div>
+      <div class="psection__body">
+<div class="pdecisions pdecisions--3"><div class="pdecision"><img class="pdecision__icon" src="assets/img/a4d39042f8ebf0e5fdbde1648980f4c8e7c10da2.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Patient journey</span><span data-l="es">Recorrido del paciente</span></h3><p class="pdecision__text"><span data-l="en">Every interaction supports patients throughout their rehabilitation journey.</span><span data-l="es">Cada interacción acompaña al paciente a lo largo de su proceso de rehabilitación.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/59894aa7e9ad8fee9faa1701c15fc8746f8eba2f.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Human-centred care</span><span data-l="es">Atención centrada en la persona</span></h3><p class="pdecision__text"><span data-l="en">Real professionals and authentic imagery build trust and confidence.</span><span data-l="es">Profesionales reales e imágenes auténticas generan confianza y seguridad.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/5d55f4e1d65747b3f40286a97ac6e6cce372983f.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Clear paths to action</span><span data-l="es">Caminos claros hacia la acción</span></h3><p class="pdecision__text"><span data-l="en">Simple navigation and clear CTAs encourage appointment requests.</span><span data-l="es">Una navegación sencilla y llamadas a la acción claras favorecen la petición de cita.</span></p></div></div></div>
+      </div>
+    </section>
+    </div>
+    <section class="psection reveal" id="final">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Final design</span><span data-l="es">Diseño final</span></h2>
+        <p class="psection__sub"><span data-l="en">The final interface translates the research, UX audit and information architecture into a clear digital experience that helps patients understand their healthcare journey, discover relevant treatments and confidently take the next step.</span><span data-l="es">La interfaz final traduce la investigación, la auditoría UX y la arquitectura de la información en una experiencia digital clara que ayuda al paciente a entender su recorrido sanitario, descubrir los tratamientos relevantes y dar el siguiente paso con confianza.</span></p>
+      </div>
+      <div class="psection__body">
+
+      </div>
+      <div class="psection__full">
+<figure class="pshow pshow--dark"><div class="pshow__head"><h3 class="pshow__title"><span data-l="en">Inspiring the first steps</span><span data-l="es">Inspirar los primeros pasos</span></h3><div><p class="psection__text"><span data-l="en">The homepage immediately connects physical activity with cardiovascular health, encouraging patients to take the first step towards prevention and rehabilitation.</span><span data-l="es">La home conecta de inmediato actividad física y salud cardiovascular, animando al paciente a dar el primer paso hacia la prevención y la rehabilitación.</span></p></div></div></figure>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="rehabilitation">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Guiding the rehabilitation journey</span><span data-l="es">Guiar el proceso de rehabilitación</span></h3><p><span data-l="en">Rehabilitation is presented as a structured journey, helping patients understand each stage of the programme and what to expect throughout their recovery.</span><span data-l="es">La rehabilitación se presenta como un recorrido estructurado que ayuda a entender cada etapa del programa y qué esperar durante la recuperación.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/6ac3ac7fae1b81d5941beab05befe91624736424.png" alt="Altessia 1" loading="lazy" decoding="async"><img src="assets/img/bfd7c0db2966dcdfc9d2680dd8ff9eb2b5bf37e8.png" alt="Altessia 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="humanising">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Humanising the treatment experience</span><span data-l="es">Humanizar la experiencia del tratamiento</span></h3><p><span data-l="en">Real professionals, authentic patient interactions and specialised equipment reinforce trust while making the rehabilitation process feel approachable and personal.</span><span data-l="es">Profesionales reales, interacciones auténticas con pacientes y equipamiento especializado refuerzan la confianza y hacen que el proceso de rehabilitación se sienta cercano y personal.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--1"><img src="assets/img/4c6da8861e4654df50a9094cd306ac61eabfeaed.png" alt="Altessia 1" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="trust">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Building trust beyond treatment</span><span data-l="es">Generar confianza más allá del tratamiento</span></h3><p><span data-l="en">Dedicated sections about the team, facilities and clinical philosophy help patients understand who will accompany them throughout their rehabilitation journey.</span><span data-l="es">Secciones dedicadas al equipo, las instalaciones y la filosofía clínica explican quién acompañará al paciente durante todo su proceso de rehabilitación.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/b554a6ac51dcc3c71433a75ec9922f637654339d.png" alt="Altessia 1" loading="lazy" decoding="async"><img src="assets/img/bf51114c7e6b6b08457130687cbc769ff1aed41a.png" alt="Altessia 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="appointments">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Encouraging appointment requests</span><span data-l="es">Favorecer la petición de cita</span></h3><p><span data-l="en">Strategic calls to action are integrated across the experience, allowing patients to request an appointment naturally whenever they feel ready.</span><span data-l="es">Llamadas a la acción estratégicas integradas en toda la experiencia, para que el paciente pida cita de forma natural cuando esté listo.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/963e4e89ea13c3e36cbf9a318d138ace94f6ce51.png" alt="Altessia 1" loading="lazy" decoding="async"><img src="assets/img/df14ca8c7ede505deeb0b20d1b28c0803e064c86.png" alt="Altessia 2" loading="lazy" decoding="async"><img src="assets/img/ec4bcbd283bca2475e6eaf32936e4d2a01b049b6.png" alt="Altessia 3" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="impact">
+      
+      <div class="psection__body">
+<div class="pgrid pgrid--2 pgrid--boxed"><div><h3 class="pshow__title"><span data-l="en">Impact</span><span data-l="es">Impacto</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">To validate the new experience, I compared the redesigned patient journey against the initial UX audit findings. The restructured information architecture and clearer patient pathways directly addressed the navigation and comprehension issues identified at the start of the project, giving patients a more guided route from diagnosis to long-term care.</span><span data-l="es">Para validar la nueva experiencia, comparé el recorrido rediseñado del paciente con los hallazgos de la auditoría UX inicial. La reestructuración de la arquitectura de la información y unas rutas de paciente más claras atacaban directamente los problemas de navegación y comprensión detectados al inicio del proyecto, ofreciendo al paciente un camino más guiado desde el diagnóstico hasta el cuidado a largo plazo.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Conclusions</span><span data-l="es">Conclusiones</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">This project reinforced the importance of designing around real patient needs rather than internal clinic structure. By anchoring the experience in the patient journey — diagnosis, treatment, recovery and long-term care — the redesign helps patients feel informed and supported at every stage, while making it easier to take the next step towards booking an appointment.</span><span data-l="es">Este proyecto reforzó la importancia de diseñar en torno a las necesidades reales del paciente y no a la estructura interna de la clínica. Anclando la experiencia en el recorrido del paciente — diagnóstico, tratamiento, recuperación y cuidado a largo plazo — el rediseño ayuda a que el paciente se sienta informado y acompañado en cada etapa, y facilita dar el siguiente paso hacia la cita.</span></p></div></div>
+      </div>
+    </section>
+
+  <section class="psection" id="another">
+    <h2 class="psection__label"><span data-l="en">Another projects</span><span data-l="es">Otros proyectos</span></h2>
+    <div class="psection__body">
+      <div class="next-projects">
+        <a class="next-card" href="edusport.html">
+          <span class="next-card__cat"><span data-l="en">Edtech / Sport</span><span data-l="es">Edtech / Deporte</span></span>
+          <h3 class="next-card__title">Edusport</h3>
+          <p class="next-card__desc"><span data-l="en">An online education platform focused on sports, nutrition and physical activity courses.</span><span data-l="es">Una plataforma de formación online centrada en cursos de deporte, nutrición y actividad física.</span></p>
+          <span class="link-arrow"><span data-l="en">See project</span><span data-l="es">Ver proyecto</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="next-card" href="ascaso.html">
+          <span class="next-card__cat"><span data-l="en">Ecommerce / Coffee shop</span><span data-l="es">Ecommerce / Coffee shop</span></span>
+          <h3 class="next-card__title">Ascaso</h3>
+          <p class="next-card__desc"><span data-l="en">From research to design system: how I built Ascaso's shopping experience — clearer and more consistent across the whole store.</span><span data-l="es">De la investigación al sistema de diseño: así construí la experiencia de compra de Ascaso, más clara y coherente en todo el e-commerce.</span></p>
+          <span class="link-arrow"><span data-l="en">See project</span><span data-l="es">Ver proyecto</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <span class="eyebrow"><span data-l="en">Let’s connect</span><span data-l="es">Conectemos</span></span>
+        <h2 class="contact__title" style="margin-top:1.25rem"><span data-l="en">Let’s build something meaningful together.</span><span data-l="es">Construyamos algo juntos.</span></h2>
+        <div class="contact__list">
+          <a class="contact__row" href="mailto:carloszubeldiavilchez@gmail.com">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/441e7367733d9fe3d2a83f7b23e375a9157b8b6a.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">Email</span><span data-l="es">Email</span></span>
+            </span>
+            <span class="contact__row-value">carloszubeldiavilchez@gmail.com</span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact__row" href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/acd04169f24873ed6042027e243218298533ce65.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">LinkedIn</span><span data-l="es">LinkedIn</span></span>
+            </span>
+            <span class="contact__row-value">in/czubeldia</span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact__row" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/d383121b44b6ba2fae1aae402c646df7bd2faff1.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">Resume</span><span data-l="es">CV</span></span>
+            </span>
+            <span class="contact__row-value"><span data-l="en">Download my resume</span><span data-l="es">Descargar mi CV</span></span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="contact__row">
+            <span class="contact__row-head">
+              <span class="contact__row-label"><span data-l="en">Location</span><span data-l="es">Ubicación</span></span>
+            </span>
+            <span class="contact__row-value"><span data-l="en">Spain · Remote / Hybrid</span><span data-l="es">España · Remoto / Híbrido</span></span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+</main>
+
+<div class="lightbox" data-lightbox-root data-open="false" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <span class="sr-only" id="lightbox-title"><span data-l="en">Image viewer</span><span data-l="es">Visor de imagen</span></span>
+  <button class="lightbox__close" type="button" data-lightbox-close><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="sr-only"><span data-l="en">Close</span><span data-l="es">Cerrar</span></span></button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Previous image</span><span data-l="es">Imagen anterior</span></span></button>
+  <img class="lightbox__img" data-lightbox-img src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Next image</span><span data-l="es">Imagen siguiente</span></span></button>
+  <p class="lightbox__caption" data-lightbox-caption></p>
+</div>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© 2026 Carlos Zubeldia. <span data-l="en">All rights reserved.</span><span data-l="es">Todos los derechos reservados.</span></span>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="work.html"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+        <a href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+        <a href="mailto:carloszubeldiavilchez@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <a class="to-top" href="#main">
+        <span data-l="en">Back to top</span><span data-l="es">Volver arriba</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </footer>
+<script src="assets/js/app.js?v=1791924191641"></script>
+</body>
+</html>

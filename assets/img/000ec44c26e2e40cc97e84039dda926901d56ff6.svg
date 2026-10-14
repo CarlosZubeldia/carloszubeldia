@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="50" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 50 50" width="50">
+<g id="Frame 1430107149">
+<rect fill="var(--fill-0, #EDF1EE)" height="50" rx="12.5" width="50"/>
+<g id="Group 35162">
+<path d="M24.9994 36.5026C31.3523 36.5026 36.5022 31.3527 36.5022 24.9998C36.5022 18.647 31.3523 13.497 24.9994 13.497C18.6466 13.497 13.4967 18.647 13.4967 24.9998C13.4967 31.3527 18.6466 36.5026 24.9994 36.5026Z" id="Vector" stroke="var(--stroke-0, #1E3D34)" stroke-width="2.15677"/>
+<path d="M25.3599 13.8652C31.3234 14.0567 36.1441 18.9922 36.1441 25C36.144 31.0077 31.3233 35.9422 25.3599 36.1338V13.8652Z" fill="var(--fill-0, #1E3D34)" id="Vector_2" stroke="var(--stroke-0, #1E3D34)" stroke-width="0.718924"/>
+</g>
+</g>
+</svg>

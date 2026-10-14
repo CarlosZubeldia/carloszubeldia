@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Ascaso — Carlos Zubeldia" data-title-es="Ascaso — Carlos Zubeldia">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ascaso — Carlos Zubeldia</title>
+  <meta name="description" content="From research to design system: how I built Ascaso's shopping experience — clearer and more consistent across the whole store." data-desc-en="From research to design system: how I built Ascaso's shopping experience — clearer and more consistent across the whole store." data-desc-es="De la investigación al sistema de diseño: así construí la experiencia de compra de Ascaso, más clara y coherente en todo el e-commerce.">
+  <meta name="author" content="Carlos Zubeldia">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ascaso — Carlos Zubeldia">
+  <meta property="og:description" content="From research to design system: how I built Ascaso's shopping experience — clearer and more consistent across the whole store.">
+  <meta property="og:image" content="https://carloszubeldia.com/assets/img/ascaso-card-transp.webp">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="canonical" href="https://carloszubeldia.com/ascaso.html">
+  <link rel="icon" type="image/svg+xml" href="assets/img/d443d4ee85f48a1c8e4ca03e4f27583cf6b97daa.svg">
+  <link rel="alternate icon" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600&display=swap" rel="stylesheet">
+  <!-- Sin cache: durante el desarrollo el navegador guardaba el HTML antiguo
+       y seguia pidiendo el CSS viejo. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1791924191641">
+
+  <script>
+    /* Evita el flash: fija el idioma antes del primer pintado */
+    (function () {
+      try {
+        document.documentElement.classList.add("js");
+        var q = new URLSearchParams(location.search).get("lang");
+        var l = q || localStorage.getItem("cz-lang") || (navigator.language || "en").slice(0, 2).toLowerCase();
+        document.documentElement.lang = ["en", "es"].indexOf(l) > -1 ? l : "en";
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<script>(function(){try{if(sessionStorage.getItem("cz-preloader")){document.documentElement.className+=" preloader-skip";}else{sessionStorage.setItem("cz-preloader","1");}}catch(e){}})();</script>
+<div class="preloader" data-preloader>
+  <div class="preloader__inner">
+    <p class="preloader__hello" data-preloader-hello>Bienvenido</p>
+    <p class="preloader__name"><span class="preloader__who">Carlos Zubeldia</span> <span class="preloader__dot">&#183;</span> <span class="preloader__role">Product Designer</span></p>
+    <p class="preloader__pct">[<span data-preloader-pct>000</span>]</p>
+  </div>
+  <div class="preloader__bar" aria-hidden="true"><span data-preloader-bar></span></div>
+</div>
+
+<a class="skip" href="#main"><span data-l="en">Skip to content</span><span data-l="es">Saltar al contenido</span></a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="header header--over-media">
+  <div class="wrap header__inner">
+    <a class="brand" href="index.html" aria-label="Carlos Zubeldia">
+      <span class="brand__dot" aria-hidden="true"></span>
+      <span>Carlos Zubeldia</span>
+    </a>
+
+    <nav class="nav nav--desktop" aria-label="Main">
+      <a class="nav__link" href="work.html" aria-current="page"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+      <a class="nav__link" href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+      <a class="nav__link" href="index.html#contact"><span data-l="en">Contact</span><span data-l="es">Contacto</span></a>
+          <a class="nav__link nav__link--cv" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener"><span data-l="en">Resume</span><span data-l="es">CV</span></a>
+    </nav>
+
+    <div class="header__tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button class="lang__opt" type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang__opt" type="button" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" aria-hidden="true">
+  <nav class="drawer__nav" aria-label="Mobile">
+    <a class="drawer__link" href="work.html"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+    <a class="drawer__link" href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+    <a class="drawer__link" href="index.html#contact"><span data-l="en">Contact</span><span data-l="es">Contacto</span></a>
+    <a class="drawer__link" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener"><span data-l="en">Resume</span><span data-l="es">CV</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <a class="btn btn--ghost drawer__cta" href="mailto:carloszubeldiavilchez@gmail.com">
+      <img class="drawer__icon" src="assets/img/icon-mail-negro.svg" alt="" aria-hidden="true"><span data-l="en">Email</span><span data-l="es">Email</span>
+    </a>
+    <a class="btn drawer__cta" href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">
+      <img class="drawer__icon" src="assets/img/icon-linkedin-blanco.svg" alt="" aria-hidden="true">LinkedIn
+    </a>
+  </div>
+</div>
+
+<main id="main" class="project project--ascaso">
+
+  <header class="phero">
+    <div class="phero__frame">
+      <div class="phero__media" aria-hidden="true"><img src="assets/img/4ca75270cbc529723d1498c29a84103596b9809c.png" alt="Ascaso" decoding="async"></div>
+      <div class="phero__scrim" aria-hidden="true"></div>
+      <div class="phero__top">
+        <span class="phero__cat"><span data-l="en">Ecommerce / Coffee shop</span><span data-l="es">Ecommerce / Coffee shop</span></span>
+        <p class="phero__tagline"><span data-l="en">From research to design system: how I built Ascaso's shopping experience — clearer and more consistent across the whole store.</span><span data-l="es">De la investigación al sistema de diseño: así construí la experiencia de compra de Ascaso, más clara y coherente en todo el e-commerce.</span></p>
+      </div>
+      <p class="phero__title" aria-hidden="true">ascaso shop</p>
+    </div>
+  </header>
+
+  <section class="pintro">
+    <div class="pintro__col pintro__col--left">
+      <div class="pintro__head"><span class="eyebrow eyebrow--accent"><span data-l="en">About the project</span><span data-l="es">Sobre el proyecto</span></span></div>
+      <div class="pintro__text"><div class="stack" data-l="en"><p>Ascaso is a premium coffee machine manufacturer known for combining industrial craftsmanship, innovation and contemporary design.</p><p>The project focused on rethinking key areas of the e-commerce experience, with the goal of helping users better understand the product catalogue, compare models and make confident purchasing decisions while maintaining the brand's premium positioning.</p></div><div class="stack" data-l="es"><p>Ascaso es un fabricante premium de máquinas de café conocido por combinar artesanía industrial, innovación y diseño contemporáneo.</p><p>El proyecto se centró en repensar las áreas clave de la experiencia de e-commerce, con el objetivo de ayudar a los usuarios a comprender mejor el catálogo, comparar modelos y tomar decisiones de compra con confianza, manteniendo el posicionamiento premium de la marca.</p></div></div>
+      
+    </div>
+    <div class="pintro__col pintro__col--right">
+      <div class="pintro__facts">
+        <div class="pfact"><span class="pfact__label"><span data-l="en">My role</span><span data-l="es">Mi rol</span></span><span class="pfact__value"><span data-l="en">Product Designer</span><span data-l="es">Product Designer</span></span></div>
+        <div class="pfact"><span class="pfact__label"><span data-l="en">Duration</span><span data-l="es">Duración</span></span><span class="pfact__value"><span data-l="en">8 Weeks</span><span data-l="es">8 semanas</span></span></div>
+        <div class="pfact"><span class="pfact__label"><span data-l="en">Industry</span><span data-l="es">Industria</span></span><span class="pfact__value"><span data-l="en">E-commerce</span><span data-l="es">E-commerce</span></span></div>
+      </div>
+      <p class="pcaption pintro__caption"><span data-l="en">What I worked on</span><span data-l="es">Que trabajé en el proyecto</span></p>
+      <div class="tags pintro__tags"><span class="tag"><span data-l="en">UX Audit</span><span data-l="es">Auditoría UX</span></span><span class="tag"><span data-l="en">Benchmarking</span><span data-l="es">Benchmarking</span></span><span class="tag"><span data-l="en">UI Design</span><span data-l="es">Diseño UI</span></span><span class="tag"><span data-l="en">E-commerce</span><span data-l="es">E-commerce</span></span><span class="tag"><span data-l="en">Information Architecture</span><span data-l="es">Arquitectura de la información</span></span></div>
+      <div class="pintro__link"><a class="btn" href="https://www.ascaso.com/" target="_blank" rel="noopener"><span data-l="en">Visit the website</span><span data-l="es">Visitar la web</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </div>
+  </section>
+
+  <figure class="pbanner reveal">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/img/ascaso-01-poster.jpg"><source src="assets/video/ascaso-01.mp4" type="video/mp4"></video>
+    <figcaption class="pshow__caption"><span data-l="en">Ascaso e-commerce</span><span data-l="es">E-commerce de Ascaso</span></figcaption>
+  </figure>
+
+    <section class="psection reveal" id="challenge">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Challenge</span><span data-l="es">El reto</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__text"><span data-l="en">The existing experience provided access to a wide range of products, but users faced challenges when exploring the catalogue, comparing models and understanding the differences between product categories.</span><span data-l="es">La experiencia existente daba acceso a una amplia gama de productos, pero los usuarios tenían dificultades para explorar el catálogo, comparar modelos y entender las diferencias entre categorías de producto.</span></p>
+<p class="psection__text"><span data-l="en">The goal was to simplify product discovery, improve navigation and create a clearer purchasing journey without compromising the premium perception of the brand.</span><span data-l="es">El objetivo era simplificar el descubrimiento de producto, mejorar la navegación y crear un recorrido de compra más claro sin comprometer la percepción premium de la marca.</span></p>
+      </div>
+    </section>
+    <div class="pband pband--grey">
+    <section class="psection reveal" id="ecosystem">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Understanding Ascaso's brand ecosystem</span><span data-l="es">Entendiendo el ecosistema de marca de Ascaso</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__text"><span data-l="en">Before designing the e-commerce experience, I analysed Ascaso's existing digital ecosystem to understand how the brand communicated its values, products and positioning across different touchpoints.</span><span data-l="es">Antes de diseñar la experiencia de e-commerce, analicé el ecosistema digital existente de Ascaso para entender cómo la marca comunicaba sus valores, productos y posicionamiento en los distintos puntos de contacto.</span></p>
+<p class="psection__text"><span data-l="en">The analysis focused on identifying recurring visual patterns, navigation structures, content hierarchy and brand attributes that could be translated into the shopping experience.</span><span data-l="es">El análisis se centró en identificar patrones visuales recurrentes, estructuras de navegación, jerarquía de contenido y atributos de marca que pudieran trasladarse a la experiencia de compra.</span></p>
+<p class="psection__text"><span data-l="en">This phase helped establish a clear connection between the corporate website and the future e-commerce platform, ensuring consistency while adapting the experience to the specific needs of online purchasing.</span><span data-l="es">Esta fase ayudó a establecer una conexión clara entre la web corporativa y la futura plataforma de e-commerce, asegurando la coherencia y adaptando a la vez la experiencia a las necesidades específicas de la compra online.</span></p>
+      </div>
+      <div class="psection__full">
+<div class="pgrid pgrid--3"><article class="pcard" data-kind="type"><h3 class="pcard__title"><span class="pcard__num">01.</span> <span data-l="en">Typography</span><span data-l="es">Tipografía</span></h3><div class="pcard__body"><p class="psample"><span data-l="en">For the coffee lovers, since 1962.</span><span data-l="es">Para los amantes del café, desde 1962.</span></p><p><span data-l="en">There are things that cannot be described in words. Like the aroma of freshly ground coffee. Or the sensation evoked by a good design. It is a moment, an instant, a feeling, sometimes incomprehensible.</span><span data-l="es">Hay cosas que no se pueden describir con palabras. Como el aroma del café recién molido. O la sensación que evoca un buen diseño. Es un momento, un instante, un sentimiento, a veces incomprensible.</span></p><div class="pfonts"><div class="pfont"><div class="pfont__name">Libre Caslon</div><div class="pfont__aa">Aa</div><div class="pfont__role"><span data-l="en">Heading</span><span data-l="es">Titulares</span></div></div><div class="pfont"><div class="pfont__name">Poppins</div><div class="pfont__aa">Aa</div><div class="pfont__role"><span data-l="en">Text</span><span data-l="es">Texto</span></div></div></div><span class="pcard__rule" aria-hidden="true"></span></div></article>
+<article class="pcard" data-kind="palette"><h3 class="pcard__title"><span class="pcard__num">02.</span> <span data-l="en">Colour palette</span><span data-l="es">Paleta de color</span></h3><div class="pcard__body"><div class="pswatches"><div class="pswatch"><span class="pswatch__dot" style="background:#E2DCD3"></span>#E2DCD3</div><div class="pswatch"><span class="pswatch__dot" style="background:#4A94FF"></span>#4A94FF</div><div class="pswatch"><span class="pswatch__dot" style="background:#000000"></span>#000000</div><div class="pswatch"><span class="pswatch__dot" style="background:#5A5A5A"></span>#5A5A5A</div></div><p class="pcaption"><span data-l="en">Usage</span><span data-l="es">Uso</span></p><div class="pusage"><div class="pusage__item"><span class="pusage__bar" style="background:#000000"></span><div class="pusage__legend"><b>70 %</b><i><span data-l="en">Neutrals</span><span data-l="es">Neutros</span></i></div></div><div class="pusage__item"><span class="pusage__bar" style="background:#E2DCD3"></span><div class="pusage__legend"><b>25 %</b><i><span data-l="en">Warms</span><span data-l="es">Cálidos</span></i></div></div><div class="pusage__item"><span class="pusage__bar" style="background:#4A94FF"></span><div class="pusage__legend"><b>5 %</b><i><span data-l="en">Accent</span><span data-l="es">Acento</span></i></div></div></div></div></article>
+<article class="pcard" data-kind="photos"><h3 class="pcard__title"><span class="pcard__num">03.</span> <span data-l="en">Product photography</span><span data-l="es">Fotografía de producto</span></h3><div class="pcard__body"><div class="pphotos"><img class="pphotos__big" src="assets/img/9348bfee3ab9053f1610f45e2952f41db057635a.png" alt="Product photography 1" loading="lazy" decoding="async"><img class="pphotos__small" src="assets/img/132ef29b495519ef78fac6ff5e4449e354e11638.png" alt="Product photography 2" loading="lazy" decoding="async"><img class="pphotos__small" src="assets/img/779704bab140adf01b19cbd7a3098db359cd851e.png" alt="Product photography 3" loading="lazy" decoding="async"></div></div></article>
+<article class="pcard" data-kind="images"><h3 class="pcard__title"><span class="pcard__num">04.</span> <span data-l="en">Layout &amp; composition</span><span data-l="es">Maquetación y composición</span></h3><div class="pcard__body"><img src="assets/img/5766f616ecf82b052a660bf4aa8ca51f72856669.png" alt="Layout &amp; composition 1" loading="lazy" decoding="async"><img src="assets/img/28e4e70a7bfe6d27c145f8621ba21ae45918e898.png" alt="Layout &amp; composition 2" loading="lazy" decoding="async"></div></article>
+<article class="pcard" data-kind="nav"><h3 class="pcard__title"><span class="pcard__num">05.</span> <span data-l="en">Navigation patterns</span><span data-l="es">Patrones de navegación</span></h3><div class="pcard__body"><div class="pstack"><img src="assets/img/63e388bae13115c6c59aea27cf10c88edb4f983d.png" alt="Navigation patterns 1" loading="lazy" decoding="async"><img src="assets/img/39d0ad188763d4fc5c022e27e725d118783d7e53.png" alt="Navigation patterns 2" loading="lazy" decoding="async"></div><div class="pgrid pgrid--2" style="margin-top:0.9rem"><img src="assets/img/818baf0330fc86f108be4fc2c4759209d47b3e9a.png" alt="Navigation patterns 1" loading="lazy" decoding="async"><img src="assets/img/8673d94308e788b908abbac234a27d7644377a7c.png" alt="Navigation patterns 2" loading="lazy" decoding="async"></div></div></article>
+<article class="pcard" data-kind="ui"><h3 class="pcard__title"><span class="pcard__num">06.</span> <span data-l="en">UI components</span><span data-l="es">Componentes de interfaz</span></h3><div class="pcard__body"><div class="pgrid pgrid--2"><img src="assets/img/a68848daf24ce35f5a7d2f3419ee5bf67d296277.png" alt="UI components 1" loading="lazy" decoding="async"><img src="assets/img/ac1ed230b8d8f8d809338d691754cd711f547d26.png" alt="UI components 2" loading="lazy" decoding="async"></div><div class="pui__buttons" style="margin-top:0.9rem"><span class="btn btn--ghost"><span data-l="en">Go to STEEL</span><span data-l="es">Ir a STEEL</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span> <span class="btn btn--brand"><span data-l="en">Go to STEEL</span><span data-l="es">Ir a STEEL</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="picons" style="margin-top:0.9rem"><img src="assets/img/8729740b39c79589597dc74e5f913c374e3ad251.svg" alt="UI components 1" loading="lazy" decoding="async"><img src="assets/img/573cadc28eb7b99d4f358844241b7c96a4c1f066.svg" alt="UI components 2" loading="lazy" decoding="async"><img src="assets/img/a768f90a3783952970c898f9666ef71661cf24b9.svg" alt="UI components 3" loading="lazy" decoding="async"><img src="assets/img/icon-avatar.svg" alt="UI components 4" loading="lazy" decoding="async"><img src="assets/img/b0c999e039e6d3f7b61bfdfc868995cbe9d1846f.svg" alt="UI components 5" loading="lazy" decoding="async"><img src="assets/img/43ecf3432e9ae545ad770195c25b4d1157fcbaab.svg" alt="UI components 6" loading="lazy" decoding="async"><img src="assets/img/43ecf3432e9ae545ad770195c25b4d1157fcbaab.svg" alt="UI components 7" loading="lazy" decoding="async"></div></div></article></div>
+      </div>
+    </section>
+    </div>
+    <section class="psection reveal" id="references">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Design references</span><span data-l="es">Referencias de diseño</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__lead"><span data-l="en">Learning from industry leaders and curated references.</span><span data-l="es">Aprender de líderes del sector y referencias seleccionadas.</span></p>
+<p class="psection__text"><span data-l="en">To better understand user expectations and identify proven interaction patterns, I analysed a selection of e-commerce experiences recommended by the client alongside additional references discovered during the research phase.</span><span data-l="es">Para entender mejor las expectativas de los usuarios e identificar patrones de interacción probados, analicé una selección de experiencias de e-commerce recomendadas por el cliente junto con otras referencias descubiertas durante la fase de investigación.</span></p>
+<p class="psection__text"><span data-l="en">Rather than replicating existing solutions, the goal was to understand how leading brands approached product presentation, navigation and purchasing journeys. These insights helped shape key areas of the Ascaso experience while maintaining a visual language aligned with the brand's identity.</span><span data-l="es">En lugar de replicar soluciones existentes, el objetivo era entender cómo las marcas líderes abordaban la presentación de producto, la navegación y los recorridos de compra. Estos insights ayudaron a definir áreas clave de la experiencia Ascaso manteniendo un lenguaje visual alineado con la identidad de la marca.</span></p>
+<div>      <article class="pref reveal">
+        <div>
+          <span class="pref__num">01</span>
+          <h3 class="pref__name">La Marzocco</h3>
+          <p class="pref__url">www.lamarzocco.com</p>
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Product storytelling and homepage composition. The visual hierarchy, use of large product imagery and editorial layout helped define the structure of the Ascaso e-commerce homepage. This reference demonstrated how premium products can be presented through storytelling while maintaining a clear path to exploration and purchase.</span><span data-l="es">Storytelling de producto y composición de la home. La jerarquía visual, el uso de imágenes grandes de producto y la maquetación editorial ayudaron a definir la estructura de la home de Ascaso. Esta referencia demostró cómo presentar productos premium mediante storytelling sin perder un camino claro hacia la exploración y la compra.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/6266956b5f013e46d3c8f00df6fe9f6e612ef1c3.png" alt="La Marzocco" loading="lazy" decoding="async">
+        </div>
+      </article>
+      <article class="pref reveal">
+        <div>
+          <span class="pref__num">02</span>
+          <h3 class="pref__name">Lelit</h3>
+          <p class="pref__url">www.lelit.com</p>
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Product card structure, information hierarchy and colour selector interactions. This reference provided valuable insights into how technical products can be organised and compared efficiently. The product card layout, content prioritisation and colour selection patterns inspired several interaction decisions within the catalogue experience.</span><span data-l="es">Estructura de la tarjeta de producto, jerarquía de información e interacción con el selector de color. Esta referencia aportó claves sobre cómo organizar y comparar productos técnicos de forma eficiente. La tarjeta de producto, la priorización de contenido y los patrones de selección de color inspiraron varias decisiones de interacción del catálogo.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/ed6d88b080dccdd2dda60cf1344e5f2e9133115d.png" alt="Lelit" loading="lazy" decoding="async">
+        </div>
+      </article>
+      <article class="pref reveal">
+        <div>
+          <span class="pref__num">03</span>
+          <h3 class="pref__name">Create</h3>
+          <p class="pref__url">https://www.create-store.com/es/</p>
+          <p class="pref__takeaway"><span data-l="en">Key takeaway</span><span data-l="es">Conclusión clave</span></p>
+          <p class="pref__text"><span data-l="en">Minimal product presentation and clean purchasing experience. Create's approach demonstrated how a reduced visual language can help users focus on the product itself. The product detail page became a key reference for simplifying information, reducing visual noise and creating a more intuitive shopping experience.</span><span data-l="es">Presentación de producto minimalista y experiencia de compra limpia. El enfoque de Create demostró cómo un lenguaje visual reducido ayuda a centrar la atención en el producto. La ficha de producto se convirtió en una referencia clave para simplificar la información, reducir el ruido visual y crear una experiencia de compra más intuitiva.</span></p>
+        </div>
+        <div class="pref__media">
+          <img src="assets/img/aacc892eac394d33084b3eaff23331def69cae19.png" alt="Create" loading="lazy" decoding="async">
+        </div>
+      </article></div>
+      </div>
+    </section>
+    <section class="psection reveal" id="findings">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Key findings</span><span data-l="es">Conclusiones clave</span></h2>
+      </div>
+      <div class="psection__body">
+<div class="pgrid pgrid--4"><div><h3 class="pshow__title"><span data-l="en">Editorial product presentation</span><span data-l="es">Presentación editorial de producto</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Leading brands use large imagery and thoughtful composition to highlight product craftsmanship and reinforce premium positioning.</span><span data-l="es">Las marcas líderes usan imágenes grandes y una composición cuidada para destacar la artesanía del producto y reforzar el posicionamiento premium.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Clear product hierarchy</span><span data-l="es">Jerarquía de producto clara</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Information is prioritised to help users quickly understand product differences, features and value.</span><span data-l="es">La información se prioriza para que el usuario entienda rápido las diferencias, características y el valor de cada producto.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Minimal purchasing experience</span><span data-l="es">Experiencia de compra minimalista</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Reducing unnecessary visual elements helps users focus on decision-making and product exploration.</span><span data-l="es">Reducir los elementos visuales innecesarios ayuda al usuario a centrarse en la decisión y en explorar el producto.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Focused product storytelling</span><span data-l="es">Storytelling de producto enfocado</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">Every touchpoint contributes to communicating the brand's values through content, visuals and interaction design.</span><span data-l="es">Cada punto de contacto contribuye a comunicar los valores de la marca a través del contenido, lo visual y el diseño de interacción.</span></p></div></div>
+      </div>
+    </section>
+    <div class="pband pband--soft">
+    <section class="psection reveal" id="ia">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Information architecture</span><span data-l="es">Arquitectura de la información</span></h2>
+      </div>
+      <div class="psection__body">
+<p class="psection__lead"><span data-l="en">Organising a complex catalogue into a clearer shopping experience.</span><span data-l="es">Organizar un catálogo complejo en una experiencia de compra más clara.</span></p>
+<p class="psection__text"><span data-l="en">One of the main challenges was helping users navigate a broad product catalogue while understanding the differences between machines, accessories and complementary products.</span><span data-l="es">Uno de los principales retos era ayudar a los usuarios a navegar por un catálogo amplio entendiendo las diferencias entre máquinas, accesorios y productos complementarios.</span></p>
+<p class="psection__text"><span data-l="en">To create a more intuitive experience, I restructured the information architecture, defining clearer navigation paths, product groupings and content relationships.</span><span data-l="es">Para crear una experiencia más intuitiva, reestructuré la arquitectura de la información definiendo rutas de navegación, agrupaciones de producto y relaciones de contenido más claras.</span></p>
+<p class="psection__text"><span data-l="en">The goal was to reduce cognitive load and help users find the right product more efficiently.</span><span data-l="es">El objetivo era reducir la carga cognitiva y ayudar a los usuarios a encontrar el producto adecuado de forma más eficiente.</span></p>
+      </div>
+      <div class="psection__full">
+<figure class="pshow"><img src="assets/img/104359329ecfb1977fdd5dd5a9447ec208552fd3.png" alt="Ascaso" loading="lazy" decoding="async"><figcaption class="pshow__caption"><span data-l="en">Site map and user flows</span><span data-l="es">Sitemap y flujos de usuario</span></figcaption></figure>
+      </div>
+    </section>
+    </div>
+    <section class="psection reveal" id="final">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Final design</span><span data-l="es">Diseño final</span></h2>
+        <p class="psection__sub"><span data-l="en">Designing a premium shopping experience for coffee enthusiasts.</span><span data-l="es">Diseñando una experiencia de compra premium para los amantes del café.</span></p>
+      </div>
+      <div class="psection__body">
+<figure class="pshow"><img src="assets/img/44fcfe4ed6655bc3b667deb562b2a52513fe1b92.png" alt="Ascaso" loading="lazy" decoding="async"></figure>
+      </div>
+    </section>
+    <div class="pband pband--dark">
+    <section class="psection reveal" id="decisions">
+      <div class="psection__head">
+        <h2 class="psection__label"><span data-l="en">Key design decisions</span><span data-l="es">Decisiones clave de diseño</span></h2>
+      </div>
+      <div class="psection__body">
+<div class="pdecisions pdecisions--3"><div class="pdecision"><img class="pdecision__icon" src="assets/img/eyes.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Editorial Product Presentation</span><span data-l="es">Presentación editorial de producto</span></h3><p class="pdecision__text"><span data-l="en">Leading brands use large imagery and thoughtful composition to highlight product craftsmanship and reinforce premium positioning.</span><span data-l="es">Las marcas líderes usan imágenes grandes y una composición cuidada para destacar la artesanía del producto y reforzar el posicionamiento premium.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/imbalance.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Clear Product Hierarchy</span><span data-l="es">Jerarquía de producto clara</span></h3><p class="pdecision__text"><span data-l="en">Information is prioritised to help users quickly understand product differences, features and value.</span><span data-l="es">La información se prioriza para que el usuario entienda rápido las diferencias, las características y el valor de cada producto.</span></p></div></div><div class="pdecision"><img class="pdecision__icon" src="assets/img/mall-bag.svg" alt="" loading="lazy" decoding="async"><div class="pdecision__body"><h3 class="pdecision__title"><span data-l="en">Minimal Purchasing Experience</span><span data-l="es">Experiencia de compra minimalista</span></h3><p class="pdecision__text"><span data-l="en">Reducing unnecessary visual elements helps users focus on decision-making and product exploration.</span><span data-l="es">Reducir los elementos visuales innecesarios ayuda al usuario a centrarse en la decisión y en explorar el producto.</span></p></div></div></div>
+      </div>
+    </section>
+    </div>
+    <section class="psection psection--wide reveal" id="storytelling">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Premium Product Storytelling</span><span data-l="es">Storytelling premium de producto</span></h3><p><span data-l="en">Large imagery, generous spacing and editorial layouts were used to highlight product craftsmanship and reinforce Ascaso's premium positioning.</span><span data-l="es">Imágenes grandes, espaciado generoso y maquetaciones editoriales para destacar la artesanía del producto y reforzar el posicionamiento premium de Ascaso.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--1"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/ascaso-02-poster.jpg"><source src="assets/video/ascaso-02.mp4" type="video/mp4"></video></div></div></div>
+<div class="pshowcase pshowcase--media"><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/b9964450dc2551dfba6f7135a1eff294922cd3df.png" alt="Ascaso 1" loading="lazy" decoding="async"><img src="assets/img/3662f44077c94d1e6a138643546a994feb7fcaf6.png" alt="Ascaso 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="discovery">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Clear Product Discovery</span><span data-l="es">Descubrimiento de producto claro</span></h3><p><span data-l="en">The catalogue structure was designed to help users quickly understand product categories and find the right machine for their needs.</span><span data-l="es">La estructura del catálogo se diseñó para que el usuario entienda rápido las categorías y encuentre la máquina adecuada a sus necesidades.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--3"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/ascaso-03-poster.jpg"><source src="assets/video/ascaso-03.mp4" type="video/mp4"></video><img src="assets/img/ascaso-mob-01.webp" alt="Ascaso 1" loading="lazy" decoding="async"><img src="assets/img/ascaso-mob-02.webp" alt="Ascaso 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="configuration">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Product Configuration</span><span data-l="es">Configuración de producto</span></h3><p><span data-l="en">Users could explore different finishes and configurations while maintaining a simple and intuitive purchasing journey.</span><span data-l="es">Los usuarios podían explorar distintos acabados y configuraciones manteniendo un recorrido de compra simple e intuitivo.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--1"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/ascaso-04-poster.jpg"><source src="assets/video/ascaso-04.mp4" type="video/mp4"></video></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="checkout-mockups">
+      
+      <div class="psection__body">
+<div class="pshowcase pshowcase--media"><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--3"><img src="assets/img/d833897149a340582cb74b3f809b17e9dd715881.png" alt="Ascaso 1" loading="lazy" decoding="async"><img src="assets/img/d52b686eb5f90c0b957b2ab7652c929d3e642b5a.png" alt="Ascaso 2" loading="lazy" decoding="async"><img src="assets/img/818baf0330fc86f108be4fc2c4759209d47b3e9a.png" alt="Ascaso 3" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="checkout">
+      
+      <div class="psection__body">
+<div class="pshowcase"><div class="pshowcase__text"><h3 class="pshow__title"><span data-l="en">Smooth Checkout Experience</span><span data-l="es">Checkout fluido</span></h3><p><span data-l="en">A simplified checkout flow reduces friction and allows users to complete their purchase through sign in, registration or guest checkout, creating a fast and intuitive purchasing experience.</span><span data-l="es">Un flujo de checkout simplificado reduce la fricción y permite completar la compra con login, registro o como invitado, creando una experiencia de compra rápida e intuitiva.</span></p></div><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/33ec3d1bb8085283f0cf81cf6cfd8e001768a641.png" alt="Ascaso 1" loading="lazy" decoding="async"><img src="assets/img/588fe9e11fb535a428c0acc99fc873dddd553bd1.png" alt="Ascaso 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="checkout-more">
+      
+      <div class="psection__body">
+<div class="pshowcase pshowcase--media"><div class="pshowcase__media"><div class="pshowcase__grid pshowcase__grid--2"><img src="assets/img/588fe9e11fb535a428c0acc99fc873dddd553bd1.png" alt="Ascaso 1" loading="lazy" decoding="async"><img src="assets/img/82ee052b07e66ea0fe98e3a9159c5308f92355bb.png" alt="Ascaso 2" loading="lazy" decoding="async"></div></div></div>
+      </div>
+    </section>
+    <section class="psection psection--wide reveal" id="impact">
+      
+      <div class="psection__body">
+<div class="pgrid pgrid--2 pgrid--boxed"><div><h3 class="pshow__title"><span data-l="en">Impact</span><span data-l="es">Impacto</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">The project transformed Ascaso's digital ecosystem into a more cohesive shopping experience, improving product discovery, comparison and purchase confidence while preserving the brand's premium character.</span><span data-l="es">El proyecto transformó el ecosistema digital de Ascaso en una experiencia de compra más cohesionada, mejorando el descubrimiento de producto, la comparación y la confianza en la compra, y preservando el carácter premium de la marca.</span></p></div><div><h3 class="pshow__title"><span data-l="en">Reflections</span><span data-l="es">Reflexiones</span></h3><p class="psection__text" style="font-size:var(--fs-small);margin-top:.5rem"><span data-l="en">This project demonstrated how thoughtful information architecture, clear product communication and strong visual storytelling can work together to create a more intuitive and engaging e-commerce experience.</span><span data-l="es">Este proyecto demostró cómo una arquitectura de la información cuidada, una comunicación de producto clara y un storytelling visual sólido pueden trabajar juntos para crear una experiencia de e-commerce más intuitiva y atractiva.</span></p></div></div>
+      </div>
+    </section>
+
+  <section class="psection" id="another">
+    <h2 class="psection__label"><span data-l="en">Another projects</span><span data-l="es">Otros proyectos</span></h2>
+    <div class="psection__body">
+      <div class="next-projects">
+        <a class="next-card" href="altessia.html">
+          <span class="next-card__cat"><span data-l="en">Healthcare / Cardiac rehabilitation</span><span data-l="es">Salud / Rehabilitación cardíaca</span></span>
+          <h3 class="next-card__title">Altessia</h3>
+          <p class="next-card__desc"><span data-l="en">Designing a patient-centred experience that encourages prevention, rehabilitation and long-term wellbeing.</span><span data-l="es">Diseñando una experiencia centrada en el paciente que fomente la prevención, la rehabilitación y el bienestar a largo plazo.</span></p>
+          <span class="link-arrow"><span data-l="en">See project</span><span data-l="es">Ver proyecto</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="next-card" href="edusport.html">
+          <span class="next-card__cat"><span data-l="en">Edtech / Sport</span><span data-l="es">Edtech / Deporte</span></span>
+          <h3 class="next-card__title">Edusport</h3>
+          <p class="next-card__desc"><span data-l="en">An online education platform focused on sports, nutrition and physical activity courses.</span><span data-l="es">Una plataforma de formación online centrada en cursos de deporte, nutrición y actividad física.</span></p>
+          <span class="link-arrow"><span data-l="en">See project</span><span data-l="es">Ver proyecto</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <span class="eyebrow"><span data-l="en">Let’s connect</span><span data-l="es">Conectemos</span></span>
+        <h2 class="contact__title" style="margin-top:1.25rem"><span data-l="en">Let’s build something meaningful together.</span><span data-l="es">Construyamos algo juntos.</span></h2>
+        <div class="contact__list">
+          <a class="contact__row" href="mailto:carloszubeldiavilchez@gmail.com">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/441e7367733d9fe3d2a83f7b23e375a9157b8b6a.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">Email</span><span data-l="es">Email</span></span>
+            </span>
+            <span class="contact__row-value">carloszubeldiavilchez@gmail.com</span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact__row" href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/acd04169f24873ed6042027e243218298533ce65.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">LinkedIn</span><span data-l="es">LinkedIn</span></span>
+            </span>
+            <span class="contact__row-value">in/czubeldia</span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="contact__row" href="https://docs.google.com/document/d/1pbB3UorEtX21ZrDCN3POVL8Y2e_s21vY/edit" target="_blank" rel="noopener">
+            <span class="contact__row-head">
+              <img class="contact__icon" src="assets/img/d383121b44b6ba2fae1aae402c646df7bd2faff1.svg" alt="" width="22" height="22">
+              <span class="contact__row-label"><span data-l="en">Resume</span><span data-l="es">CV</span></span>
+            </span>
+            <span class="contact__row-value"><span data-l="en">Download my resume</span><span data-l="es">Descargar mi CV</span></span>
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="contact__row">
+            <span class="contact__row-head">
+              <span class="contact__row-label"><span data-l="en">Location</span><span data-l="es">Ubicación</span></span>
+            </span>
+            <span class="contact__row-value"><span data-l="en">Spain · Remote / Hybrid</span><span data-l="es">España · Remoto / Híbrido</span></span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+</main>
+
+<div class="lightbox" data-lightbox-root data-open="false" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <span class="sr-only" id="lightbox-title"><span data-l="en">Image viewer</span><span data-l="es">Visor de imagen</span></span>
+  <button class="lightbox__close" type="button" data-lightbox-close><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="sr-only"><span data-l="en">Close</span><span data-l="es">Cerrar</span></span></button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Previous image</span><span data-l="es">Imagen anterior</span></span></button>
+  <img class="lightbox__img" data-lightbox-img src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="sr-only"><span data-l="en">Next image</span><span data-l="es">Imagen siguiente</span></span></button>
+  <p class="lightbox__caption" data-lightbox-caption></p>
+</div>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>© 2026 Carlos Zubeldia. <span data-l="en">All rights reserved.</span><span data-l="es">Todos los derechos reservados.</span></span>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="work.html"><span data-l="en">Work</span><span data-l="es">Proyectos</span></a>
+        <a href="about.html"><span data-l="en">About</span><span data-l="es">Sobre mí</span></a>
+        <a href="mailto:carloszubeldiavilchez@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/czubeldia" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <a class="to-top" href="#main">
+        <span data-l="en">Back to top</span><span data-l="es">Volver arriba</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </footer>
+<script src="assets/js/app.js?v=1791924191641"></script>
+</body>
+</html>

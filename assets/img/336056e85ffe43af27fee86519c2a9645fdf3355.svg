@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="32" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 32 32" width="32">
+<g id="Frame 1430107149">
+<rect fill="var(--fill-0, #EDF1EE)" height="32" rx="16" width="32"/>
+<g id="Group 35163">
+<path d="M24 16C24 19.7712 24 21.6569 22.8284 22.8284C21.6569 24 19.7712 24 16 24C12.2288 24 10.3431 24 9.17158 22.8284C8 21.6569 8 19.7712 8 16C8 12.2288 8 10.3431 9.17158 9.17158C10.3431 8 12.2288 8 16 8C19.7712 8 21.6569 8 22.8284 9.17158C23.6074 9.95057 23.8685 11.0452 23.9559 12.8" id="Vector" stroke="var(--stroke-0, #1E3D34)" stroke-linecap="round" stroke-width="2"/>
+<path d="M19.2 14.4C20.0837 14.4 20.8 13.6837 20.8 12.8C20.8 11.9163 20.0837 11.2 19.2 11.2C18.3163 11.2 17.6 11.9163 17.6 12.8C17.6 13.6837 18.3163 14.4 19.2 14.4Z" id="Vector_2" stroke="var(--stroke-0, #1E3D34)" stroke-width="2"/>
+<path d="M8 16.4001L9.40127 15.174C10.1303 14.5361 11.229 14.5727 11.914 15.2577L15.3458 18.6894C15.8955 19.2393 16.761 19.3142 17.3971 18.8671L17.6357 18.6995C18.551 18.0561 19.7895 18.1307 20.6212 18.8792L23.2 21.2001" id="Vector_3" stroke="var(--stroke-0, #1E3D34)" stroke-linecap="round" stroke-width="2"/>
+</g>
+</g>
+</svg>

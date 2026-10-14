@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 24 24" width="24">
+<g id="Icon Frame">
+<g id="Base">
+</g>
+<path d="M3 5V4H2V5H3ZM21 5H22C22 4.44772 21.5523 4 21 4V5ZM3 5V6H21V5V4H3V5ZM21 5H20V17H21H22V5H21ZM19 19V18H5V19V20H19V19ZM3 17H4V5H3H2V17H3ZM5 19V18C4.44772 18 4 17.5523 4 17H3H2C2 18.6569 3.34315 20 5 20V19ZM21 17H20C20 17.5523 19.5523 18 19 18V19V20C20.6569 20 22 18.6569 22 17H21Z" fill="var(--stroke-0, #FF4400)" id="Rectangle 10"/>
+<path d="M3 5L12 14L21 5" id="Vector 64" stroke="var(--stroke-0, #FF4400)" stroke-linecap="round" stroke-width="2"/>
+</g>
+</svg>

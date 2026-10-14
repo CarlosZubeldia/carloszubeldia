@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Carlos Zubeldia</title>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0;url=work.html">
+  <link rel="canonical" href="https://carloszubeldia.com/work.html">
+  <script>
+    /* Conserva los enlaces antiguos del tipo project.html?id=ascaso */
+    (function () {
+      var id = new URLSearchParams(location.search).get("id");
+      var known = ["ascaso", "altessia", "edusport"];
+      location.replace(known.indexOf(id) > -1 ? id + ".html" : "work.html");
+    })();
+  </script>
+</head>
+<body>
+  <p><a href="work.html">Work</a></p>
+</body>
+</html>

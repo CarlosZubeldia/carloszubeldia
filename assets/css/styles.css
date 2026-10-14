@@ -1,0 +1,6298 @@
+/* ==========================================================================
+   Carlos Zubeldia — Product Designer
+   Design system
+   --------------------------------------------------------------------------
+   Paleta:  blanco #FFFFFF + tinta #0A0A0A + naranja #FF4400
+   Tipos:   Clash Display (display) · Outfit (texto)
+   Idiomas: HTML estático bilingüe; se alterna con [data-l] + <html lang>
+   ========================================================================== */
+
+/* 1. TOKENS ================================================================ */
+
+:root {
+  /* Color — la tinta no es negro puro, pero mantiene contraste AAA */
+  --bg: #ffffff;
+  --bg-2: #f4f4f2;
+  --bg-3: #ececea;
+  --ink: #1f1f1f; /* 15:1 sobre blanco */
+  --ink-2: #4a4a4a; /* 8,9:1 */
+  --muted: #666666; /* 5,7:1 — cumple AA en texto normal */
+  --line: rgba(31, 31, 31, 0.12);
+  --line-strong: rgba(31, 31, 31, 0.3);
+  --accent: #ff4400;
+  --accent-hover: #e63d00;
+  --accent-soft: #fff2ed;
+  --accent-ink: #ffffff;
+  --shadow: 0 24px 60px -34px rgba(31, 31, 31, 0.35);
+  --radius-box: 8px;
+
+  /* Tipografía */
+  --font-display: "Clash Display", "Outfit", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --fs-display: clamp(3.2rem, 12.5vw, 11.5rem);
+  --fs-h1: clamp(2.4rem, 6.2vw, 5.4rem);
+  --fs-h2: clamp(1.9rem, 4.2vw, 3.4rem);
+  --fs-h3: clamp(1.25rem, 2.2vw, 1.8rem);
+  --fs-lead: clamp(1.05rem, 1.55vw, 1.35rem);
+  --fs-body: clamp(0.98rem, 1.05vw, 1.06rem);
+  /* Los textos secundarios (parrafos cortos, entradillas, descripciones de
+     tarjeta) suben de 13,8 a 16 px: en conjunto se veian pequenos. */
+  --fs-small: 1rem;
+  /* Suelo de accesibilidad: nada por debajo de 14 px. Estaba en 0,72rem
+     (11,5 px) y alimenta 25 reglas (eyebrows, categorias, enlaces del pie),
+     que son justo las que mas se leen en movil. */
+  --fs-micro: 0.875rem;
+
+  /* Espaciado */
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-y: clamp(5rem, 12vw, 11rem);
+  /* Ancho maximo comun: es el mismo tope que llevan al final del archivo el
+     hero, el contacto, el pie y las bandas. Estuvo en 1440 mientras esos
+     marcos ya iban a 1760, asi que el contenido se quedaba 160 px mas estrecho
+     por lado que el hero y el pie (se veia a partir de 1600 px de ventana). */
+  --maxw: 1760px;
+  --maxw-text: 62ch;
+  --radius: 4px;
+  --radius-lg: 12px;
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --header-h: 76px;
+}
+
+/* 2. RESET & BASE ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1.5rem);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.003em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 3. IDIOMA ================================================================ */
+/* Cada texto traducible se emite dos veces, una por idioma ([data-l]).
+   Sin JavaScript se ve el idioma marcado por <html lang>.                  */
+
+html[lang="en"] [data-l="es"],
+html[lang="es"] [data-l="en"] {
+  display: none !important;
+}
+
+/* 4. LAYOUT ================================================================ */
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap--narrow {
+  max-width: 1040px;
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.section--line {
+  border-top: 1px solid var(--line);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.grid--sidebar {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
+  align-items: start;
+}
+
+.stack > * + * {
+  margin-top: 1.15em;
+}
+
+/* 5. TIPOGRAFÍA ============================================================ */
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.eyebrow--accent {
+  color: var(--accent);
+}
+
+.eyebrow--dot::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.15em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.h1 {
+  font-size: var(--fs-h1);
+}
+.h2 {
+  font-size: var(--fs-h2);
+}
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Variante ligera de la display, para contrastar dentro de un titular */
+.display-alt {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: var(--maxw-text);
+  letter-spacing: -0.01em;
+}
+
+.body {
+  color: var(--ink-2);
+  max-width: var(--maxw-text);
+}
+
+.small {
+  font-size: var(--fs-small);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 6. BOTONES Y ENLACES ===================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.8em 1.3em 0.8em 1.45em;
+  border-radius: 100px;
+  background: #000000;
+  color: #ffffff;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1px solid #000000;
+  transition: transform 0.35s var(--ease), background-color 0.3s var(--ease),
+    color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #000000;
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.btn--ghost:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.35s var(--ease);
+}
+
+.btn:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transition: transform 0.45s var(--ease);
+}
+
+.link:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.3s var(--ease);
+}
+
+.link-arrow svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s var(--ease);
+}
+
+.link-arrow:hover {
+  color: var(--accent);
+}
+
+.link-arrow:hover svg {
+  transform: translate(4px, -4px);
+}
+
+/* 7. HEADER ================================================================ */
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: height 0.4s var(--ease), background-color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.header.is-stuck {
+  height: 64px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(1.6) blur(14px);
+  -webkit-backdrop-filter: saturate(1.6) blur(14px);
+  border-bottom-color: var(--line);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.brand__mark {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.brand__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.25rem);
+}
+
+.nav__link {
+  position: relative;
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+  padding-block: 0.35rem;
+  transition: color 0.3s var(--ease);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+
+.nav__link:hover,
+.nav__link[aria-current="page"] {
+  color: var(--ink);
+}
+
+.nav__link:hover::after,
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.header__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-width: 36px;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+    background-color 0.3s var(--ease);
+}
+
+.tool:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 2px;
+}
+
+.lang__opt {
+  padding: 0.3rem 0.6rem;
+  border-radius: 100px;
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.lang__opt[aria-pressed="true"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+.burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  place-items: center;
+}
+
+.burger span {
+  display: block;
+  width: 16px;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease);
+}
+
+.burger span + span {
+  margin-top: 5px;
+}
+
+.burger[aria-expanded="true"] span:first-child {
+  transform: translateY(3px) rotate(45deg);
+}
+.burger[aria-expanded="true"] span:last-child {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* Menú móvil */
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--bg);
+  padding: calc(var(--header-h) + 3rem) var(--gutter) 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.6s var(--ease);
+}
+
+.drawer[data-open="true"] {
+  clip-path: inset(0 0 0 0);
+}
+
+.drawer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.drawer__link {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 11vw, 3.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.drawer[data-open="true"] .drawer__link {
+  opacity: 1;
+  transform: none;
+}
+
+.drawer__link:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.drawer__link:nth-child(2) {
+  transition-delay: 0.16s;
+}
+.drawer__link:nth-child(3) {
+  transition-delay: 0.22s;
+}
+.drawer__link:nth-child(4) {
+  transition-delay: 0.28s;
+}
+
+/* 8. HERO ================================================================== */
+
+.hero {
+  padding: calc(var(--header-h) + 0.5rem) 10px 10px;
+}
+
+/* Cuadro redondeado con el vídeo, la malla interactiva y el texto dentro */
+.hero__frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(100svh - var(--header-h) - 1.5rem);
+  min-height: 440px;
+  /* El aire de arriba y abajo es cosa del hero, pero el margen lateral es el
+     MISMO que el del contenido (`--gutter`): antes eran 88 px contra los 64
+     de las secciones, asi que el titular del hero no arrancaba en la misma
+     vertical que el resto de la pagina. */
+  padding: clamp(1.5rem, 5vw, 5.5rem) var(--gutter);
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  background: var(--bg-2);
+  isolation: isolate;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__media video.is-failed {
+  display: none;
+}
+
+/* Malla interactiva de puntos (canvas) */
+.hero__mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Velo suave: garantiza el contraste del texto blanco sobre el vídeo */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    78% 88% at 14% 56%,
+    rgba(0, 0, 0, 0.46),
+    rgba(0, 0, 0, 0.14) 52%,
+    rgba(0, 0, 0, 0) 76%
+  );
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+/* Ocultamos el texto estático solo si hay JavaScript: así el efecto de
+   escritura no provoca un salto, y sin JS el texto sigue leyéndose. */
+.js [data-typing] > [data-l] {
+  display: none;
+}
+
+.hero__greeting {
+  color: #ffffff;
+  font-size: clamp(1.3rem, 2.2vw, 2.05rem);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  margin-bottom: clamp(0.6rem, 1.5vw, 1.1rem);
+  min-height: 1.4em;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.35);
+}
+
+.typing__caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 0.09em;
+  vertical-align: -0.18em;
+  background: #ffffff;
+  animation: caret 1.05s steps(1) infinite;
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero__role {
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8.6vw, 7.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  max-width: 11ch;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.3);
+}
+
+.hero__claim {
+  color: #ffffff;
+  font-size: var(--fs-lead);
+  max-width: 44ch;
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.4);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* Sobre el vídeo el botón fantasma necesita contraste propio */
+/* COMPARATIVA: el texto y el borde vuelven a blanco. Sobre el video oscuro el
+   negro dependia del fondo translucido y se leia peor. */
+.hero__actions .btn--ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* El mismo remate que el boton principal: se rellena de negro al pasar. */
+.hero__actions .btn--ghost:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+/* Marquesina */
+.marquee {
+  border-block: 1px solid var(--line);
+  padding-block: 1.35rem;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--bg);
+}
+
+.marquee__track {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 3rem;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  font-size: var(--fs-small);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.marquee__item::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 9. SECCIONES ============================================================= */
+
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.section-head__title {
+  font-size: var(--fs-h2);
+  max-width: 22ch;
+  margin-top: 1rem;
+}
+
+.section-head__aside {
+  max-width: 40ch;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  padding-top: 0.5rem;
+}
+
+/* Enfoque */
+.approach__statement {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.1vw, 2.6rem);
+  line-height: 1.16;
+  letter-spacing: -0.028em;
+  max-width: 30ch;
+}
+
+.approach__body {
+  display: grid;
+  gap: 1.5rem;
+  max-width: var(--maxw-text);
+  color: var(--ink-2);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 3rem);
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--line);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  color: var(--accent);
+}
+
+.stat__label {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  max-width: 26ch;
+}
+
+/* Principios */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.principle {
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--line);
+  transition: border-color 0.4s var(--ease);
+}
+
+.principle:hover {
+  border-top-color: var(--accent);
+}
+
+.principle__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.principle__title {
+  font-size: var(--fs-h3);
+  margin-bottom: 0.6rem;
+}
+
+.principle__text {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+
+/* Sobre mí */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.portrait {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-2);
+  aspect-ratio: 4 / 5;
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Galería tipo muro: columnas con la proporción natural de cada ilustración,
+   así no se recorta ninguna. */
+.gallery {
+  columns: 3;
+  column-gap: clamp(0.75rem, 1.6vw, 1.25rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.gallery--4 {
+  columns: 4;
+}
+
+.gallery__item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: clamp(0.75rem, 1.6vw, 1.25rem);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.gallery__item img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.9s var(--ease);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.03);
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  max-width: 26ch;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent);
+}
+
+/* --- Página About: rejilla de tres columnas, como el original ----------- */
+
+.about-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  align-items: start;
+}
+
+/* La presentacion va alineada ARRIBA: titular, retrato y parrafos empiezan a
+   la misma altura. Con `center` el texto se centraba respecto al retrato -que
+   es mas alto-, asi que las tres columnas arrancaban a alturas distintas. */
+.about-cols--top {
+  align-items: start;
+}
+
+.about-headline {
+  font-size: clamp(1.3rem, 2.4vw, 2.05rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.about-lead-lg {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.85vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.about-portrait img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-box);
+}
+
+.about-section {
+  padding-block: clamp(1.75rem, 3.6vw, 3rem);
+}
+
+/* Fila de logotipos de marca (proyectos de identidad) */
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.logo-row__item {
+  display: block;
+  padding: 0.5rem;
+  border: 0;
+  background: none;
+  border-radius: 6px;
+  cursor: zoom-in;
+  transition: transform 0.35s var(--ease);
+}
+
+.logo-row__item:hover,
+.logo-row__item:focus-visible {
+  transform: translateY(-3px);
+}
+
+/* El tope de alto no es estetico: a 1440 los cinco logos tienen que caber en
+   una sola fila. Con el gap de 56 px y este alto suman ~1.220 px de los 1.325
+   disponibles (ocupan el 92% de la fila, antes el 78%). A 90 px se partirian
+   en dos lineas. */
+.logo-row__item img {
+  max-height: clamp(44px, 5.5vw, 78px);
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Carrusel de ilustraciones
+   El margen izquierdo hay que calcularlo: esta seccion no lleva .wrap (la
+   galeria tiene que poder cortarse contra el borde derecho de la pantalla), y
+   con `var(--gutter)` a secas solo cuadraba mientras la ventana no pasase de
+   --maxw: en pantallas mas anchas el texto se centra y la galeria se quedaba
+   pegada al borde.
+
+   Y OJO, que aqui estuvo el fallo: `padding-left` NO basta. Con
+   `scroll-snap-type: x mandatory` el navegador hace snap al cargar y alinea la
+   primera tarjeta con el borde del scrollport, que cae DENTRO del padding, de
+   modo que el margen se lo comia el propio snap y la galeria aparecia pegada
+   al borde. `scroll-padding-left` mueve ese borde de referencia al mismo
+   sitio, y entonces la posicion natural (scrollLeft 0) ya es valida. */
+.carousel {
+  --carousel-left: max(
+    var(--gutter),
+    calc((100% - var(--maxw)) / 2 + var(--gutter))
+  );
+  display: flex;
+  gap: clamp(0.75rem, 1.8vw, 1.5rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 var(--gutter);
+  padding-left: var(--carousel-left);
+  scroll-padding-left: var(--carousel-left);
+  /* La barra nativa se OCULTA: vive en el padding box, asi que ocupaba todo el
+     ancho de la ventana y colgaba del contenido. En su lugar van las flechas
+     y los puntos de abajo. */
+  scrollbar-width: none;
+}
+
+.carousel__item {
+  flex: 0 0 auto;
+  display: block;
+  height: clamp(200px, 26vw, 350px);
+  padding: 0;
+  /* Contorno para las ilustraciones de fondo claro, que sobre el blanco de la
+     pagina se quedaban sin borde. */
+  border: 1px solid #BCBCBC;
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  background: var(--bg-2);
+  scroll-snap-align: start;
+  cursor: zoom-in;
+}
+
+.carousel__item img {
+  display: block;
+  height: 100%;
+  width: auto;
+  transition: transform 0.9s var(--ease);
+}
+
+.carousel__item:hover img {
+  transform: scale(1.03);
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Flechas y puntos del carrusel --------------------------------------
+   Mismo lenguaje que el visor de imagenes (circulo blanco que se pone negro
+   al pasar el raton), pero flotando sobre la galeria. El viewport es la
+   referencia para centrarlas en vertical sobre las ilustraciones. */
+.carousel__viewport {
+  position: relative;
+}
+
+.carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.14);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
+    border-color 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+/* OJO: sin esto `hidden` no oculta nada, porque arriba se declara `display`. */
+.carousel__arrow[hidden] {
+  display: none;
+}
+
+.carousel__arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.carousel__arrow:hover:not(:disabled) {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+/* En los extremos no hay a donde ir: se apagan en vez de desaparecer. */
+.carousel__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.carousel__arrow--prev {
+  left: clamp(0.75rem, 2vw, 2rem);
+}
+
+.carousel__arrow--next {
+  right: clamp(0.75rem, 2vw, 2rem);
+}
+
+/* En movil estorban: alli se pasa el dedo. */
+@media (max-width: 640px) {
+  .carousel__arrow {
+    display: none;
+  }
+
+  .carousel__arrow[hidden] {
+    display: none;
+  }
+}
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Mismo motivo que en las flechas: sin esto `hidden` no oculta nada. */
+.carousel__dots[hidden] {
+  display: none;
+}
+
+/* El punto activo se estira en una pildora, como en la referencia. */
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 100px;
+  background: var(--line-strong);
+  cursor: pointer;
+  transition: width 0.35s var(--ease), background-color 0.35s var(--ease);
+}
+
+.carousel__dot:hover {
+  background: var(--muted);
+}
+
+.carousel__dot.is-active {
+  width: 28px;
+  background: var(--accent);
+}
+
+/* --- Visor de imagen ampliada ------------------------------------------ */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 5vw, 4rem);
+  /* Fondo OPACO y sin `backdrop-filter`: con el difuminado, la fila de
+     logotipos que queda arriba asomaba detras de la imagen ampliada como una
+     mancha borrosa. */
+  background: #ffffff;
+}
+
+.lightbox[data-open="true"] {
+  display: flex;
+}
+
+.lightbox__img {
+  max-width: 92vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-box);
+  box-shadow: 0 40px 90px -40px rgba(31, 31, 31, 0.45);
+}
+
+/* Al ampliar un logotipo, sin sombra: el PNG es un rectangulo con mucho blanco
+   y la sombra se veia como un marco sucio alrededor. La marca la pone app.js
+   segun el elemento desde el que se abre el visor. */
+.lightbox--logo .lightbox__img {
+  box-shadow: none;
+}
+
+.lightbox__caption {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(0.75rem, 2.5vw, 1.75rem);
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+.lightbox__close svg,
+.lightbox__nav svg {
+  width: 16px;
+  height: 16px;
+}
+
+.lightbox__close {
+  top: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+}
+
+.lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__nav--prev {
+  left: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.lightbox__nav--next {
+  right: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+/* Contacto */
+.contact {
+  background: var(--ink);
+  color: #fff;
+  margin: 0 10px 10px;
+  border-radius: var(--radius-box);
+  /* El aire lateral lo pone el .wrap de dentro (--gutter, 64 px), pero el
+     vertical venia de `.section` (--section-y, 176 px): casi el triple. Al ser
+     una caja cerrada, los cuatro lados van iguales. */
+  padding-block: var(--gutter);
+}
+
+/* --- Ancho maximo comun de todos los marcos ------------------------------
+   Las bandas de color, el banner, el hero, el contacto y el pie tienen que
+   acabar en el mismo borde que las cajas de contenido. Si no, en pantallas
+   anchas las bandas se estiran a todo el ancho y las cajas se quedan
+   centradas en 1440 px, y los bordes no coinciden. */
+.pband--grey,
+.pband--soft,
+.pband--dark,
+.pbanner,
+.contact,
+.footer,
+.hero__frame {
+  max-width: min(100% - 20px, calc(var(--maxw) - 20px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact .eyebrow,
+.contact .muted {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.contact__title {
+  font-size: var(--fs-h1);
+  line-height: 0.98;
+  max-width: 16ch;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.contact__list {
+  display: grid;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: clamp(1.1rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: padding-inline 0.45s var(--ease), color 0.3s var(--ease);
+}
+
+.contact__row:hover {
+  padding-inline: clamp(0.5rem, 1.5vw, 1.25rem);
+  color: var(--accent);
+}
+
+.contact__row-label {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  min-width: 8ch;
+}
+
+/* Iconos de contacto (Email, LinkedIn, CV) */
+.contact__icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+.contact__row-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.contact__row-value {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  letter-spacing: -0.02em;
+  margin-left: auto;
+  text-align: right;
+  word-break: break-word;
+}
+
+.contact__row svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease);
+}
+
+.contact__row:hover svg {
+  transform: translate(4px, -4px);
+}
+
+/* 10. TARJETAS DE PROYECTO ================================================= */
+
+.work-list {
+  display: grid;
+  gap: clamp(3rem, 8vw, 7rem);
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.project-card {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  position: relative;
+}
+
+.project-card[hidden] {
+  display: none;
+}
+
+.project-card__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--bg-2);
+  /* OJO: en la home las tarjetas van a ancho completo (.work-list, una sola
+     columna), asi que la proporcion manda sobre el alto. Con 16/10 la imagen
+     medía 1.020 px de alto a 1920 y la tarjeta no cabia en pantalla; 2/1 la
+     deja en 816. La rejilla de dos columnas de work.html tiene su propio 4/3
+     mas abajo, asi que esto no la toca. */
+  aspect-ratio: 2 / 1;
+}
+
+/* La rejilla de dos columnas de work.html. Mismo criterio que la home: con 4/3
+   la imagen medía 597 px de alto a 1920, demasiado para lo que ocupa. */
+.work-grid .project-card__media {
+  aspect-ratio: 2 / 1;
+}
+
+.project-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s var(--ease);
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.04);
+}
+
+.project-card__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+  background: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.project-card__badge--accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.project-card__logo {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 38px;
+  height: auto;
+}
+
+.project-card__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.project-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.project-card__cat {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.project-card__title {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.02em;
+}
+
+.project-card__desc {
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  max-width: 46ch;
+}
+
+.project-card__cta {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Filtros */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.filter {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: all 0.3s var(--ease);
+}
+
+.filter:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.growing {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
+  border-top: 1px dashed var(--line-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* 11. DETALLE DE PROYECTO ================================================== */
+
+.project-hero {
+  padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 6rem));
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  transition: color 0.3s var(--ease);
+}
+
+.breadcrumb:hover {
+  color: var(--accent);
+}
+
+.project-hero__cat {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.project-hero__title {
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.25rem;
+}
+
+.project-hero__tagline {
+  font-size: var(--fs-lead);
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+.factsheet {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding-block: clamp(1.75rem, 4vw, 2.5rem);
+  border-block: 1px solid var(--line);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.factsheet__label {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.factsheet__value {
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.factsheet__item--wide {
+  grid-column: 1 / -1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.cover {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-2);
+  margin-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.cover img {
+  width: 100%;
+}
+
+.prose-section {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.prose-section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+  gap: clamp(1.25rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.prose-section__title {
+  font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+  letter-spacing: -0.028em;
+  line-height: 1.08;
+}
+
+.prose-section__lead {
+  margin-top: 0.75rem;
+  max-width: 28ch;
+}
+
+.prose-section__content > * + * {
+  margin-top: 1.15em;
+}
+
+/* Los bloques de idioma envuelven el contenido de cada sección */
+.prose-section__content > [data-l] > * + * {
+  margin-top: 1.15em;
+}
+
+.prose-section__content p {
+  color: var(--ink-2);
+  max-width: var(--maxw-text);
+}
+
+.prose-section__content ul {
+  display: grid;
+  gap: 0.7rem;
+  max-width: var(--maxw-text);
+}
+
+.prose-section__content li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--ink-2);
+}
+
+.prose-section__content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 7px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.8vw, 1.5rem);
+  margin-top: clamp(1.75rem, 4vw, 3rem);
+}
+
+.gallery-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--bg-2);
+}
+
+.next-projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  /* Sin margen superior: el titulo de la seccion y las tarjetas deben
+     arrancar exactamente a la misma altura. */
+  margin-top: 0;
+}
+
+.next-card {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.next-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.next-card__cat {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.next-card__title {
+  font-size: var(--fs-h3);
+  margin-bottom: 0.5rem;
+}
+
+.next-card__desc {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+  margin-bottom: 1.5rem;
+}
+
+/* 12. FOOTER =============================================================== */
+
+.footer {
+  margin: 0 10px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+  /* Mismo margen lateral que el contenido: antes eran 40 px y el texto del pie
+     no arrancaba donde el de las secciones. El aire de arriba y abajo es corto
+     a proposito (ver la regla del final). */
+  padding-inline: var(--gutter);
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.footer__links {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.footer__links a:hover {
+  color: var(--accent);
+}
+
+.to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.to-top svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.4s var(--ease);
+}
+
+.to-top:hover {
+  color: var(--accent);
+}
+
+.to-top:hover svg {
+  transform: translateY(-3px);
+}
+
+/* 13. UTILIDADES Y ANIMACIÓN ============================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  transition-delay: var(--delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Dentro de una seccion las tarjetas entran solo con fundido, sin
+   desplazarse: asi la etiqueta y el contenido arrancan siempre a la
+   misma altura, tambien durante la animacion. */
+.psection__body .reveal {
+  transform: none;
+}
+
+/* NOTA: no usar clip-path para revelar imágenes. Chrome deja de rasterizar
+   las imágenes dentro de un contenedor recortado; por eso el reveal se hace
+   siempre con opacidad + desplazamiento. */
+
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+
+.split-line > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s var(--ease-out);
+  transition-delay: var(--delay, 0s);
+}
+
+.split-line.is-visible > span {
+  transform: none;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent);
+  color: #fff;
+}
+
+.skip:focus {
+  left: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 120;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--accent);
+  pointer-events: none;
+}
+
+/* 14. RESPONSIVE =========================================================== */
+
+@media (max-width: 1024px) {
+  .principles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .grid--sidebar,
+  .about-grid,
+  .prose-section__head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-grid {
+    gap: 2.5rem;
+  }
+
+  .portrait {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --header-h: 64px;
+  }
+
+  .nav--desktop,
+  .tool--resume {
+    display: none;
+  }
+
+  .burger {
+    display: grid;
+  }
+
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .work-grid,
+  .next-projects,
+  .gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery--4 {
+    columns: 2;
+  }
+
+  .factsheet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1.25rem;
+  }
+
+  .project-card__body {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .project-card__cta {
+    align-self: flex-start;
+  }
+
+  .gallery {
+    columns: 2;
+  }
+
+  .about-cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .about-portrait img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .logo-row {
+    justify-content: center;
+    gap: 2rem 2.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .principles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding: calc(var(--header-h) + 0.5rem) 8px 8px;
+  }
+
+  .hero__frame {
+    height: calc(100svh - var(--header-h) - 1.25rem);
+    min-height: 380px;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .hero__role {
+    font-size: clamp(2.5rem, 15vw, 4.6rem);
+    max-width: none;
+  }
+
+  .hero__scrim {
+    background: radial-gradient(
+      90% 70% at 20% 62%,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.16) 58%,
+      rgba(0, 0, 0, 0) 85%
+    );
+  }
+
+  .factsheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact__row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .contact__row-value {
+    margin-left: 0;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+/* Accesibilidad: menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .split-line > span {
+    transform: none;
+  }
+}
+
+/* Impresión */
+/* ==========================================================================
+   15. PAGINA DE PROYECTO - maquetacion editorial
+   --------------------------------------------------------------------------
+   Patron base: una columna estrecha a la izquierda con la etiqueta naranja
+   de la seccion, y el contenido a la derecha. Igual que el portfolio original.
+   ========================================================================== */
+
+/* --- Cabecera del proyecto --------------------------------------------- */
+
+.phero {
+  padding: 10px 10px 0;
+}
+
+.phero__frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: min(62vh, 620px);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  /* El menu flota encima del hero. Los textos arrancan por debajo de el y
+     bajan hacia el centro, para que no choquen con la navegacion. */
+  padding-top: calc(var(--header-h, 68px) + clamp(2.5rem, 11vh, 7rem));
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  background: var(--bg-2);
+  isolation: isolate;
+}
+
+.phero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.phero__media img,
+.phero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.22) 42%,
+    rgba(0, 0, 0, 0.05) 70%
+  );
+}
+
+.phero__top {
+  position: relative;
+  z-index: 2;
+  max-width: 46ch;
+}
+
+.phero__cat {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 0.9rem;
+}
+
+.phero__tagline {
+  color: #ffffff;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  max-width: 38ch;
+}
+
+/* El nombre del proyecto en grande, muy espaciado, como en el original */
+.phero__title {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 11.5vw, 10.5rem);
+  line-height: 0.85;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* --- Tarjeta de introduccion (About the project) ------------------------ */
+
+.pintro {
+  margin: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.4fr) minmax(0, 0.95fr);
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  align-items: start;
+}
+
+.pintro__facts {
+  display: grid;
+}
+
+/* Los parrafos de la ficha van a 18 px/27 (1,5) y en negro, como el original;
+   el resto del sitio usa 16 px. */
+.pintro p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* La ficha se genera con dos columnas (izquierda y derecha). Por defecto la
+   izquierda no es una caja: `display: contents` deja que sus piezas se
+   coloquen directamente en la rejilla de tres columnas del .pintro, con lo que
+   Ascaso y Altessia siguen viendose exactamente igual que antes (etiqueta,
+   texto y fichas). Edusport la convierte en columna de verdad mas abajo, todo
+   acotado a .project--edusport. */
+.pintro__col--left {
+  display: contents;
+}
+
+.pintro__col--right {
+  display: block;
+}
+
+/* Los espacios que antes venian en atributos style del HTML. */
+.pintro .pintro__caption {
+  margin-top: 1.25rem;
+}
+
+.pintro .pintro__tags {
+  margin-top: 0.5rem;
+}
+
+.pfact {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
+
+.pfact__label {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.pfact__value {
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.pintro__link {
+  margin-top: 1.5rem;
+}
+
+/* Recuadro a ancho completo justo despues de la ficha del proyecto.
+   Es el sitio del video de presentacion. */
+.pbanner {
+  margin: 10px;
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.pbanner img,
+.pbanner video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pbanner .pshow__caption {
+  margin: 0;
+  padding: 0.75rem 1rem;
+}
+
+/* --- Secciones ---------------------------------------------------------- */
+
+.psection {
+  padding: clamp(2.5rem, 6vw, 5.5rem) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.9fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.psection--wide {
+  grid-template-columns: minmax(0, 1fr);
+  /* Las cajas oscuras de estas secciones tienen que quedar al mismo margen
+     que las bandas de color: 10 px desde el borde. */
+  padding-inline: 10px;
+}
+
+.psection__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  /* 19,2 px: es el cuerpo que le da el original a la etiqueta naranja
+     (--fs-small, 16 px, se queda corto y ademas alimenta 28 reglas). */
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  max-width: 22ch;
+}
+
+.psection__body > * + * {
+  margin-top: clamp(0.9rem, 1.55vw, 1.4rem);
+}
+
+/* El primer bloque no lleva margen superior: asi la etiqueta y el contenido
+   arrancan exactamente a la misma altura. */
+.psection__body > *:first-child,
+.psection__body > .pgrid:first-child {
+  margin-top: 0;
+}
+
+/* Bloques que rompen la columna y ocupan todo el ancho de la seccion */
+.psection__full {
+  grid-column: 1 / -1;
+  margin-top: clamp(1.4rem, 2.4vw, 2.05rem);
+}
+
+/* La entradilla va DEBAJO de la etiqueta, no a su lado. Es un bloque
+   aparte, asi que ocupa el ancho de su columna y no hereda el max-width
+   ni las mayusculas de la etiqueta. */
+.psection__head {
+  min-width: 0;
+}
+
+.psection__sub {
+  display: block;
+  text-transform: none;
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* Bandas de color que envuelven una seccion completa.
+   Van metidas 10 px y con esquinas redondeadas, igual que el original. */
+.pband--grey {
+  background: #f2f2f2;
+  margin-inline: 10px;
+  border-radius: var(--radius-box);
+}
+
+/* Banda muy suave, para Impacto y Reflexiones */
+.pband--soft {
+  background: #fafafa;
+  margin-inline: 10px;
+  border-radius: var(--radius-box);
+}
+
+/* Dentro de una banda el aire sigue el sistema del diseno: la banda va
+   metida 10 px y su contenido otros 45 px. */
+.pband .psection {
+  padding-block: clamp(1.6rem, 3.1vw, 2.8rem);
+  padding-inline: clamp(1.25rem, 3.1vw, 2.8rem);
+}
+
+/* --- Recortes de las imagenes dentro de las tarjetas ---------------------
+   En el diseno original las imagenes van dentro de marcos de proporcion
+   fija y se recortan con "Fill". Sin esto las tarjetas crecen y la seccion
+   se estira mucho mas que la original. */
+
+.pcard[data-kind="photos"] .pcard__body > img:first-child {
+  aspect-ratio: 2.8;
+  object-fit: cover;
+}
+
+.pcard[data-kind="photos"] .pgrid img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.pcard[data-kind="layout"] .pcard__body > img:first-child {
+  aspect-ratio: 2.6;
+  object-fit: cover;
+}
+
+.pcard[data-kind="layout"] .prow--4 img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* El ultimo icono de la fila es la flecha derecha: el SVG original apunta
+   a la izquierda, asi que se voltea. */
+.pcard[data-kind="ui"] .picons img:last-child {
+  transform: scaleX(-1);
+}
+
+/* En navegacion se respeta la proporcion natural: recortarlas cortaba el
+   menu y las pantallas. */
+.pcard[data-kind="nav"] img {
+  object-fit: contain;
+}
+
+/* Los dos moviles de esta tarjeta miden 708x1438 y al ocupar el ancho de su
+   columna salian a ~386 px de alto cada uno, asi que la tarjeta doblaba en
+   alto a las de sus lados y estiraba la fila entera. Se les pone un tope de
+   alto: siguen enteros (nada de recortes) pero la fila queda equilibrada. */
+.pcard[data-kind="nav"] .pgrid--2 img {
+  max-height: 15rem;
+  width: auto;
+  max-width: 100%;
+  justify-self: center;
+}
+
+.pband--dark {
+  background: #171717;
+  color: #ffffff;
+  margin-inline: 10px;
+  border-radius: var(--radius-box);
+}
+
+.pband--dark .psection__label {
+  color: #ffffff;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.85rem;
+  display: inline-block;
+}
+
+.pband--dark .psection__text,
+.pband--dark p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pband--dark .pshow__title {
+  color: #ffffff;
+}
+
+/* Columnas de decisiones (seccion oscura) */
+.pdecisions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdecision {
+  padding-left: clamp(1rem, 2.5vw, 2.25rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.pdecision:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.pdecision__icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  background: none;
+  border-radius: 0;
+  margin-bottom: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+
+.pdecision__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+}
+
+.pdecision__text {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.psection__lead {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1.9vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 34ch;
+}
+
+.psection__text {
+  /* 16 px y negro, como el original: antes heredaba los ~15,7 px del body y
+     iba en --ink-2 (#4a4a4a), que es el gris de apoyo, no el del texto. */
+  font-size: 1rem;
+  color: var(--ink);
+  max-width: 72ch;
+  line-height: 1.5;
+}
+
+/* --- Rejilla de tarjetas ------------------------------------------------ */
+
+/* La rejilla usa el sistema del diseno: 10 px entre filas y 20 px entre
+   columnas. Las tarjetas se estiran a la misma altura dentro de cada fila,
+   como en el original. */
+.pgrid {
+  display: grid;
+  gap: 10px 20px;
+}
+
+.pgrid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.pgrid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.pgrid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pcard {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+  background: #ffffff;
+  padding: clamp(1rem, 1.8vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 1.5vw, 1.25rem);
+}
+
+.pcard--grey {
+  background: var(--bg-2);
+  border-color: transparent;
+}
+
+.pcard--dark {
+  background: #171717;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.pcard--dark p,
+.pcard--dark .pcard__num {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pcard__num {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pcard__title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.pcard__title .pcard__num {
+  color: var(--muted);
+}
+
+.pcard--dark .pcard__title {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+.pcard__body > * + * {
+  margin-top: 0.75rem;
+}
+
+.pcard p {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.pcard img {
+  width: 100%;
+  border-radius: 4px;
+  background: var(--bg-2);
+}
+
+/* --- Piezas sueltas ----------------------------------------------------- */
+
+.psample {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.pfonts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.pfont {
+  padding-top: 0.85rem;
+}
+
+.pfont + .pfont {
+  border-left: 1px solid var(--line);
+  padding-left: 1rem;
+}
+
+.pfont__name {
+  font-size: var(--fs-micro);
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.pfont__aa {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.pfont__role {
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+.pswatches {
+  display: flex;
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  flex-wrap: wrap;
+}
+
+.pswatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+}
+
+.pswatch__dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.pusage {
+  display: flex;
+  gap: 4px;
+  height: 42px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.pusage__legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: var(--fs-micro);
+  color: var(--ink-2);
+}
+
+.pstack {
+  display: grid;
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+
+.prow--4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+
+.pcaption {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.picons {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.picons img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  background: none;
+  border-radius: 0;
+}
+
+/* --- Referencias -------------------------------------------------------- */
+
+.pref {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.pref__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pref__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  letter-spacing: -0.02em;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.pref__url {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.pref__takeaway {
+  margin-top: 1rem;
+  font-size: var(--fs-micro);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pref__text {
+  margin-top: 0.35rem;
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+
+.pref__media img {
+  width: 100%;
+  border-radius: var(--radius-box);
+  border: 1px solid var(--line);
+}
+
+/* --- Bloques con imagen grande ------------------------------------------ */
+
+.pshow {
+  border-radius: var(--radius-box);
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.pshow--dark {
+  background: #171717;
+  color: #ffffff;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.pshow__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: start;
+  margin-bottom: clamp(1rem, 2.5vw, 2rem);
+}
+
+.pshow--dark p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pshow__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.pshow img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* --- Imagen ampliable ---------------------------------------------------
+   El boton que abre el visor sobre una imagen de seccion (los bloques con
+   `zoom: true`). Mismo gesto que en la fila de logotipos y la galeria: el
+   cursor de lupa y nada mas; el boton no aporta marco ni fondo. */
+.pshow__zoom {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.pshow__zoom img {
+  display: block;
+}
+
+.pshow__zoom:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.pshow__caption {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+.pshow--dark .pshow__caption {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Caja oscura con el texto a la izquierda y las capturas a la derecha.
+   Es el bloque de "Final design" en el original. */
+.pshowcase {
+  background: #171717;
+  color: #ffffff;
+  border-radius: var(--radius-box);
+  padding: clamp(1.25rem, 2.6vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.7fr);
+  gap: clamp(1.25rem, 3vw, 3rem);
+  align-items: center;
+}
+
+.pshowcase__text .pshow__title {
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.pshowcase__text p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  max-width: 40ch;
+}
+
+/* Cajas sueltas (Impacto y Reflexiones): cada columna es su propia caja */
+.pgrid--boxed > * {
+  background: #fafafa;
+  border-radius: var(--radius-box);
+  padding: clamp(1.25rem, 2.6vw, 2.25rem);
+}
+
+.pgrid--boxed .pshow__title {
+  color: var(--accent);
+}
+
+/* Caja oscura solo con capturas, sin texto al lado */
+.pshowcase--media {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pshowcase__media {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pshowcase__grid {
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+
+.pshowcase__grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pshowcase__grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Los mockups se ven ENTEROS (nada de recorte) y a un tamano contenido */
+.pshowcase__grid--3 > * {
+  aspect-ratio: 0.52;
+  object-fit: contain;
+  height: 100%;
+}
+
+/* Una caja que solo lleva capturas no las estira a todo el ancho */
+.pshowcase--media .pshowcase__media {
+  max-width: 1020px;
+  margin-inline: auto;
+}
+
+.pshowcase__grid img,
+.pshowcase__grid video {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  background: #262626;
+}
+
+/* --- Responsive de la pagina de proyecto -------------------------------- */
+
+@media (max-width: 1024px) {
+  .psection {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .pdecisions {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .pdecision {
+    padding-left: 0;
+    border-left: 0;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .pdecision:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .pintro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pgrid--4,
+  .prow--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pref,
+  .pshow__head,
+  .pshowcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .pgrid--3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phero__title {
+    font-size: clamp(2rem, 14vw, 5rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .pgrid--2,
+  .pgrid--4,
+  .prow--4,
+  .pfonts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pfont + .pfont {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 0.85rem;
+  }
+
+  .pintro {
+    margin: 8px;
+  }
+}
+
+@media print {
+  .header,
+  .drawer,
+  .marquee,
+  .progress,
+  .to-top,
+  .hero__media,
+  .hero__scrim {
+    display: none !important;
+  }
+
+  .contact {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* --- Ancho maximo comun de TODOS los marcos (va al final a proposito) ----
+   Las bandas, el banner, el hero, el contacto y el pie deben acabar en el
+   mismo borde que las cajas de contenido. Sin esto, en pantallas anchas
+   las bandas se estiran a todo el ancho y las cajas se quedan centradas
+   en 1440 px, y los bordes no coinciden. */
+.pband--grey,
+.pband--soft,
+.pband--dark,
+.pbanner,
+.contact,
+.footer,
+.hero__frame {
+  max-width: min(100% - 20px, calc(var(--maxw) - 20px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Aire entre las cajas oscuras de "Final design" ---------------------
+   Van seguidas, asi que el hueco tiene que ser corto y exactamente el
+   mismo entre todas. Al compartir el padding vertical, el espacio entre
+   dos cajas contiguas es siempre el doble de este valor. */
+.psection--wide,
+.pband--dark .psection {
+  padding-block: clamp(1.1rem, 1.7vw, 1.6rem);
+}
+
+/* --- Arquitectura de la informacion -------------------------------------
+   La caja lleva un gris muy claro y el diagrama va centrado y algo mas
+   estrecho que el texto, como en el porfolio anterior. */
+.pband--soft {
+  background: #f9f9f9;
+}
+
+.psection__full > .pshow {
+  margin-inline: auto;
+  max-width: 92%;
+}
+
+/* --- Tarjeta de galeria -------------------------------------------------
+   Si la galeria tiene varias fotos cae sola en una segunda fila y deja un
+   hueco vacio al lado. Ocupa toda la fila y reparte las fotos en horizontal. */
+.project--altessia .pcard[data-kind="images"] {
+  grid-column: 1 / -1;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .project--altessia .pcard[data-kind="images"] .pcard__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --- Altessia: las cajas oscuras pasan a verde muy claro -----------------
+   El tono #EBFFF6 sustituye al negro en las cajas de este proyecto; el
+   texto pasa a tinta oscura para que siga siendo legible. */
+.project--altessia .pshowcase,
+.project--altessia .pband--dark {
+  background: #ebfff6;
+  color: var(--ink);
+}
+
+.project--altessia .pshowcase__text .pshow__title,
+.project--altessia .pband--dark .pshow__title,
+.project--altessia .pdecision__title {
+  color: var(--ink);
+}
+
+.project--altessia .pshowcase__text p,
+.project--altessia .pband--dark p,
+.project--altessia .pband--dark .psection__text,
+.project--altessia .pdecision__text {
+  color: var(--ink-2);
+}
+
+.project--altessia .pshowcase__grid img,
+.project--altessia .pshowcase__grid video {
+  background: #ffffff;
+}
+
+.project--altessia .pband--dark .psection__label {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.project--altessia .pdecision {
+  border-left-color: rgba(20, 45, 32, 0.14);
+}
+
+@media (max-width: 1024px) {
+  .project--altessia .pdecision {
+    border-top-color: rgba(20, 45, 32, 0.14);
+  }
+}
+
+/* --- Pie de pagina: menos aire arriba y abajo --------------------------- */
+.footer {
+  padding-block: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+/* La caja oscura de tipo "media" (titulo + texto) tambien cambia de tono */
+.project--altessia .pshow--dark {
+  background: #ebfff6;
+  color: var(--ink);
+}
+
+.project--altessia .pshow--dark .pshow__title {
+  color: var(--ink);
+}
+
+.project--altessia .pshow--dark .psection__text,
+.project--altessia .pshow--dark .pshow__caption {
+  color: var(--ink-2);
+}
+
+/* ==========================================================================
+   ALTESSIA · "Design principles"
+   --------------------------------------------------------------------------
+   Todo lo de este bloque va acotado a .project--altessia: las tarjetas
+   (type, palette, images) y el bloque de columnas con icono los comparte con
+   Ascaso, asi que los cambios de maqueta no pueden ser globales.
+   ========================================================================== */
+
+/* --- La banda suave pasa a verde muy claro en todo el proyecto ---------- */
+.project--altessia .pband--soft {
+  background: #f1fcf7;
+}
+
+/* --- Tarjetas: mas aire y cabecera con icono ---------------------------- */
+.project--altessia .pcard {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.project--altessia .pcard__title--icon {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* La cabecera de las tarjetas de este proyecto es algo mas grande y en
+   tinta oscura, como en el diseno original. */
+.project--altessia .pcard__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.project--altessia .pcard__icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  background: none;
+  border-radius: 50%;
+}
+
+/* --- Nota con punto de color (paleta y galeria) ------------------------- */
+.project--altessia .pnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding-top: clamp(0.85rem, 1.6vw, 1.25rem);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.project--altessia .pnote__dot {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  margin-top: 0.18rem;
+  border-radius: 50%;
+  background: #a6d8c2;
+}
+
+/* --- Tipografia: especimenes a la izquierda, pregunta y respuesta al lado */
+.project--altessia .pcard[data-kind="type"] .pcard__body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.2fr) minmax(0, 1fr);
+  column-gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  align-items: start;
+}
+
+/* Con `display: contents` las dos muestras de fuente pasan a ser celdas de
+   la rejilla de la tarjeta. */
+.project--altessia .pcard[data-kind="type"] .pfonts {
+  display: contents;
+}
+
+.project--altessia .pcard[data-kind="type"] .pfont {
+  grid-column: 1;
+  padding-top: 0;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.project--altessia .pcard[data-kind="type"] .pfont:nth-child(1) {
+  grid-row: 1;
+  padding-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.project--altessia .pcard[data-kind="type"] .pfont:nth-child(2) {
+  grid-row: 2;
+  padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.project--altessia .pcard[data-kind="type"] .pcard__body > p {
+  grid-column: 2;
+  align-self: center;
+  margin-top: 0;
+}
+
+.project--altessia .pcard[data-kind="type"] .psample {
+  grid-row: 1;
+}
+
+.project--altessia .pcard[data-kind="type"] .pcard__body > p:not(.psample) {
+  grid-row: 2;
+}
+
+/* La linea que separa las dos filas cruza toda la tarjeta: va al fondo de
+   la primera fila de la rejilla. Solo se usa en Altessia; en las tarjetas
+   de Ascaso el elemento existe pero no se ve. */
+.pcard__rule {
+  display: none;
+}
+
+.project--altessia .pcard[data-kind="type"] .pcard__rule {
+  display: block;
+  grid-row: 1;
+  grid-column: 1 / -1;
+  align-self: end;
+  height: 1px;
+  margin: 0;
+  background: var(--line);
+}
+
+/* --- Paleta: las cinco muestras repartidas y mas grandes ---------------- */
+.project--altessia .pcard[data-kind="palette"] .pswatches {
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: clamp(0.85rem, 1.6vw, 1.25rem);
+}
+
+.project--altessia .pcard[data-kind="palette"] .pswatch__dot {
+  width: 58px;
+  height: 58px;
+}
+
+/* --- Galeria: dos fotos altas a la izquierda y dos apiladas a la derecha - */
+.project--altessia .pcard[data-kind="images"] {
+  grid-column: auto;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  aspect-ratio: 3.2;
+  align-items: stretch;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* --- Componentes: logotipo, tarjeta de foto, botones y barra verde ------
+   La caja del logotipo ocupa el 32% del ancho y la tarjeta de foto el 27%,
+   pegada al borde derecho: el resto es el aire que las separa. */
+.project--altessia .pcomp {
+  display: grid;
+  grid-template-columns: minmax(0, 32.4%) minmax(0, 26.8%);
+  grid-template-rows: auto auto;
+  justify-content: space-between;
+  gap: clamp(0.85rem, 1.6vw, 1.35rem) 0;
+  align-items: start;
+}
+
+.project--altessia .pcomp__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: clamp(0.85rem, 1.4vw, 1rem);
+  border: 1px dashed #c7d2cb;
+  border-radius: var(--radius-box);
+}
+
+.project--altessia .pcomp__photo {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  aspect-ratio: 0.87;
+  background: #dfeae4;
+}
+
+.project--altessia .pcomp__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.project--altessia .pcomp__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: clamp(0.9rem, 1.6vw, 1.25rem);
+  color: #ffffff;
+  background: linear-gradient(180deg, rgba(12, 24, 18, 0) 0%, rgba(12, 24, 18, 0.78) 62%);
+}
+
+.project--altessia .pcomp__caption-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  letter-spacing: -0.01em;
+}
+
+.project--altessia .pcomp__caption-text {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.project--altessia .pcomp__caption-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  font-size: 0.875rem;
+}
+
+.project--altessia .pcomp__caption-cta svg {
+  width: 14px;
+  height: 14px;
+}
+
+.project--altessia .pcomp__buttons {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.project--altessia .pcomp__buttons .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.72rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #171717;
+  color: #ffffff;
+}
+
+.project--altessia .pcomp__buttons .btn--ghost {
+  background: #b8e0ce;
+  border-color: transparent;
+  color: #17342a;
+}
+
+.project--altessia .pcomp__buttons .btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.project--altessia .pcomp__btn-icon {
+  display: inline-flex;
+}
+
+.project--altessia .pcomp__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(0.9rem, 2.2vw, 1.6rem);
+  padding: clamp(0.9rem, 1.6vw, 1.25rem) clamp(1rem, 2vw, 1.5rem);
+  border-radius: var(--radius-box);
+  background: #b8e0ce;
+}
+
+.project--altessia .pcomp__social {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.project--altessia .pcomp__social img {
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+}
+
+/* --- Logotipo: piezas SVG encadenadas ---------------------------------- */
+.project--altessia .alogo {
+  display: inline-flex;
+  align-items: flex-end;
+  max-width: 100%;
+}
+
+.project--altessia .alogo__word {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: calc(4px * var(--logo-scale, 1));
+}
+
+.project--altessia .alogo__part {
+  display: block;
+  width: calc(var(--w) * var(--logo-scale, 1));
+  height: calc(var(--h) * var(--logo-scale, 1));
+  background: none;
+  border-radius: 0;
+}
+
+.project--altessia .alogo__mark {
+  position: relative;
+  display: block;
+  width: calc(44px * var(--logo-scale, 1));
+  height: calc(44px * var(--logo-scale, 1));
+  margin-right: calc(19px * var(--logo-scale, 1));
+}
+
+.project--altessia .alogo__mark .alogo__part {
+  position: absolute;
+  left: calc(var(--x) * var(--logo-scale, 1));
+  top: calc(var(--y) * var(--logo-scale, 1));
+}
+
+/* El logotipo de la caja discontinua va en verde claro: el SVG se incrusta
+   para poder tenirlo desde aqui. */
+.project--altessia .pcomp__logo .alogo {
+  --fill-0: #b8e0ce;
+}
+
+/* --- Accesibilidad: tarjeta ancha con cuatro columnas ------------------ */
+.project--altessia .psection__full > * + * {
+  margin-top: clamp(0.75rem, 1.4vw, 1.15rem);
+}
+
+.project--altessia .pcard--decisions {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.project--altessia .pdecisions--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.project--altessia .pcard--decisions .pdecision {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.7rem, 1.3vw, 1.1rem);
+  align-items: start;
+  border-left-color: rgba(20, 45, 32, 0.12);
+}
+
+.project--altessia .pcard--decisions .pdecision__icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0;
+  border-radius: 12.5px;
+}
+
+.project--altessia .pcard--decisions .pdecision__title {
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.project--altessia .pcard--decisions .pdecision__text {
+  color: var(--ink-2);
+}
+
+/* --- Ajustes para pantallas estrechas ---------------------------------- */
+@media (max-width: 1024px) {
+  .project--altessia .pdecisions--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .project--altessia .pcard[data-kind="palette"] .pswatches {
+    justify-content: flex-start;
+    gap: clamp(0.9rem, 3vw, 1.6rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .project--altessia .pcomp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--altessia .pcomp__photo {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    width: min(100%, 300px);
+  }
+
+  .project--altessia .pcomp__buttons {
+    grid-row: auto;
+  }
+
+  .project--altessia .pcard[data-kind="type"] .pcard__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--altessia .pcard[data-kind="type"] .pfont,
+  .project--altessia .pcard[data-kind="type"] .pcard__body > p {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project--altessia .pcard[data-kind="type"] .pcard__rule {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .project--altessia .pdecisions--4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--altessia .pcard[data-kind="images"] .pcard__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    aspect-ratio: 2.1;
+  }
+
+  .project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .project--altessia .pcard[data-kind="images"] .pcard__body img:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* --- Edusport: la ficha a dos columnas ----------------------------------
+   La ficha ("About the project") de Edusport se reparte en dos columnas:
+   a la izquierda la etiqueta, el texto de presentacion y el logotipo de la
+   marca; a la derecha, dentro de su propia caja, la tabla de datos (rol,
+   duracion e industria), el rotulo "What I worked on", los chips y el boton
+   "Visit the website". El display:contents de la columna izquierda y la
+   rejilla de tres columnas se quedan como estan para Ascaso y Altessia: todo
+   lo de aqui va acotado a .project--edusport. */
+.project--edusport .pintro {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+}
+
+/* La columna izquierda deja de ser transparente y apila sus tres piezas:
+   la etiqueta, el texto y el logotipo. */
+.project--edusport .pintro__col--left {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.2vw, 1.75rem);
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* La caja de la derecha: todo su contenido va dentro. */
+.project--edusport .pintro__col--right {
+  grid-column: 2;
+  grid-row: 1;
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-box);
+}
+
+/* La ultima fila de la tabla cierra la caja: no lleva raya. */
+.project--edusport .pintro__facts .pfact:last-child {
+  border-bottom: 0;
+}
+
+/* El logotipo va debajo del texto, centrado en su columna, con la caja de
+   327 px del original. */
+.project--edusport .pintro__logo {
+  display: block;
+  width: min(100%, 327px);
+  height: auto;
+  margin: 0 auto;
+}
+
+/* El boton "Visit the website" no lleva a ningun sitio, pero el original
+   muestra el puntero del raton igualmente. */
+.project--edusport .pintro__link .btn[role="link"] {
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .project--edusport .pintro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--edusport .pintro__col--left,
+  .project--edusport .pintro__col--right {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+
+/* --- Marco sin fondo -----------------------------------------------------
+   Para imagenes que ya traen su propio fondo o son transparentes: quita el
+   gris y las esquinas redondeadas del marco. */
+.pshow--plain {
+  background: none;
+  border-radius: 0;
+}
+
+/* --- Etiqueta de la ficha "About the project" ---------------------------
+   Tiene que pesar exactamente igual que los titulos de seccion
+   (.psection__label): misma familia, peso, tamano y espaciado. */
+.pintro .eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+}
+
+/* --- Titulos de seccion centrados SOLO en Edusport ----------------------
+   Ojo: va acotado a Edusport. En Ascaso y Altessia la etiqueta naranja
+   sigue en su columna a la izquierda, con el contenido a la derecha. */
+.project--edusport .psection {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
+}
+
+.project--edusport .psection__head {
+  text-align: center;
+}
+
+.project--edusport .psection__label {
+  max-width: none;
+  margin-inline: auto;
+}
+
+.project--edusport .psection__sub {
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* --- El hero de las paginas de proyecto ---------------------------------
+   Usaba una clase distinta (.phero__frame) y se quedo fuera del ancho comun:
+   en pantallas anchas el hero llegaba mas lejos que las secciones. Ahora
+   comparte el mismo ancho y los mismos margenes que todo lo demas. */
+.phero__frame {
+  max-width: min(100% - 20px, calc(var(--maxw) - 20px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- ANCHO UNICO PARA TODOS LOS MARCOS ----------------------------------
+   Va al final a proposito, para ganar a cualquier regla anterior.
+   Hero, ficha del proyecto, bandas de color, banner, contacto y pie
+   comparten el MISMO ancho maximo y el MISMO margen lateral minimo.
+   Antes convivian tres anchos distintos (1420, 1440 y ancho completo). */
+.pband--grey,
+.pband--soft,
+.pband--dark,
+.pbanner,
+.contact,
+.footer,
+.hero__frame,
+.phero__frame,
+.pintro {
+  max-width: min(100% - 20px, var(--maxw));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- ANCHO UNICO: todo el ancho con 10 px de margen ---------------------
+   Sustituye al tope de 1440 px, que en pantallas anchas dejaba franjas
+   blancas enormes a los lados. Ahora los marcos ocupan todo el ancho
+   disponible conservando el margen minimo de 10 px del sistema, igual que
+   en la web original. Va al final a proposito, para ganar a lo anterior. */
+.pband--grey,
+.pband--soft,
+.pband--dark,
+.pbanner,
+.contact,
+.footer,
+.hero__frame,
+.phero__frame,
+.pintro {
+  max-width: none;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Las secciones llenan a su contenedor: el aire interior lo pone su propio
+   padding, no un tope de ancho. */
+.psection {
+  max-width: none;
+}
+
+/* Correccion: los heroes ya van DENTRO de .hero / .phero, que tienen 10 px
+   de padding. Anadirles margen los dejaba a 20 px. Solo necesitan que se
+   les quite el tope de ancho. */
+.hero__frame,
+.phero__frame {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* --- Edusport: el contenido se centra bajo el titulo --------------------
+   El titulo va centrado, asi que el bloque de texto tambien se centra y se
+   limita a un ancho comodo de lectura. El texto DENTRO sigue alineado a la
+   izquierda: centrar parrafos largos perjudica la lectura.
+   Los bloques `full` no se ven afectados (son hijos de la seccion, no del
+   cuerpo), asi que las imagenes a todo el ancho siguen igual. */
+.project--edusport .psection__body {
+  max-width: 80ch;
+  margin-inline: auto;
+}
+
+/* --- La seccion "Otros proyectos" NO se centra --------------------------
+   El centrado de arriba es para las secciones de contenido de Edusport. La
+   de otros proyectos tiene que seguir el diseno comun —etiqueta en su
+   columna a la izquierda y las dos tarjetas a todo el ancho—, igual que en
+   Ascaso y Altessia: ahi las tarjetas ocupan ~620 px cada una y en Edusport
+   se quedaban en 820 px las dos juntas, centradas. */
+.project--edusport #another.psection {
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.9fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.project--edusport #another .psection__head {
+  text-align: left;
+}
+
+.project--edusport #another .psection__label {
+  max-width: 22ch;
+  margin-inline: 0;
+}
+
+.project--edusport #another .psection__body {
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* --- ANCHO MAXIMO COMUN (definitivo) ------------------------------------
+   Equilibrio entre los dos extremos que hemos probado:
+     · sin tope  -> en monitores muy anchos la maqueta se estiraba y se
+                    deformaba (parrafos larguisimos, cajas desproporcionadas)
+     · tope 1440 -> en esos mismos monitores sobraban franjas blancas enormes
+   Ahora el contenido usa todo el ancho hasta 1760 px y a partir de ahi se
+   centra. En pantallas normales (hasta 1780) no cambia nada.
+   Va al final a proposito, para ganar a las reglas anteriores. */
+.pband--grey,
+.pband--soft,
+.pband--dark,
+.pbanner,
+.contact,
+.footer,
+.pintro {
+  max-width: min(100% - 20px, 1760px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Los heroes van DENTRO de .hero / .phero, que ya aportan los 10 px de
+   margen: aqui solo hace falta el tope. */
+.hero__frame,
+.phero__frame {
+  max-width: 1760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.psection {
+  max-width: 1760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Alto maximo del hero de la home ------------------------------------
+   Antes media `100svh - 100px`, o sea el alto entero de la pantalla menos la
+   cabecera: en un monitor de 1440 px de alto salian ~1340 px de hero, que es
+   demasiado. Ahora crece con la ventana hasta 820 px y ahi se queda.
+   En pantallas bajas no cambia nada (manda el min-height de 440 px).
+   Subido de 780 a 820 px: el hero dura mas en pantalla, asi que el parallax
+   tiene mas recorrido y el efecto se nota mas. */
+.hero__frame {
+  max-height: 820px;
+}
+
+/* --- Ficha "Sobre el proyecto" en Ascaso y Altessia ---------------------
+   (Edusport tiene su propia maqueta con caja interior, asi que se deja.)
+   1) La caja pierde el borde.
+   2) Mas aire entre el texto y el cuadro de datos de la derecha. */
+.project--ascaso .pintro,
+.project--altessia .pintro {
+  border: 0;
+}
+
+.project--ascaso .pintro__col--right,
+.project--altessia .pintro__col--right {
+  padding-left: clamp(1rem, 2.6vw, 2.75rem);
+}
+
+/* --- Mas aire entre las secciones de texto ------------------------------
+   De 88 px por lado a 112 px: el hueco entre dos secciones normales pasa de
+   176 a 224 px.
+   NO afecta a las cajas de "Final design" ni a las bandas de color, que
+   tienen su propia regla de padding-block y conservan su espaciado. */
+.psection {
+  padding-block: clamp(3rem, 7.6vw, 7rem);
+}
+
+/* --- Las bandas de color igualan su aire al de las secciones normales ----
+   Tenian 45 px por lado (90 entre dos) mientras las normales tenian 112
+   (224 entre dos). Al ir seguidas -CONCLUSIONES CLAVE y ARQUITECTURA DE LA
+   INFORMACION, por ejemplo- se notaba el salto. Ahora todas comparten el
+   mismo espaciado.
+   Las cajas de "Final design" NO se tocan: son .psection--wide y sin banda. */
+.pband .psection {
+  padding-block: clamp(3rem, 7.6vw, 7rem);
+}
+
+/* --- La banda oscura pertenece al bloque de Final design ----------------
+   "Key design decisions" es una .pband--dark, o sea otra caja oscura mas,
+   pero al igualar el espaciado de las bandas se le aplicaron 112 px mientras
+   las cajas de showcase seguian con 26. Resultado: separaciones distintas
+   dentro del mismo bloque. Esta regla va DESPUES de la de .pband .psection
+   para ganarle, y le devuelve el ritmo corto de las cajas oscuras. */
+.pband--dark .psection {
+  padding-block: clamp(1.1rem, 1.7vw, 1.6rem);
+}
+
+/* --- RECUPERAR el ritmo corto de las cajas de Final design --------------
+   Al subir el espaciado de la seccion base (.psection) se pisó sin querer la
+   regla de .psection--wide: misma especificidad, y la nueva iba despues. Las
+   cajas pasaron de 26 a 112 px por lado (51 -> 224 px entre ellas), mezcladas
+   con la banda oscura que si conservaba 26. De ahi que unas tuvieran mas aire
+   que otras dentro del mismo bloque.
+   Esta regla va la ULTIMA para ganar a todas. */
+.psection--wide {
+  padding-block: clamp(1.1rem, 1.7vw, 1.6rem);
+}
+
+/* --- Ajuste de la banda oscura "Key design decisions" -------------------
+   Medido: la separacion entre esa banda y la primera caja de storytelling
+   era de 25 px cuando deberia ser 52 (26 + 26). La banda aportaba la mitad
+   de lo previsto. Se le dobla el padding para compensar. */
+.pband--dark .psection {
+  padding-block: clamp(2.2rem, 3.4vw, 3.25rem);
+}
+
+/* --- Causa real de la separacion corta ----------------------------------
+   Las cajas de showcase son blancas por fuera: su padding de 26 px NO se ve,
+   asi que entre dos cajas contiguas hay 26 + 26 = 52 px de blanco.
+   La banda oscura, en cambio, es negra hasta el borde: su padding queda
+   DENTRO del negro y no suma al hueco. Por eso la separacion banda -> caja
+   era de 26 px (solo el padding de la caja).
+   La solucion no es tocar su padding -lo unico que hace es engordar la
+   banda-, sino darle un MARGEN inferior, que si es blanco.
+   Se revierte el padding doblado del intento anterior. */
+.pband--dark .psection {
+  padding-block: clamp(1.1rem, 1.7vw, 1.6rem);
+}
+
+.pband--dark {
+  margin-bottom: clamp(1.1rem, 1.7vw, 1.6rem);
+}
+
+/* --- Dos cajas oscuras seguidas dentro de la MISMA seccion ---------------
+   "Premium Product Storytelling" tiene dos bloques showcase (el video y las
+   capturas). Al vivir en la misma seccion, los separaba el margen entre
+   bloques (22 px) en vez del de seccion (49-50 px), y se notaba mas juntas
+   que las demas cajas oscuras.
+   Cuando dos cajas oscuras van seguidas, se les da el mismo aire que tendrian
+   en secciones distintas. */
+.psection__body > .pshowcase + .pshowcase {
+  margin-top: clamp(2rem, 3.4vw, 3.1rem);
+}
+
+/* --- Tarjeta de tipografia de Ascaso ------------------------------------
+   La web carga Clash Display y Outfit, pero esta tarjeta muestra las fuentes
+   REALES del proyecto (Libre Caslon y Poppins), que ahora tambien se cargan
+   desde Google Fonts.
+   Se acota a Ascaso: Altessia y Edusport tienen las suyas. */
+.project--ascaso .pcard[data-kind="type"] .psample,
+.project--ascaso .pcard[data-kind="type"] .pfont:nth-child(1) .pfont__aa {
+  font-family: "Libre Caslon Text", Georgia, "Times New Roman", serif;
+}
+
+.project--ascaso .pcard[data-kind="type"] .pcard__body > p:nth-of-type(2),
+.project--ascaso .pcard[data-kind="type"] .pfont:nth-child(2) .pfont__aa {
+  font-family: "Poppins", var(--font-sans);
+}
+
+/* --- Texto de muestra de la tarjeta de tipografia ------------------------
+   Un poco mas grande (de 23,2 a 25,3 px) y con mas peso. El peso 700 esta
+   cargado en las tres fuentes que usa la tarjeta, asi que no hay negrita
+   sintetizada. */
+.psample {
+  font-size: clamp(1.15rem, 1.8vw, 1.58rem);
+  font-weight: 700;
+}
+
+/* --- Tarjeta de tipografia de Ascaso: ajuste fino frente al Figma --------
+   El panel de Figma dice: Libre Caslon Text, peso Regular, 24 px, altura de
+   linea 150%, relleno 000000.
+   Las diferencias que habia:
+     · peso 700 (yo lo subi)  -> el Figma lo tiene en Regular
+     · altura de linea 1.25   -> el Figma usa 1.5
+     · color var(--ink) #1f1f1f -> el Figma usa negro puro #000000 */
+.project--ascaso .pcard[data-kind="type"] .psample {
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000000;
+}
+
+.project--ascaso .pcard[data-kind="type"] .pcard__body > p:nth-of-type(2) {
+  color: #000000;
+}
+
+/* El titular de muestra, mas grande: de 25,3 a 30,4 px */
+.psample {
+  font-size: clamp(1.3rem, 2.1vw, 1.9rem);
+}
+
+/* Titular de muestra: de 30,4 a 35,2 px (+3 puntos de sobra) */
+.psample {
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+}
+
+/* Titular de muestra: mas grande y con mas peso */
+.psample {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+}
+
+/* --- LA CAUSA REAL DEL TAMANO QUE NO SUBIA ------------------------------
+   En el CSS hay `.pcard p { font-size: var(--fs-small) }`. Ese selector es
+   "una clase + una etiqueta" y gana a `.psample`, que es "solo una clase".
+   Por eso se podia subir el numero en `.psample` una y otra vez sin que el
+   navegador lo aplicara: nunca llegaba a usarse.
+   Se arregla subiendo la PRIORIDAD del selector: `.pcard p.psample` es
+   "una clase + una etiqueta + una clase", asi que gana. */
+.pcard p.psample {
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+}
+
+/* Y para Ascaso, mas grande y con peso 700 */
+.project--ascaso .pcard[data-kind="type"] .pcard__body > p.psample {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Titular de muestra: 8 px menos (41,6 -> 33,6 px) */
+.project--ascaso .pcard[data-kind="type"] .pcard__body > p.psample {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+}
+
+/* --- Titulos de "Design principles" (home) ------------------------------
+   Pasan de la tipografia display (Clash Display) a Outfit. */
+.principle__title {
+  font-family: var(--font-sans);
+}
+
+/* --- Logo de Borealis centrado sobre la portada de la tarjeta ------------
+   Borealis no tiene pagina propia (enlaza a Medium), asi que la tarjeta
+   lleva su orbe centrado encima de la imagen de portada. */
+.project-card__logo {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 38%;
+  max-width: 180px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Correccion: `inset: 0` estiraba la altura de la imagen y el logo se
+   ampliaba tanto que solo se veia una letra. Centrado sin deformar: */
+.project-card__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: 62%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* El SVG no declara proporcion intrinseca, asi que `height:auto` disparaba la
+   altura y el logo salia ampliado y recortado. Se le fija la proporcion real
+   del viewBox (277 x 64). */
+/* --- La causa de que el logo saliera ampliado y recortado ---------------
+   `.project-card__media img` es "una clase + una etiqueta" (0,1,1) y GANA a
+   `.project-card__logo`, que es "solo una clase" (0,1,0). Le aplicaba
+   width:100% y object-fit:cover, asi que el logo llenaba la tarjeta entera y
+   se recortaba.
+   Es la misma trampa que con el titular de Ascaso: hay que subir la prioridad
+   del selector, no cambiar el valor. */
+.project-card__media img.project-card__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(62%, 300px);
+  height: auto;
+  aspect-ratio: 1955 / 449;
+  object-fit: contain;
+  background: none;
+  pointer-events: none;
+}
+
+/* --- Zoom del logo de Borealis al pasar el raton ------------------------
+   El hover de la tarjeta aplica `transform: scale(1.04)` a TODAS las imagenes
+   de `.project-card__media`. Como el logo tambien es una imagen, esa regla
+   SUSTITUIA su `translate(-50%, -50%)` y el logo saltaba a un lado.
+   Aqui se combinan las dos: sigue centrado y hace el mismo zoom.
+   La velocidad no hay que tocarla: hereda la transicion de 1,1 s de
+   `.project-card__media img`, que es la misma que usan las demas tarjetas. */
+.project-card:hover .project-card__media img.project-card__logo {
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+/* --- Tarjeta con logo (Borealis) ----------------------------------------
+   En estas tarjetas la PORTADA NO se amplia al pasar el raton: se queda
+   quieta. Lo unico que crece es el logo, que sigue centrado.
+   El selector `> img:not(.project-card__logo)` apunta solo a la portada y
+   deja fuera al logo. */
+.project-card--logo:hover .project-card__media > img:not(.project-card__logo) {
+  transform: none;
+}
+
+.project-card--logo:hover .project-card__media img.project-card__logo {
+  transform: translate(-50%, -50%) scale(1.09);
+}
+
+/* El logo crece mas al pasar el raton: de 1,09 a 1,28 */
+.project-card--logo:hover .project-card__media img.project-card__logo {
+  transform: translate(-50%, -50%) scale(1.28);
+}
+
+/* --- El rol del hero, en dos lineas -------------------------------------
+   El texto lleva un salto de linea entre las dos palabras. `pre-line` hace
+   que el navegador lo respete y parta ahi, en vez de partir por ancho. */
+.hero__role {
+  white-space: pre-line;
+}
+
+/* --- Tarjeta 02 "Colour palette": ajuste contra el diseno original -------
+   Tres diferencias con el original:
+     1. Las muestras se apiNaban a la izquierda. En el original ocupan las
+        cuatro el ancho completo de la caja, a columnas iguales.
+     2. La barra de uso recortaba las esquinas del conjunto, asi que los
+        tramos salian con el borde recto. En el original cada tramo tiene
+        su propio redondeo.
+     3. La leyenda se repartia con `space-between`, sin relacion con el
+        tamano de cada tramo. Ahora cada etiqueta usa el MISMO `flex` que su
+        tramo, asi que cae justo debajo. */
+.pswatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.2vw, 1rem);
+  width: 100%;
+}
+
+.pswatch {
+  min-width: 0;
+}
+
+.pusage {
+  gap: 6px;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.pusage > span {
+  border-radius: 8px;
+}
+
+.pusage__legend {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  font-size: var(--fs-micro);
+  color: var(--ink);
+}
+
+.pusage__legend > span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  font-style: normal;
+}
+
+.pusage__legend b {
+  font-weight: 500;
+  font-style: normal;
+  color: var(--ink);
+}
+
+.pusage__legend i {
+  font-style: normal;
+  color: var(--ink-2);
+}
+
+/* --- Tarjeta 02 "Colour palette": segunda pasada ------------------------
+
+   1) La leyenda se partia en dos lineas. Causa: al dar a cada etiqueta un
+      `flex` igual a su porcentaje, la de "5 %" recibia solo el 5% del ancho
+      y el texto no cabia. Se impide el salto de linea; la ultima etiqueta se
+      alinea a la derecha para que no se salga de la caja.
+
+   2) Faltaba la linea horizontal que separa la paleta de la seccion USAGE.
+
+   3) Todo el texto del cuadro va en negro puro; solo el titulo usa el gris
+      767676. */
+
+.pusage__legend > span {
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.pusage__legend > span:last-child {
+  text-align: right;
+}
+
+.project--ascaso .pcard[data-kind="palette"] .pcaption {
+  border-top: 1px solid var(--line);
+  padding-top: clamp(0.9rem, 1.6vw, 1.25rem);
+}
+
+.project--ascaso .pcard[data-kind="palette"] .pswatch,
+.project--ascaso .pcard[data-kind="palette"] .pcaption,
+.project--ascaso .pcard[data-kind="palette"] .pusage__legend,
+.project--ascaso .pcard[data-kind="palette"] .pusage__legend b,
+.project--ascaso .pcard[data-kind="palette"] .pusage__legend i {
+  color: #000000;
+}
+
+.project--ascaso .pcard[data-kind="palette"] .pcard__title {
+  color: #767676;
+}
+
+/* --- Tarjeta 02: las barras de uso, segun el codigo de Figma ------------
+   La clave que revela el Figma: la ETIQUETA vive DENTRO de la columna de su
+   barra, no en una fila aparte. Asi nunca se pueden descuadrar entre si.
+   Y los anchos NO son proporcionales a los porcentajes:
+     · negro  -> ancho fijo de 207 px
+     · beige  -> flex 1 0 0 (se lleva el espacio libre)
+     · azul   -> ancho segun su propio texto ("5 %" / "Accent")
+   Medidas del Figma: barra 60 px de alto, radio 8 px, separacion barra-texto
+   8 px, separacion entre grupos 10 px, texto Poppins Regular 14 px negro. */
+.pusage {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 0;
+  overflow: visible;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.pusage__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.pusage__item:nth-child(1) {
+  flex: 0 1 207px;
+}
+
+.pusage__item:nth-child(2) {
+  flex: 1 0 0;
+  min-width: 1px;
+}
+
+.pusage__item:nth-child(3) {
+  flex: none;
+}
+
+.pusage__bar {
+  display: block;
+  width: 100%;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.pusage__legend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0;
+  font-size: 1rem;
+  line-height: normal;
+}
+
+.pusage__legend b,
+.pusage__legend i {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: normal;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.pusage__legend i {
+  text-transform: capitalize;
+}
+
+/* --- Las etiquetas se pisaban en pantallas estrechas --------------------
+   La columna beige tiene `flex: 1 0 0`, asi que en una tarjeta estrecha se
+   queda con muy poco ancho; su etiqueta ("25 % / Warms") se sale y choca con
+   la del azul. En el Figma no ocurre porque el ancho es fijo.
+   Arreglo: ninguna columna puede encoger por debajo de su propio texto
+   (`min-width: max-content`) y el negro puede reducirse si hace falta, en vez
+   de quedarse clavado en 207 px. Asi el texto manda siempre. */
+.pusage__item {
+  min-width: max-content;
+}
+
+.pusage__item:nth-child(1) {
+  flex: 0 1 207px;
+}
+
+.pusage__item:nth-child(2) {
+  flex: 1 0 auto;
+  min-width: max-content;
+}
+
+.pusage {
+  flex-wrap: nowrap;
+  gap: clamp(8px, 1.4vw, 10px);
+}
+
+/* --- Proporciones de las barras, cercanas a los porcentajes -------------
+   El Figma daba al negro 207 px fijos y dejaba al beige llevarse todo el
+   espacio libre: el beige acababa con mas de la mitad de la barra, justo lo
+   contrario de lo que dice su "25 %".
+   Ahora los tres tramos reparten el ancho segun un numero cercano a su
+   porcentaje, con la beige un poco por encima del suyo para que se lea bien:
+     negro  62   (etiqueta 70 %)
+     beige  30   (etiqueta 25 %)
+     azul    8   (etiqueta  5 %)
+   Cada columna conserva su `min-width: max-content`, asi que ningun tramo
+   puede quedar mas estrecho que su propia etiqueta. */
+.pusage__item:nth-child(1) {
+  flex: 62 1 0;
+  min-width: max-content;
+}
+
+.pusage__item:nth-child(2) {
+  flex: 30 1 0;
+  min-width: max-content;
+}
+
+.pusage__item:nth-child(3) {
+  flex: 8 1 0;
+  min-width: max-content;
+}
+
+/* --- Tarjeta 03 "Product photography", segun la referencia --------------
+   Antes se apilaban: la grande arriba y las dos pequenas debajo en fila.
+   La referencia las pone EN PARALELO: la grande ocupa la columna izquierda
+   entera y las dos pequenas van apiladas a la derecha.
+
+   El truco: la grande abarca las DOS filas de la rejilla, y la altura de
+   esas filas la marcan las pequenas con su proporcion (380 x 217, medido
+   en la referencia). Asi la grande queda exactamente tan alta como las dos
+   pequenas mas la separacion, sin numeros fijos y adaptandose al ancho. */
+.pphotos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pphotos img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.pphotos__big {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.pphotos__small {
+  grid-column: 2;
+  aspect-ratio: 380 / 217;
+}
+
+/* --- Tarjeta 03 "Product photography", medidas del Figma ----------------
+   El Figma da al conjunto ("bento") una ALTURA de 298 px con el contenido de
+   331 px de ancho, o sea una proporcion de 331:298. Se usa esa proporcion en
+   vez de una altura fija, para que escale con el ancho de la tarjeta.
+   Los huecos son de 10 px (antes 12) y las dos columnas miden lo mismo.
+   La imagen grande abarca las dos filas; las pequenas se reparten la altura. */
+.pphotos {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  aspect-ratio: 331 / 298;
+}
+
+.pphotos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.pphotos__big {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.pphotos__small {
+  grid-column: 2;
+  aspect-ratio: auto;
+}
+
+/* --- Tarjeta 06 "UI components": los botones, segun el Figma -------------
+   En el Figma los dos botones "Go to STEEL" son pastillas de radio 40 px.
+   El primero va transparente con borde negro; el SEGUNDO va con fondo azul
+   #4a94ff y borde negro. Antes el segundo se pintaba negro macizo porque no
+   tenia variante propia y usaba el estilo de boton por defecto. */
+.pcard[data-kind="ui"] .btn {
+  border-radius: 40px;
+  padding: 8.5px 34.75px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pcard[data-kind="ui"] .btn--ghost {
+  background: transparent;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.pcard[data-kind="ui"] .btn--brand {
+  background: #4a94ff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+/* --- Pie del menu movil -------------------------------------------------
+   Antes llevaba el correo suelto al final. Ahora son dos botones anclados
+   abajo del todo: LinkedIn y Email.
+   El drawer pasa a ser columna flexible y el pie se empuja con
+   `margin-top: auto`, asi queda pegado al borde inferior sea cual sea el
+   numero de enlaces. */
+.drawer {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer__nav {
+  flex: 0 0 auto;
+}
+
+.drawer__foot {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.drawer__cta {
+  flex: 1 1 0;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.drawer__cta img {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* --- Boton de menu: aspa de verdad ---------------------------------------
+   Antes las dos lineas se movian con `translateY` desde su posicion en la
+   rejilla, pero quedaban sin tocarse: se veia una forma rara en vez de un
+   aspa. Ahora las dos se colocan en el CENTRO EXACTO del boton y solo se
+   separan con un desplazamiento. Al abrir, las dos vuelven al centro y
+   rotan, asi que se cruzan por necesidad: no pueden no tocarse. */
+.burger {
+  position: relative;
+}
+
+.burger span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  margin: 0;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease);
+}
+
+.burger span:first-child {
+  transform: translate(-50%, -50%) translateY(-3.25px);
+}
+
+.burger span:last-child {
+  transform: translate(-50%, -50%) translateY(3.25px);
+}
+
+.burger[aria-expanded="true"] span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.burger[aria-expanded="true"] span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* --- Pie del menu: los dos botones, uno encima del otro ------------------
+   Arriba el correo, en blanco con contorno negro; debajo LinkedIn, negro
+   macizo.
+   Los iconos van como MASCARA, no como imagen: asi toman el color del texto
+   del boton (blanco sobre el negro, negro sobre el blanco) y de paso
+   desaparece el naranja #FF4400 que llevan dentro los archivos SVG. */
+.drawer__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.drawer__cta {
+  width: 100%;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.drawer__icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+/* La mascara con la forma corta (`mask: var(--icon) ...`) no se aplicaba en
+   Chrome cuando el valor viene de una variable. Se usan las propiedades
+   largas, que si lo resuelven. */
+.drawer__icon {
+  -webkit-mask-image: var(--icon);
+  mask-image: var(--icon);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* La mascara no llegaba a pintarse (Chrome no resolvia el `url()` dentro de
+   una variable CSS). Se usan dos copias del SVG, una en negro y otra en
+   blanco, y el icono vuelve a ser una imagen normal. */
+.drawer__icon {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* --- El aspa del boton de menu: metodo a prueba de balas -----------------
+   Las lineas se centran con `inset: 0; margin: auto`, que no depende de
+   porcentajes ni de la caja del elemento. Despues solo se separan con
+   `translateY`. Al abrir, las dos vuelven al mismo punto y rotan: se cruzan
+   en el centro exacto por construccion. */
+.burger {
+  position: relative;
+}
+
+.burger span {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 16px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease);
+}
+
+.burger span:first-child {
+  transform: translateY(-3.25px);
+}
+
+.burger span:last-child {
+  transform: translateY(3.25px);
+}
+
+.burger[aria-expanded="true"] span:first-child {
+  transform: translateY(0) rotate(45deg);
+}
+
+.burger[aria-expanded="true"] span:last-child {
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* El pie del menu: los botones ocupan el ancho, uno encima del otro. El
+   tamano de texto y el hover los ponen las clases .btn y .btn--ghost, que
+   ya existen. */
+.drawer__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.drawer__cta {
+  width: 100%;
+}
+
+/* --- Aspa: centrado con margenes negativos -------------------------------
+   `inset:0 + margin:auto` no centraba bien: las dos lineas quedaban a la
+   misma altura pero desplazadas en horizontal, y al rotar formaban una "<"
+   en vez de un aspa.
+   Ahora se colocan con `left/top: 50%` y la mitad exacta de su tamano en
+   margenes negativos, asi su CENTRO cae justo en el centro del boton y las
+   dos rotan sobre el mismo punto. */
+.burger span {
+  position: absolute;
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 1.5px;
+  margin: 0 0 0 -8px;
+  margin-top: -0.75px;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease);
+}
+
+.burger span:first-child {
+  transform: translateY(-3.25px);
+}
+
+.burger span:last-child {
+  transform: translateY(3.25px);
+}
+
+.burger[aria-expanded="true"] span:first-child {
+  transform: translateY(0) rotate(45deg);
+}
+
+.burger[aria-expanded="true"] span:last-child {
+  transform: translateY(0) rotate(-45deg);
+}
+
+/* --- Parallax del hero --------------------------------------------------
+   El marco recorta, y el fondo es un 32% mas alto que el marco empezando por
+   encima. Ese sobrante es justo lo que se desplaza al hacer scroll (factor
+   0,3 sobre la altura), asi que nunca asoma el borde por arriba ni por abajo.
+   El texto y los botones (.hero__inner) no se tocan: se quedan donde estan y
+   son los que "tiran" mientras el fondo se queda atras. */
+.hero__frame {
+  overflow: hidden;
+}
+
+.hero__media {
+  inset: auto 0;
+  top: -32%;
+  height: 132%;
+  will-change: transform;
+}
+
+/* El sobrante del fondo tiene que ser SIEMPRE igual al factor de desplaza-
+   miento, o asoma el borde. Factor 0,45 -> 46% de sobrante. */
+.hero__media {
+  top: -46%;
+  height: 146%;
+}
+
+/* La capa de texto tambien se retrasa, asi que necesita su propio aviso al
+   navegador para que la anime en la tarjeta grafica. */
+.hero__inner {
+  will-change: transform;
+}
+
+/* --- El texto del hero, un poco mas arriba -------------------------------
+   La caja reparte con `align-items: center`, asi que un margen inferior
+   empuja el bloque hacia arriba justo la mitad de su valor: 80 px de margen
+   = 40 px de subida.
+   Se hace con margen y NO con `transform`, porque el transform de
+   `.hero__inner` lo usa el parallax. Si se usara para las dos cosas, una
+   pisaria a la otra. */
+.hero__inner {
+  margin-bottom: 80px;
+}
+
+/* El sobrante del fondo va SIEMPRE igual al factor de desplazamiento: si el
+   fondo se retrasa menos (0,35), necesita menos sobrante (36%). De paso, el
+   video queda menos ampliado. */
+.hero__media {
+  top: -36%;
+  height: 136%;
+}
+
+/* El sobrante del fondo vuelve a 46%, que es lo que corresponde al factor
+   0,45. Si se cambia el factor, hay que cambiar esto a la vez. */
+.hero__media {
+  top: -46%;
+  height: 146%;
+}
+
+/* El sobrante va SIEMPRE igual al factor del fondo: 0,60 -> 62%.
+   Cuanto mayor el sobrante, mas ampliado queda el video dentro del marco. */
+.hero__media {
+  top: -62%;
+  height: 162%;
+}
+
+/* --- Video en la portada de las tarjetas --------------------------------
+   La tarjeta de Ascaso lleva un video que se reproduce solo, en bucle y sin
+   sonido. Se comporta igual que la imagen: llena la caja y hace el mismo
+   zoom al pasar el raton, asi que va en las mismas reglas. */
+.project-card__media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s var(--ease);
+}
+
+.project-card:hover .project-card__media video {
+  transform: scale(1.04);
+}
+
+/* --- Portada de tipo maqueta (Ascaso) -----------------------------------
+   La imagen de los dispositivos es mas apaisada que la caja de la tarjeta
+   (2,32 frente a 1,60) y lleva fondo transparente. Con `cover` se comeria
+   los lados y dejaria ver el fondo de la tarjeta por las esquinas.
+   Con `contain` se ve ENTERA y centrada, que es lo que pide una maqueta. */
+.project-card--mockup .project-card__media {
+  background: #ffffff;
+}
+
+.project-card--mockup .project-card__media img {
+  object-fit: contain;
+  padding: 6%;
+}
+
+/* Sin margen interior: la maqueta ocupa todo el ancho disponible. La caja es
+   16:10 y la imagen 2,32, asi que manda el ancho y queda aire arriba y abajo,
+   pero al menos se ve al maximo tamano posible. */
+.project-card--mockup .project-card__media img {
+  padding: 0;
+}
+
+/* La tarjeta parecia flotar sobre blanco. Pasa al gris de las bandas, F2F2F2.
+   OJO: la imagen lleva un halo blanco suave alrededor de los dispositivos,
+   asi que sobre gris puede asomar ese blanco. Se comprueba en la captura. */
+.project-card--mockup .project-card__media {
+  background: #f2f2f2;
+}
+
+/* --- Botones e iconos de la tarjeta 06: llenan el ancho ------------------
+   Estaban pegados a la izquierda y dejaban medio cuadro vacio. Ahora los
+   dos botones se reparten el ancho a partes iguales y los siete iconos se
+   reparten con `space-between`, asi que el ultimo toca el borde derecho. */
+.pui__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pui__buttons .btn {
+  flex: 1 1 0;
+  justify-content: center;
+}
+
+.pcard[data-kind="ui"] .picons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+}
+
+/* Al ensanchar los botones, su texto se partia en dos lineas ("Go to" /
+   "STEEL"). Se impide el salto: la etiqueta va siempre de una pieza. */
+.pui__buttons .btn {
+  white-space: nowrap;
+}
+
+.pui__buttons .btn span {
+  white-space: nowrap;
+}
+
+/* --- Tags de la ficha "Sobre el proyecto" -------------------------------
+   Van sin contorno, rellenas de gris, con el texto en lila claro. */
+.pintro .pintro__tags .tag {
+  border: 0;
+  background: #edeff5;
+  color: #d5d4e8;
+}
+
+/* --- Ficha "Sobre el proyecto": legibilidad -----------------------------
+   El lila claro sobre gris daba un contraste de 1,27:1, o sea que el texto
+   casi no se veia. Las tags pasan a un negro que no es negro puro (#1f1f1f,
+   el mismo tono que usa el resto de la web) y el titulo a negro puro. */
+.pintro .pintro__tags .tag {
+  color: #1f1f1f;
+}
+
+.pintro .pintro__caption {
+  color: #000000;
+}
+
+/* =====================================================================
+   REGLA: el texto de las cajas ocupa todo el ancho disponible
+   ---------------------------------------------------------------------
+   Antes habia una medida global de lectura (--maxw-text: 62ch) y cuatro
+   topes sueltos mas. El texto se quedaba corto y dejaba hueco a la derecha.
+   Se quitan todos, PERO solo a los bloques de TEXTO: las etiquetas y los
+   rotulos de columna conservan su ancho, porque ahi el limite es
+   intencionado y sirve para que la rejilla cuadre.
+   La separacion entre la columna de la etiqueta y la del texto no se toca:
+   va en el `gap` de la rejilla, no en estos anchos.
+   ===================================================================== */
+:root {
+  --maxw-text: none;
+}
+
+.project-card__desc,
+.project-hero__tagline,
+.phero__top,
+.psection__text {
+  max-width: none;
+}
+
+/* --- Titulo de la tarjeta en mayusculas (Edusport) ---------------------- */
+.project-card--upper .project-card__title {
+  text-transform: uppercase;
+}
+
+/* El video de Ascaso tiene el mismo problema que la maqueta: es MAS apaisado
+   que la caja (1,84 frente a 1,60), asi que con \cover\ se comia el encuadre
+   y solo ensenaba el centro del portatil. Con \contain\ se ve entero.
+   El fondo de la tarjeta se iguala al del propio video (#E0DAD1) para que no
+   se noten las bandas a los lados. */
+.project-card--mockup .project-card__media video {
+  object-fit: contain;
+  padding: 0;
+}
+
+.project-card--mockup .project-card__media {
+  background: #E0DAD1;
+}
+
+/* El video se ajustaba entero (`contain`), y eso dejaba un borde visible
+   donde acaba el video y empieza el fondo de la tarjeta: una linea fina.
+   Ahora LLENA la tarjeta (`cover`), asi que no hay borde que se vea.
+   Se recorta algo de los lados (el video es 1,84 y la caja 1,60), pero el
+   portatil esta centrado y lo que se pierde es margen del propio video. */
+.project-card--mockup .project-card__media video {
+  object-fit: cover;
+  padding: 0;
+}
+
+/* El video seguia dejando ver un borde dentro de la tarjeta. Ademas de
+   llenarla con `cover`, se AMPLIA un 14%: asi el encuadre del propio video
+   queda por fuera de la caja y no hay ningun borde interior que asome.
+   OJO con el zoom del hover: `.project-card:hover ... video` tiene mas peso
+   que la regla base, asi que hay que declarar tambien el estado hover con
+   las dos escalas sumadas, o al pasar el raton el video ENCOGERIA. */
+.project-card--mockup .project-card__media video {
+  object-fit: cover;
+  padding: 0;
+  transform: scale(1.14);
+}
+
+.project-card--mockup:hover .project-card__media video {
+  transform: scale(1.19);
+}
+
+/* El fondo de la caja ya no se fija por clase, sino que cada proyecto lo
+   declara en sus datos (`cardBg`), porque Ascaso va en beige y Altessia en
+   el verde de su marca. La regla de la clase queda solo como respaldo. */
+.project-card--mockup .project-card__media {
+  background: inherit;
+}
+
+/* ==========================================================================
+   LAMINA DE ESTILO DE EDUSPORT (style guide)
+   --------------------------------------------------------------------------
+   Reproduce el collage de Figma. Las medidas son las del lienzo original
+   (1121,58 x 794,71 px) pasadas a `cqw` (1% del ancho del bloque), asi que la
+   lamina entera escala sola, como si fuera una imagen, y no hay ninguna
+   medida fija. `container-type: inline-size` es lo que hace que `cqw` se
+   refiera a ESTE bloque y no a la ventana.
+   ========================================================================== */
+
+.pstyle {
+  container-type: inline-size;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 3.118cqw 2.751cqw;
+}
+
+/* El lienzo: las piezas van en absoluto sobre esta proporcion. */
+.pstyle__stack {
+  position: relative;
+  aspect-ratio: 1121.58 / 794.71;
+}
+
+.pstyle__stack > * {
+  position: absolute;
+}
+
+/* --- Tarjeta azul: logotipo y variantes --------------------------------- */
+
+.pstyle__brand {
+  left: 0;
+  top: 0;
+  width: 18.945cqw;
+  height: 49.738cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.643cqw 2.186cqw;
+  border-radius: 1.651cqw;
+  background: #054cd6;
+}
+
+.pstyle__brand-logo,
+.pstyle__brand-alt {
+  width: 12.079cqw;
+  height: auto;
+}
+
+/* --- Paleta: la foto, su velo y los circulos ---------------------------- */
+
+.pstyle__palette {
+  left: 21.129cqw;
+  top: 0;
+  width: 46.995cqw;
+  height: 21.857cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.809cqw;
+  border-radius: 1.651cqw;
+  background: #2c2c2c;
+  overflow: hidden;
+}
+
+.pstyle__palette-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* El velo oscuro del original, para que los circulos se lean encima. */
+.pstyle__palette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(55, 55, 55, 0.5);
+  z-index: 1;
+}
+
+.pstyle__swatch {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: 2.826cqw;
+  height: 2.826cqw;
+  border: 0.141cqw solid #ffffff;
+  border-radius: 50%;
+}
+
+/* El ultimo (el blanco) es algo mayor y lleva sombra, como en Figma. */
+.pstyle__swatch:last-child {
+  width: 2.967cqw;
+  height: 2.967cqw;
+  box-shadow: 0 0.957cqw 1.595cqw rgba(0, 0, 0, 0.05);
+}
+
+/* El lima al 70% de la paleta original. */
+.pstyle__swatch[data-soft="true"] {
+  opacity: 0.7;
+}
+
+/* --- Dos recortes de la escala tipografica ------------------------------ */
+
+.pstyle__scale {
+  left: 70.299cqw;
+  top: 0;
+  width: 29.690cqw;
+  height: 21.790cqw;
+  border-radius: 1.651cqw;
+  background: #2c2c2c;
+  overflow: hidden;
+}
+
+.pstyle__scale img {
+  position: absolute;
+  object-fit: cover;
+}
+
+.pstyle__scale-a {
+  left: 2.186cqw;
+  top: 2.368cqw;
+  width: 12.288cqw;
+  height: 16.844cqw;
+  object-position: top;
+}
+
+.pstyle__scale-b {
+  left: 17.669cqw;
+  top: 2.368cqw;
+  width: 10.752cqw;
+  height: 17.951cqw;
+  object-position: bottom;
+}
+
+/* --- Especimen tipografico ---------------------------------------------- */
+
+.pstyle__specimen {
+  left: 21.113cqw;
+  top: 24.448cqw;
+  width: 37.233cqw;
+  height: 25.312cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.459cqw;
+  padding: 1.459cqw;
+  border: 1px solid var(--line);
+  border-radius: 1.313cqw;
+  background: #ffffff;
+  color: #bbd852;
+  text-align: center;
+}
+
+.pstyle__specimen-name {
+  width: 100%;
+  color: #054cd6;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.429cqw;
+  line-height: 1.1;
+}
+
+.pstyle__specimen-chars {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.429cqw;
+  line-height: 1.15;
+}
+
+.pstyle__specimen-nums {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.293cqw;
+  letter-spacing: 0.550cqw;
+}
+
+/* --- Banner de campana -------------------------------------------------- */
+
+.pstyle__banner {
+  left: 60.656cqw;
+  top: 24.408cqw;
+  width: 39.344cqw;
+  height: 46.529cqw;
+  border-radius: 1.651cqw;
+  background: #054cd6;
+  overflow: hidden;
+}
+
+.pstyle__banner-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40.131cqw;
+  height: 47.456cqw;
+  object-fit: cover;
+}
+
+/* La foto de la jugadora, sin ningun marco: el lima del banner tampoco iba
+   aqui (en Figma ese marco lo lleva la caja del logotipo). */
+.pstyle__banner-athlete {
+  position: absolute;
+  left: -0.174cqw;
+  top: 6.737cqw;
+  width: 28.608cqw;
+  height: auto;
+}
+
+.pstyle__banner-logo {
+  position: absolute;
+  left: 24.003cqw;
+  top: 33.649cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13.928cqw;
+  padding: 0.836cqw 1.338cqw;
+  border-radius: 0.388cqw;
+  background: #054cd6;
+}
+
+.pstyle__banner-logo img {
+  width: 11.250cqw;
+  height: auto;
+}
+
+.pstyle__banner-claim {
+  position: absolute;
+  left: 31.317cqw;
+  top: 10.730cqw;
+  width: 14.689cqw;
+  transform: translateX(-100%);
+  color: #bbd852;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3.054cqw;
+  line-height: 1.05;
+  text-align: right;
+}
+
+/* --- La caja verde con la iconografia ----------------------------------- */
+
+.pstyle__icons {
+  left: 0;
+  top: 51.916cqw;
+  width: 58.472cqw;
+  height: 18.945cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4.079cqw;
+  border-radius: 1.651cqw;
+  background: #bbd852;
+}
+
+.pstyle__icons-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pstyle__icons-row img {
+  width: 4.079cqw;
+  height: auto;
+}
+
+/* --- En pantalla estrecha la lamina se apila ----------------------------
+   A escala, el collage seria ilegible en un movil, asi que ahi deja de ser
+   una lamina y pasa a ser una columna de piezas. */
+@media (max-width: 860px) {
+  .pstyle {
+    padding: 1rem;
+  }
+
+  .pstyle__stack {
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pstyle__stack > * {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .pstyle__brand {
+    flex-direction: row;
+    gap: 10%;
+    padding: 1.5rem;
+  }
+
+  .pstyle__brand-logo {
+    width: 34%;
+  }
+
+  .pstyle__brand-mark {
+    width: 13%;
+  }
+
+  .pstyle__palette {
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 2.5rem 1rem;
+  }
+
+  .pstyle__swatch,
+  .pstyle__swatch:last-child {
+    width: 2rem;
+    height: 2rem;
+    border-width: 2px;
+    box-shadow: none;
+  }
+
+  .pstyle__scale {
+    height: 18rem;
+  }
+
+  .pstyle__scale-a {
+    left: 4%;
+    top: 8%;
+    width: 38%;
+    height: 84%;
+  }
+
+  .pstyle__scale-b {
+    left: 48%;
+    top: 8%;
+    width: 32%;
+    height: 84%;
+  }
+
+  .pstyle__specimen {
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .pstyle__specimen-name,
+  .pstyle__specimen-chars {
+    font-size: 1.5rem;
+  }
+
+  .pstyle__specimen-nums {
+    font-size: 1.35rem;
+    letter-spacing: 0.3em;
+  }
+
+  .pstyle__banner {
+    height: 30rem;
+  }
+
+  .pstyle__banner-bg {
+    width: 102%;
+    height: 102%;
+  }
+
+  .pstyle__banner-athlete {
+    left: -2%;
+    top: 16%;
+    width: 72%;
+  }
+
+  .pstyle__banner-logo {
+    left: 60%;
+    top: 64%;
+    width: 34%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+  }
+
+  .pstyle__banner-logo img {
+    width: 100%;
+  }
+
+  .pstyle__banner-claim {
+    left: 90%;
+    top: 22%;
+    width: 62%;
+    font-size: 1.6rem;
+  }
+
+  .pstyle__icons {
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .pstyle__icons-row img {
+    width: 2.25rem;
+  }
+}
+
+/* ==========================================================================
+   CAJAS DE TEXTO EN HORIZONTAL (bloque `boxes`)
+   --------------------------------------------------------------------------
+   Dos o mas bloques de texto uno al lado del otro, cada uno en su caja y con
+   su propio fondo. Es la seccion de "El reto" + "Detalles del proyecto" de
+   Edusport: en el original iban uno debajo del otro sobre una banda gris
+   continua, y asi se leen como dos cajas separadas.
+   ========================================================================== */
+
+.pboxes {
+  display: grid;
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
+}
+
+.pboxes--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pboxes--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pboxes__box {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.4vw, 1.15rem);
+  padding: clamp(1.25rem, 2.6vw, 2.5rem);
+  border-radius: var(--radius-lg);
+}
+
+/* El gris de las bandas de seccion y el de los marcos del sistema. */
+.pboxes__box--soft {
+  background: #f9f9f9;
+}
+
+.pboxes__box--grey {
+  background: #f2f2f2;
+}
+
+.pboxes__box--white {
+  background: #ffffff;
+  border: 1px solid var(--line);
+}
+
+.pboxes__box--dark {
+  background: #171717;
+  color: #ffffff;
+}
+
+.pboxes__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  max-width: 22ch;
+}
+
+.pboxes__box--dark .pboxes__label {
+  color: #ffffff;
+}
+
+.pboxes__text {
+  font-size: var(--fs-small);
+  color: inherit;
+}
+
+.pboxes__box--dark .pboxes__text {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* En pantalla estrecha las cajas se apilan. */
+@media (max-width: 720px) {
+  .pboxes--2,
+  .pboxes--3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   FONDOS DE BANDA DE ALTESSIA, COMO EL ORIGINAL
+   --------------------------------------------------------------------------
+   El original reparte tres verdes #B8E0CE (Decisiones clave, Guiding y
+   Building trust) y tres grises #FAFAFA (Arquitectura de la informacion,
+   Humanising y Encouraging), mientras que aqui casi todo caia en el menta
+   claro #EBFFF6, que es casi blanco y aplana la pagina.
+   Va con :has() porque el color lo pinta la banda que envuelve la seccion, y
+   se repite sobre la seccion por si esa bloque no lleva banda. */
+.project--altessia .pband:has(#decisions),
+.project--altessia #rehabilitation,
+.project--altessia #trust {
+  background: #b8e0ce;
+}
+
+.project--altessia .pband:has(#ia),
+.project--altessia #humanising,
+.project--altessia #appointments {
+  background: #fafafa;
+}
+
+/* En las bandas verdes claras el texto va oscuro: el blanco solo vale sobre
+   el #EBFFF6 oscuro del que veniamos. */
+.project--altessia .pband:has(#decisions) .psection__label,
+.project--altessia .pband:has(#decisions) p {
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   PANTALLA DE CARGA
+   --------------------------------------------------------------------------
+   Capa naranja a pantalla completa con el saludo rotando en siete idiomas, el
+   nombre debajo y una barra de progreso pegada al borde inferior. No anade
+   tiempo de espera: se retira en cuanto la pagina termina de cargar, con un
+   minimo corto para que no parpadee.
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--accent);
+  color: #000000;
+  display: grid;
+  place-items: center;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+/* Si la pantalla de carga ya se ha visto en esta sesion, no se pinta: la clase
+   la pone un script en linea ANTES del propio preloader, para que no haya
+   destello naranja al entrar. */
+.preloader-skip .preloader {
+  display: none;
+}
+
+.preloader.is-done {
+  opacity: 0;
+  /* Se disuelve hacia fuera: solo con el fundido se notaba seco. */
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.preloader__inner {
+  text-align: center;
+  padding-inline: var(--gutter);
+}
+
+.preloader__hello {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  /* Todos los idiomas ocupan lo mismo en alto: al cambiar de palabra el bloque
+     no baila. */
+  min-height: 1.05em;
+}
+
+.preloader__name {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #000000;
+}
+
+/* El nombre con mas peso que el cargo. */
+.preloader__who {
+  font-weight: 700;
+}
+
+.preloader__role {
+  font-weight: 400;
+}
+
+.preloader__pct {
+  margin-top: 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 500;
+  /* Sin tracking: con el espaciado de las mayusculas las cifras se separaban
+     ("6 8 %"). */
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  color: rgba(255, 255, 255, 0.82);
+  /* Las cifras no cambian de ancho: el numero no baila al subir. */
+  font-variant-numeric: tabular-nums;
+}
+
+.preloader__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.preloader__bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #000000;
+  transition: width 0.3s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader,
+  .preloader__bar span {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   CABECERA SOBRE IMAGEN O VIDEO, Y HERO A SANGRE
+   --------------------------------------------------------------------------
+   La cabecera ya es fija y ya cambiaba de transparente a barra blanca con el
+   scroll (la clase `is-stuck` que pone app.js). Lo que le faltaba era el
+   color del texto: mientras flota encima del video o de la foto va en blanco
+   para poder leerse, y al fijarse vuelve al negro sobre la barra blanca.
+   El naranja de la marca NO cambia en ningun estado.
+   ========================================================================== */
+
+.header--over-media:not(.is-stuck) .brand,
+.header--over-media:not(.is-stuck) .nav__link,
+.header--over-media:not(.is-stuck) .lang__opt,
+.header--over-media:not(.is-stuck) .tool {
+  color: #ffffff;
+}
+
+/* En blanco, el borde de la pildora del CV tiene que acompanar. */
+.header--over-media:not(.is-stuck) .tool {
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+/* El idioma inactivo se aclara para que se distinga del activo. */
+.header--over-media:not(.is-stuck) .lang__opt[aria-pressed="false"] {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* El naranja se queda en el punto del logotipo, pero NO en el idioma activo:
+   ese boton ya lleva fondo naranja, asi que su texto tiene que ser blanco. Con
+   el naranja se quedaba naranja sobre naranja y no se veia que idioma estaba
+   seleccionado. */
+.header--over-media:not(.is-stuck) .brand__dot {
+  color: var(--accent);
+}
+
+/* El hero va de borde a borde: fuera los 10 px de margen, el radio y el fondo
+   gris del marco. El video y la malla ya ocupan el 100% del marco, asi que se
+   estiran solos; el aire interior del texto se mantiene.
+
+   Ademas el hero arranca en el borde superior de la ventana: antes reservaba
+   `padding-top` para la cabecera y esta flotaba sobre blanco, no sobre el
+   video (con el texto en blanco quedaba invisible). El alto total no cambia:
+   lo que se le quita arriba se le suma abajo. */
+.hero {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Altura fija de 860 px, con el texto abajo y el aire hasta el borde inferior
+   (el original de referencia deja 56). El `max-height` que limitaba el hero a
+   820 px se anula aqui, o la altura nueva no se aplicaria. */
+.hero__frame {
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  height: 980px;
+  max-height: none;
+  align-items: flex-end;
+  padding-bottom: 96px;
+  background: #0b0b0b;
+}
+
+/* Todo lo que viene DESPUES del hero tiene que taparlo: el hero se queda
+   pegado arriba con z-index -1 y los siguientes suben por encima.
+   El fondo va en un ::before que se sale a todo el ancho de la ventana, porque
+   varias secciones de la home llevan `max-width` (la clase `.wrap`) y su propio
+   fondo solo cubria esos 1760 px: por las franjas de los lados se seguia viendo
+   el video y el texto del hero. */
+.hero ~ *:not(.contact) {
+  position: relative;
+  z-index: 1;
+}
+
+.hero ~ *:not(.contact)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #ffffff;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   HERO: TEXTO ALINEADO CON LA CABECERA, CENTRADO, STICKY E INDICADOR
+   ========================================================================== */
+
+/* El aire lateral del hero pasa del marco al texto, y el texto usa el MISMO
+   ancho y el MISMO margen que el `.wrap` de la cabecera. Asi el titular
+   arranca en la misma vertical que el logotipo en cualquier pantalla: antes
+   los dos compartian `--gutter`, pero a partir de 1760 px el `.wrap` se
+   centraba y el hero a sangre no, y se desalineaban. */
+.hero__frame {
+  padding-inline: 0;
+}
+
+.hero__inner {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  /* Este margen lo dejaba el indicador de scroll, que ahora va en absoluto:
+     sin el, el bloque de texto queda centrado en la caja. */
+  margin-bottom: 0;
+}
+
+/* La home deja el hero pegado arriba y el resto de la pagina sube por encima.
+   El `-1` lo manda detras de todo lo que viene despues (incluido el contenido
+   estatico), y por eso el `main` necesita su propio contexto de apilamiento:
+   si no, el hero se iria detras del fondo blanco del body. */
+.hero {
+  position: sticky;
+  top: 0;
+  z-index: -1;
+}
+
+main#main {
+  position: relative;
+  z-index: 0;
+  /* El ::before del fondo se sale a 100vw: se recorta lo que sobra para que no
+     aparezca scroll horizontal. Con `clip` y no con `hidden`, porque `hidden`
+     convertiria el main en contenedor de scroll y romperia el sticky del hero. */
+  overflow-x: clip;
+}
+
+
+
+
+/* --- Parallax retirado ---------------------------------------------------
+   El fondo del video ya no se desplaza, asi que vuelve a su tamano normal: el
+   162% de alto con -62% arriba existia solo para que hubiera sobrante que
+   mover. El `will-change` tambien sobra (avisaba al navegador para animar la
+   capa en la tarjeta grafica). */
+.hero__media {
+  inset: 0;
+  top: 0;
+  height: 100%;
+  will-change: auto;
+}
+
+/* El `.hero__inner` lleva `width: 100%` MAS el padding lateral, asi que su caja
+   medía mas que la ventana (390 + los dos margenes) y el texto se salia por la
+   derecha: el marco lo recortaba y la frase se cortaba a media palabra. Con
+   `border-box` el padding entra dentro del 100% y el texto hace su wrap normal. */
+.hero__inner {
+  box-sizing: border-box;
+}
+
+/* --- En movil los botones ocupan todo el ancho --------------------------
+   Aplicado a todo el proyecto: cada boton llena el ancho de SU contenedor, asi
+   que sigue respetando los margenes de la pagina, y los grupos se apilan uno
+   debajo del otro en vez de quedar en dos columnas estrechas. */
+@media (max-width: 640px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* --- En movil el hero no puede llevar altura fija ------------------------
+   Con los 980 px del escritorio y el texto anclado abajo, en un movil el bloque
+   de texto es MAS alto que la caja: al estar alineado abajo se salia por arriba
+   del recorte y los botones desaparecian. Aqui la altura la pide el contenido,
+   con un minimo de una pantalla (y un tope de 980, como en escritorio). */
+@media (max-width: 860px) {
+  .hero__frame {
+    height: auto;
+    min-height: min(100svh - 56px, 980px);
+    padding-bottom: 72px;
+  }
+
+  /* En pantallas estrechas el texto no puede medir mas que su caja. El parrafo
+     es un item flexible y tomaba su ancho de contenido (`max-width: 44ch`, mas
+     ancho que la pantalla), asi que la frase se cortaba por la derecha: hay que
+     darle el ancho del contenedor, no solo limitarle el maximo. */
+  .hero__inner,
+  .hero__greeting,
+  .hero__role,
+  .hero__claim {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero__claim {
+    max-width: 100%;
+    /* El parrafo no declaraba `line-height` y en movil partia en tres lineas
+       muy juntas: con 1.4 respira. */
+    line-height: 1.4;
+  }
+}
+
+/* --- El contacto necesita su blanco a todo el ancho ----------------------
+   Como el resto de secciones, la tarjeta de contacto tiene `max-width`, asi que
+   en pantallas anchas no llega a los bordes y por esas franjas se veia el hero.
+   Se le da su propio blanco con un ::before a 100vw, pero SIN z-index en el
+   elemento: asi el pseudo cae en el contexto de apilamiento del main y queda
+   DEBAJO del fondo oscuro de la tarjeta (si el contacto creara su propio
+   contexto, el ::before con z-index -1 se pintaria despues de su fondo y se lo
+   comeria, que es justo el fallo que tuvimos). */
+.contact {
+  position: relative;
+  z-index: auto;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: #ffffff;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- Con el menu movil abierto, la cabecera vuelve al negro ---------------
+   El drawer tiene fondo blanco y tapa la pagina, pero la cabecera sigue
+   encima. Si venimos del estado "sobre imagen o video" el logotipo y los
+   enlaces estan en blanco, y sobre ese blanco no se leen: aqui vuelven al
+   negro mientras el menu esta abierto. */
+body.is-locked .header--over-media .brand,
+body.is-locked .header--over-media .nav__link,
+body.is-locked .header--over-media .lang__opt,
+body.is-locked .header--over-media .tool {
+  color: #000000;
+}
+
+/* El idioma inactivo tambien, que en el estado claro va aclarado. */
+body.is-locked .header--over-media .lang__opt[aria-pressed="false"] {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* El punto del logotipo se queda en el naranja de marca. */
+body.is-locked .header--over-media .brand__dot {
+  color: var(--accent);
+}
+
+/* --- Boton de menu movil: dos lineas que rotan a X -----------------------
+   Mismo mecanismo que usa la web de referencia. Al centrar las lineas hay que
+   hacerlo en UN SOLO sitio: antes habia cuatro bloques de .burger pisandose,
+   cada uno con su propio translate/inset, y el resultado era una X torcida.
+   Aqui se anula todo lo anterior (transform: none, inset: auto) y se define
+   una sola vez: las lineas nacen centradas con margenes negativos y solo se
+   mueven en vertical; al abrir, rotan desde el centro. */
+.burger {
+  position: relative;
+}
+
+.burger span,
+.burger span:first-child,
+.burger span:last-child {
+  position: absolute;
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -8px;
+  background: var(--ink);
+  transition: transform 0.35s var(--ease);
+  transform: none;
+}
+
+.burger span:first-child {
+  transform: translateY(-3.25px);
+}
+
+.burger span:last-child {
+  transform: translateY(3.25px);
+}
+
+.burger[aria-expanded="true"] span:first-child {
+  transform: rotate(45deg);
+}
+
+.burger[aria-expanded="true"] span:last-child {
+  transform: rotate(-45deg);
+}
+
+/* --- Los iconos de los botones se invierten con el boton ------------------
+   Son imagenes de un solo color (el de LinkedIn va en blanco, el de Email en
+   negro) y NO heredan el color del texto. Al invertirse el boton en hover o al
+   pulsarlo, el icono se quedaba del mismo color que el fondo y desaparecia:
+   el de LinkedIn sobre el fondo blanco del hover, el de Email sobre el negro.
+   Se invierten a la vez que el boton, en los dos sentidos. */
+.btn:hover .drawer__icon,
+.btn:active .drawer__icon,
+.btn:focus-visible .drawer__icon {
+  filter: invert(1);
+}
+
+.drawer__icon {
+  transition: filter 0.25s var(--ease);
+}
+
+/* --- Logos de "Sobre mi" en movil ----------------------------------------
+   En escritorio van los cinco en fila con space-between, que ahi funciona. En
+   movil ese reparto deja tres arriba desalineados y dos abajo centrados. Aqui
+   pasan a una rejilla de dos columnas alineada a la izquierda, y el quinto se
+   oculta: quedan dos lineas de dos, que es lo que encaja. El quinto sigue
+   estando en escritorio y en el visor. */
+@media (max-width: 860px) {
+  .logo-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: start;
+    justify-items: start;
+    align-items: center;
+    gap: 1.6rem 1.25rem;
+  }
+
+  .logo-row__item {
+    padding: 0;
+    text-align: left;
+  }
+
+  .logo-row__item img {
+    max-height: 44px;
+  }
+
+  .logo-row__item:nth-child(5) {
+    display: none;
+  }
+}
+
+/* --- La card de "Storytelling premium" de Ascaso -------------------------
+   El video trae su propio marco beige dentro del archivo (rgb 224,218,209).
+   En vez de recortar el video, la caja toma ese mismo color, asi el marco se
+   funde con ella y desaparece. El texto pasa a negro puro sobre el beige.
+   OJO: la seccion tiene DOS cajas (.pshowcase). Solo cambia la primera, la del
+   texto y el video; la segunda (.pshowcase--media, con dos imagenes) se queda
+   como estaba, oscura. De ahi el :not(). */
+#storytelling .pshowcase:not(.pshowcase--media) {
+  background: #e0dad1;
+}
+
+#storytelling .pshowcase:not(.pshowcase--media) .pshow__title,
+#storytelling .pshowcase:not(.pshowcase--media) .pshowcase__text p {
+  color: #000000;
+}
+
+/* Tambien el fondo del propio video: mientras carga, en vez del gris oscuro
+   por defecto, el mismo beige, para que no haya salto. */
+#storytelling .pshowcase:not(.pshowcase--media) video {
+  background: #e0dad1;
+}
+
+/* --- La entradilla de seccion en Altessia es texto de cuerpo --------------
+   En el diseno original (Figma Sites) el texto bajo la etiqueta de seccion no
+   es un titular: es texto de cuerpo pequeno. El nuestro usaba
+   clamp(1.15rem, 2vw, 1.6rem) -hasta 26 px- dentro de una columna de 308 px,
+   de ahi que "Diseno final" cayera en 11 lineas cuando el original tiene 4.
+   Se acota a Altessia para no tocar Ascaso ni Edusport. */
+.project--altessia .psection__sub {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  max-width: none;
+}
+
+/* ==========================================================================
+   AJUSTES DE ALTESSIA vs DISENO ORIGINAL (informe del subagente, 26 puntos)
+   --------------------------------------------------------------------------
+   Todo acotado a .project--altessia. Se aplican los puntos que son CSS puro;
+   quedan fuera los que necesitan assets que no existen y los que afectan a
+   componentes compartidos con Ascaso (Otros proyectos, contacto y pie).
+   ========================================================================== */
+
+/* 1 + 21. Titular del hero: mayuscula inicial, tracking amplio y la linea de
+   base pegada al borde inferior, como en el original. */
+.project--altessia .phero__title {
+  text-transform: none;
+  letter-spacing: 0.5em;
+  color: rgba(238, 238, 238, 0.7);
+  margin-bottom: -0.16em;
+}
+
+/* 20. La cejilla del hero, al escalon de la etiqueta de seccion (19,2 px). */
+.project--altessia .phero__cat {
+  font-size: 1.2rem;
+}
+
+/* 19. El hero de Altessia es mas bajo que el de Ascaso y Edusport. */
+.project--altessia .phero__frame {
+  min-height: min(50vh, 505px);
+}
+
+/* 2. La paleta rompia en dos filas: la rejilla de 4 columnas ganaba por orden
+   a la regla de flex. Con 5 columnas, los cinco circulos van en una fila. */
+.project--altessia .pcard[data-kind="palette"] .pswatches {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+/* 23. Circulos de la paleta algo mayores (64 px: con 5 columnas en 592 px cada
+   celda mide 118 y el hex necesita ~60). */
+.project--altessia .pcard[data-kind="palette"] .pswatch {
+  width: 64px;
+  height: 64px;
+}
+
+/* 3. UX audit: el gris va en la caja de la captura, no en toda la seccion. */
+.project--altessia .pband--grey:has(#ux-audit) {
+  background: transparent;
+}
+
+.project--altessia #ux-audit .psection__full > .pshow {
+  background: #f5f5f5;
+  border-radius: var(--radius-box);
+  max-width: none;
+  padding: clamp(1.25rem, 2.4vw, 2.25rem);
+}
+
+/* 4. UX audit: la entradilla es texto de cuerpo y vive en la columna de la
+   etiqueta, no en la ancha. */
+.project--altessia #ux-audit .psection__body {
+  display: contents;
+}
+
+.project--altessia #ux-audit .psection__lead {
+  grid-area: 2 / 1 / 3 / 2;
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--ink);
+  max-width: none;
+  margin-top: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.project--altessia #ux-audit .pcaption {
+  grid-area: 1 / 2 / 2 / 3;
+  margin: 0;
+}
+
+.project--altessia #ux-audit .pgrid--4 {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+/* 5. El recorrido del paciente es una tarjeta menta con cabecera en verde
+   oscuro y titulos numerados. */
+.project--altessia #ux-audit .pcaption {
+  background: #ebfff6;
+  border-radius: var(--radius-box) var(--radius-box) 0 0;
+  padding: clamp(1.1rem, 2vw, 1.5rem) clamp(1.25rem, 2.2vw, 1.75rem) clamp(0.75rem, 1.4vw, 1rem);
+  color: #294133;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-small);
+  border-bottom: 1px solid rgba(41, 65, 51, 0.14);
+}
+
+.project--altessia #ux-audit .pgrid--4 {
+  background: #ebfff6;
+  border-radius: 0 0 var(--radius-box) var(--radius-box);
+  padding: 0 clamp(1.25rem, 2.2vw, 1.75rem) clamp(1.25rem, 2.2vw, 1.75rem);
+  gap: 1.25rem 20px;
+  counter-reset: pj;
+}
+
+.project--altessia #ux-audit .pgrid--4 > div {
+  counter-increment: pj;
+}
+
+.project--altessia #ux-audit .pgrid--4 .pshow__title {
+  text-transform: uppercase;
+  color: #294133;
+  letter-spacing: 0.04em;
+}
+
+.project--altessia #ux-audit .pgrid--4 .pshow__title::before {
+  content: counter(pj) ". ";
+}
+
+/* 6. Conclusiones clave: la franja era tres veces mas alta y con los estilos
+   de una seccion normal. */
+.project--altessia .pband--soft:has(#findings) {
+  background: #ebfff6;
+}
+
+.project--altessia #findings.psection {
+  padding-block: clamp(1.25rem, 2.6vw, 2.25rem);
+}
+
+.project--altessia #findings .psection__label {
+  color: #294133;
+  font-size: var(--fs-small);
+}
+
+.project--altessia #findings .psection__lead {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--ink);
+  max-width: none;
+}
+
+/* 7. Final design: la entradilla cabe en una columna mas ancha (516 px) y baja
+   a 4 lineas. */
+.project--altessia #final.psection {
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+}
+
+/* 9. About: SIN panel de fondo. Se probo el #FAFAFA del original y el cliente
+   lo descarto: la seccion se queda sobre blanco, con el borde fuera. */
+.project--altessia .pintro {
+  border: 0;
+  background: transparent;
+}
+
+/* 10. Research & inspiration: la seccion sobre #FAFAFA y los tres referentes
+   en tres columnas con tarjeta blanca. */
+.project--altessia #research {
+  background: #fafafa;
+  border-radius: var(--radius-box);
+  margin-inline: 10px;
+}
+
+.project--altessia #research .psection__body > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: clamp(1.4rem, 2.4vw, 2.05rem);
+}
+
+.project--altessia #research .pref {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(0.85rem, 1.6vw, 1.25rem);
+  align-items: start;
+  border-top: 0;
+  padding: clamp(1rem, 1.8vw, 1.5rem);
+  background: #ffffff;
+  border-radius: var(--radius-box);
+}
+
+.project--altessia #research .pref__media {
+  order: -1;
+}
+
+/* 11. Conclusiones clave (segundo bloque): tarjeta #FAFAFA con tres columnas
+   numeradas. */
+.project--altessia #principles {
+  background: #fafafa;
+  border-radius: var(--radius-box);
+  margin-inline: 10px;
+}
+
+.project--altessia #principles .psection__label {
+  color: #294133;
+  font-size: var(--fs-small);
+  border-bottom: 1px solid rgba(41, 65, 51, 0.14);
+  padding-bottom: clamp(0.75rem, 1.4vw, 1rem);
+}
+
+.project--altessia #principles .pgrid--3 {
+  counter-reset: kf;
+}
+
+.project--altessia #principles .pgrid--3 > div {
+  counter-increment: kf;
+}
+
+.project--altessia #principles .pgrid--3 .pshow__title::before {
+  content: counter(kf, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+}
+
+/* 12. Decisiones clave: sin filetes verticales y los titulos en mayusculas.
+   Solo la banda de decisiones, no la tarjeta de accesibilidad. */
+.project--altessia .pband--dark .pdecision {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.project--altessia .pband--dark .pdecision__title {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* 13. La muestra tipografica era un 44% mayor y en negrita. */
+.project--altessia .pcard[data-kind="type"] .pcard__body > p.psample {
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* 14. Guiding: dos paneles del mismo verde en vez de una tarjeta menta. */
+.project--altessia #rehabilitation .pshowcase {
+  background: transparent;
+  padding: 0;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.project--altessia #rehabilitation .pshowcase__text {
+  padding: clamp(1.25rem, 2.6vw, 2.5rem);
+}
+
+.project--altessia #rehabilitation .pshowcase__media {
+  background: #ffffff;
+  border-radius: var(--radius-box);
+  padding: clamp(1rem, 1.8vw, 1.5rem);
+  justify-items: center;
+}
+
+.project--altessia #rehabilitation .pshowcase__grid img {
+  width: auto;
+  max-width: 100%;
+  max-height: 390px;
+  justify-self: center;
+}
+
+/* 15. Humanising y Encouraging: texto centrado y la media debajo a todo el
+   ancho. */
+.project--altessia #humanising .pshowcase,
+.project--altessia #appointments .pshowcase {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.project--altessia #humanising .pshowcase__text,
+.project--altessia #appointments .pshowcase__text {
+  text-align: center;
+  max-width: 70ch;
+}
+
+.project--altessia #humanising .pshowcase__text p,
+.project--altessia #appointments .pshowcase__text p {
+  max-width: none;
+}
+
+.project--altessia #appointments .pshowcase__grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.project--altessia #appointments .pshowcase__grid img {
+  width: calc((100% - 40px) / 3);
+  height: auto;
+  aspect-ratio: auto;
+}
+
+/* 16. Building trust: la caja interior es blanca, no menta. */
+.project--altessia #trust .pshowcase {
+  background: #ffffff;
+}
+
+/* 17. Inspiring: la caja es #FAFAFA y el rotulo pequeno en mayusculas. */
+.project--altessia .pshow--dark {
+  background: #fafafa;
+}
+
+.project--altessia .pshow--dark .pshow__title {
+  text-transform: uppercase;
+  font-size: var(--fs-small);
+  letter-spacing: 0.06em;
+}
+
+/* 22. Cabeceras de las tarjetas de Design principles a 16 px. */
+.project--altessia .pcard__title {
+  font-size: var(--fs-small);
+}
+
+/* 24. IA: la caja del sitemap llega al borde del marco. */
+.project--altessia #ia .psection__full > .pshow {
+  max-width: none;
+}
+
+/* 8. La banda del portatil: verde menta, como en el original. El tamano lo
+   lleva el propio .pbanner (el mismo que Ascaso): NO se le pone tope de ancho,
+   porque en Ascaso el video ocupa todo el ancho de la caja y casi todo su alto. */
+.project--altessia .pbanner {
+  background: #b8e0ce;
+}
+
+/* --- Los 4 iconos del recorrido del paciente ----------------------------
+   Son SVG completos (circulo verde oscuro + glifo), en el orden en que venian
+   del Figma. Se colocan por CSS con nth-child: asi no hay que tocar el
+   contenido (projects.js) ni el generador.
+   OJO: la ruta del url() es relativa a ESTE archivo (assets/css/), de ahi el
+   ../img/. */
+.project--altessia #ux-audit .pgrid--4 > div::before {
+  content: "";
+  display: block;
+  width: 45px;
+  height: 45px;
+  margin-bottom: clamp(0.85rem, 1.6vw, 1.15rem);
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+.project--altessia #ux-audit .pgrid--4 > div:nth-child(1)::before { background-image: url("../img/altessia-journey-1.svg"); }
+.project--altessia #ux-audit .pgrid--4 > div:nth-child(2)::before { background-image: url("../img/altessia-journey-2.svg"); }
+.project--altessia #ux-audit .pgrid--4 > div:nth-child(3)::before { background-image: url("../img/altessia-journey-3.svg"); }
+.project--altessia #ux-audit .pgrid--4 > div:nth-child(4)::before { background-image: url("../img/altessia-journey-4.svg"); }
+
+/* Afinado segun la captura del diseno: el rotulo de la tarjeta en mayusculas
+   y los titulos de cada paso en mayusculas y negrita. */
+.project--altessia #ux-audit .pcaption {
+  text-transform: uppercase;
+}
+
+.project--altessia #ux-audit .pgrid--4 .pshow__title {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  /* El cliente lo vio demasiado grande: tope de 18 px. */
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+/* El rotulo y los 4 pasos son UNA sola caja: se quita el hueco de fila de la
+   rejilla (que los separaba como si fueran cajas distintas) y el aire se le
+   devuelve a la entradilla, que es la que si lo necesita. */
+.project--altessia #ux-audit.psection {
+  row-gap: 0;
+}
+
+/* Titulos del recorrido a 16 px, como pidio el cliente. */
+.project--altessia #ux-audit .pgrid--4 .pshow__title {
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   TARJETA DEL RECORRIDO DEL PACIENTE — valores del diseno de Figma
+   --------------------------------------------------------------------------
+   El codigo de Figma da las medidas exactas (escala x2,25 respecto al render):
+     caja:    bg #EBFFF6, padding 13,371 -> 30 px, gap 13,371 -> 30 px, radio 30
+     rotulo:  Outfit Bold, #294133, uppercase, SIN filete debajo
+     items:   Outfit SemiBold, lista decimal, px 5,571 -> 12,5 px
+     iconos:  22,286 -> 50 px de diametro
+     gap:     8,914 -> 20 px entre icono y titulo
+   El rotulo NO va en Clash Display (como estaba) sino en Outfit, la de texto.
+   ========================================================================== */
+
+.project--altessia #ux-audit .pcaption {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #294133;
+  padding: 0;
+  border-bottom: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.project--altessia #ux-audit .pgrid--4 {
+  padding: 30px;
+  gap: 20px;
+  border-radius: 0 0 30px 30px;
+}
+
+.project--altessia #ux-audit .pgrid--4 > div {
+  padding-inline: 12px;
+}
+
+.project--altessia #ux-audit .pgrid--4 > div::before {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.project--altessia #ux-audit .pgrid--4 .pshow__title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+/* La caja es UNA sola: el fondo menta va en el contenedor, con el rotulo
+   arriba separado del resto por el mismo aire que usa Figma (30 px). */
+.project--altessia #ux-audit .psection__full > .pshow {
+  background: transparent;
+  padding: 0;
+}
+
+.project--altessia #ux-audit .pcaption,
+.project--altessia #ux-audit .pgrid--4 {
+  background: #ebfff6;
+}
+
+.project--altessia #ux-audit .pcaption {
+  padding: 30px 30px 0;
+  border-radius: 30px 30px 0 0;
+}
+
+/* ==========================================================================
+   UNA SOLA CAJA (recorrido del paciente)
+   --------------------------------------------------------------------------
+   El menta lo pintaban DOS elementos (el rotulo y la rejilla de pasos) y entre
+   ellos se colaba el hueco de la rejilla de la seccion: de ahi el corte.
+   Ahora el fondo va en el contenedor comun (.pshow) y las dos mitades van
+   transparentes, con el aire que marca Figma (30 px) entre rotulo y pasos.
+   ========================================================================== */
+
+.project--altessia #ux-audit .psection__full > .pshow {
+  background: #ebfff6;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.project--altessia #ux-audit .pcaption,
+.project--altessia #ux-audit .pgrid--4 {
+  background: transparent;
+  border-radius: 0;
+}
+
+.project--altessia #ux-audit .pcaption {
+  padding: 0;
+  margin: 0 0 30px;
+  border-bottom: 0;
+}
+
+.project--altessia #ux-audit .pgrid--4 {
+  padding: 0;
+  gap: 20px;
+}
