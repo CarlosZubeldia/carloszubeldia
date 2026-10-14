@@ -750,9 +750,9 @@ h4 {
 /* Marquesina */
 .marquee {
   border-block: 1px solid var(--line);
-  /* 1,35rem dejaba 25 px de aire arriba que se sumaban al final del hero y
-     separaban demasiado la cinta. */
-  padding-block: 0.75rem;
+  /* Sin aire arriba ni abajo: la cinta va pegada al hero y los filetes quedan
+     como un tic estrecho, sin franja blanca de por medio. */
+  padding-block: 0;
   overflow: hidden;
   white-space: nowrap;
   background: var(--bg);
@@ -763,8 +763,8 @@ h4 {
   align-items: center;
   gap: 3rem;
   padding-right: 3rem;
-  /* 38s iba lento; 30s mantiene la lectura comoda de las palabras. */
-  animation: marquee 30s linear infinite;
+  /* 38s -> 30s -> 20s: el cliente la queria mas viva. */
+  animation: marquee 20s linear infinite;
   will-change: transform;
 }
 
