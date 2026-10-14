@@ -6712,3 +6712,40 @@ body.is-locked .header--over-media .brand__dot {
     grid-area: auto;
   }
 }
+
+/* ----------------------------------------------------------- PAGINA 404 --- */
+/* GitHub Pages sirve `404.html` en cualquier direccion que no exista. Reutiliza
+   el boton y las variables del sistema, sin inventar nada nuevo. */
+.p404 {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+
+.p404__box {
+  max-width: 44rem;
+  text-align: center;
+}
+
+.p404__code {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-micro);
+  /* Poco tracking: con 0,14em los digitos se separaban y parecia "4 0 4". */
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.p404__title {
+  margin: 0.6rem 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.p404__text {
+  margin-bottom: 2rem;
+  color: var(--ink-2);
+}
