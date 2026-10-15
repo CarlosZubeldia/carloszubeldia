@@ -6841,16 +6841,22 @@ img[width][height] {
 }
 
 @media (max-width: 1024px) {
+  /* `!important` a proposito: hay una regla mas especifica del sistema
+     (`.pshow img`, entre otras) que dejaba estas piezas en `display: none`, y
+     por eso el bloque salia vacio en movil. */
   .pshow__pieza {
-    display: block;
+    display: block !important;
     width: 100%;
     height: auto;
   }
 
-  .pshow:has(.pshow__pieza) > img,
+  /* `:not(.pshow__pieza)` es imprescindible: sin el, `> img` alcanzaba TAMBIEN a
+     las cuatro piezas nuevas (son hijos directos) y se ocultaban a si mismas.
+     Ese era el motivo de que el bloque saliera vacio en movil. */
+  .pshow:has(.pshow__pieza) > img:not(.pshow__pieza),
   .pshow:has(.pshow__pieza) > .pshow__zoom,
-  .pshow:has(.pshow__pieza) > video {
-    display: none;
+  .pshow:has(.pshow__pieza) > video:not(.pshow__pieza) {
+    display: none !important;
   }
 }
 
