@@ -6823,6 +6823,41 @@ img[width][height] {
   height: auto;
 }
 
+/* El bloque de Style guide es una maqueta de escritorio (logotipos, paleta,
+   especimen, banda) y en movil no cabe: sus piezas se apilaban unas sobre otras
+   porque el ancho disponible no da para su rejilla. Lo que quiere el cliente es
+   conservarlo TAL CUAL y verlo mas pequeno, asi que se le devuelve su ancho de
+   escritorio y se escala con `zoom`: el diseno no cambia ni un pixel, solo su
+   tamano. `zoom` escala tambien el hueco que ocupa (con `transform: scale`
+   quedaria un agujero). Acotado a Edusport y a pantallas estrechas. */
+@media (max-width: 700px) {
+  .project--edusport .pstyle {
+    /* Su maqueta pide 1180 px; se le devuelve ese ancho y se escala por tramos
+       para que siempre quepa en el hueco disponible (ventana menos 75 px de
+       margenes): 590, 448, 366 y 283 px. */
+    width: 1180px;
+    zoom: 0.48;
+  }
+}
+
+@media (max-width: 560px) {
+  .project--edusport .pstyle {
+    zoom: 0.38;
+  }
+}
+
+@media (max-width: 440px) {
+  .project--edusport .pstyle {
+    zoom: 0.30;
+  }
+}
+
+@media (max-width: 380px) {
+  .project--edusport .pstyle {
+    zoom: 0.24;
+  }
+}
+
 /* El aire ENTRE piezas. Antes puse la regla solo en `.psection__full`, y si
    todas las piezas van dentro del MISMO contenedor eso no separa nada: solo
    movia el grupo entero (por eso el cliente lo veia igual). Aqui se apunta al
