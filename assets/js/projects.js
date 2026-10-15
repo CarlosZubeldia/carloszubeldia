@@ -1425,6 +1425,9 @@ const PROJECTS = [
             t: "media",
             full: true,
             src: IMG + "edusport-web-errores.webp",
+            /* En movil, una version algo recortada (1,5 veces mas grande). En
+               escritorio manda el original, que estaba perfecto. */
+            srcMobile: [IMG + "edusport-web-errores-movil.webp"],
           },
         ],
       },
