@@ -6832,6 +6832,28 @@ img[width][height] {
   display: none;
 }
 
+/* Los mockups de la web de Edusport: en escritorio manda la pieza compuesta (los
+   dos portatiles con sus moviles) y en pantallas estrechas se apilan las cuatro
+   piezas sueltas, en cascada, como pide el cliente. Se decide por la presencia
+   de las piezas (`:has`), asi que solo afecta al bloque que las trae. */
+.pshow__pieza {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .pshow__pieza {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .pshow:has(.pshow__pieza) > img,
+  .pshow:has(.pshow__pieza) > .pshow__zoom,
+  .pshow:has(.pshow__pieza) > video {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .pstyle__mobile {
     display: block;
